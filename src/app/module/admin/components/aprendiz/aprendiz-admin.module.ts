@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 // Module
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 // Componentes
 import { AddApprenticesComponent } from './add-apprentices/add-apprentices.component';
 import { ViewApprenticesComponent } from './view-apprentices/view-apprentices.component';
@@ -11,7 +12,9 @@ import { ViewApprenticesComponent } from './view-apprentices/view-apprentices.co
     ViewApprenticesComponent
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    FormsModule
+  ],
+  exports: [ViewApprenticesComponent]
 })
 export class AprendizAdminModule { }
