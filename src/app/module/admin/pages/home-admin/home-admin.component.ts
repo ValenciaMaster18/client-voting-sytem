@@ -14,15 +14,22 @@ export class HomeAdminComponent{
   ) {
   }
 
-  openDialog(): void {
-    this.dialog.open(DialogComponent, {
-      width: '600px',
-      height: '150px',
-      position: {
-        // top: '-10%',
-        left: '30%',
-        bottom: '50px'
-      }
-    });
+  openDialog(animacionEntrar: string,  animacionSalir: string): void {
+    // Cambiamos en el archivo su modificador de acceso de private a public
+    if (this.dialog._openDialogsAtThisLevel.length == 0){
+      this.dialog.open(DialogComponent, {
+        width: '600px',
+        height: '150px',
+        enterAnimationDuration: animacionEntrar,
+        exitAnimationDuration: animacionSalir,
+        position: {
+          // top: '-10%',
+          left: '30%',
+          bottom: '50px'
+        }
+      });
+    }else{
+      this.dialog.closeAll()
+    }
   };
 };

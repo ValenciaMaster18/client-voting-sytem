@@ -1,4 +1,4 @@
-<section class="form" >
+<section class="form mt-3" >
   <picture>
     <img src="../../../../../../assets/img/logo-sena.png" alt="">
   </picture>
@@ -6,6 +6,11 @@
     <div>
       <h2>Agregar Aprendiz</h2>
       <span>Formulario de registro de aprendiz</span>
+    </div>
+    <div *ngIf="resultado" [ngClass]="resultado ? 'alert alert-success' : 'alert alert-danger'" class="form__mensaje">
+      <span>
+        {{ mensaje | uppercase}}
+      </span>
     </div>
     <div class="form__contenedor">
       <input type="number" id="id" placeholder="Ingresar tu id" formControlName="id">

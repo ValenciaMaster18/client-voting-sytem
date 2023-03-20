@@ -2,6 +2,10 @@ export const RutasGetAprendiz = {
   prduction: false,
   url: 'http://localhost:3001/aprendiz'
 }
+export const RutasPostAprendiz = {
+  prduction: false,
+  url: 'http://localhost:3001/aprendiz/add'
+}
 
 export const RutasGetAprendizLocal = {
   prduction: false,

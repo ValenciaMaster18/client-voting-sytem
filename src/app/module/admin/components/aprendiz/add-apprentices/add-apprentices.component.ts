@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule,FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { GetAprendizService } from '../../../services/get-aprendiz.service';
 @Component({
   selector: 'app-add-apprentices',
   templateUrl: './add-apprentices.component.html',
@@ -7,10 +8,14 @@ import { ReactiveFormsModule,FormGroup, FormBuilder, Validators } from '@angular
 })
 export class AddApprenticesComponent {
   miForm: FormGroup;
-
+  mensaje: string;
+  resultado: boolean;
   constructor(
-    private controles: FormBuilder
+    private controles: FormBuilder,
+    private _getAprendizService: GetAprendizService
   ){
+    this.mensaje = '';
+    this.resultado = false;
     this.miForm = this.controles.group(
       {
         id:['', [Validators.required]],
@@ -27,6 +32,18 @@ export class AddApprenticesComponent {
   }
   submit(): void{
     console.log(this.miForm.value)
+    this._getAprendizService.enviarAprendiz(this.miForm.value).subscribe(
+      {
+        next: ( valor: any ) => {
+          console.info(valor)
+          this.resultado = true;
+          this.mensaje = 'Aprendiz Guardado'
+        },
+        error: (error: any) => console.error(error),
+        complete: () => console.log("Aprendiz Guardado")
+       }
+
+    );
     this.miForm.reset()
   }
 }
