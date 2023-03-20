@@ -29,6 +29,10 @@ header{
       font-size: 1.2rem;
       position: relative;
       cursor: pointer;
+      button{
+        background-color: transparent;
+        border: 0;
+      }
       &::before{
         content: "";
         position: absolute;

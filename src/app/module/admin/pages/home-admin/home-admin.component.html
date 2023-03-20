@@ -1,11 +1,15 @@
 <app-header-admin></app-header-admin>
 <header>
   <picture class="header__logo">
-    <img src="../../../../../assets/img/logo-sena.png" alt="">
+    <a routerLink="/">
+      <img src="../../../../../assets/img/logo-sena.png" alt="">
+    </a>
   </picture>
   <nav class="header__navegacion">
     <ul>
-      <li>Aprendices</li>
+      <li (click)="openDialog()">
+          Aprendices
+      </li>
       <li>Candidatos</li>
       <li>Votaciones</li>
     </ul>
@@ -31,8 +35,8 @@
 </header>
 <section class="container">
   <div class="row">
-    <div class="col-lg-10 offset-lg-2">
-      <app-view-apprentices></app-view-apprentices>
+    <div class="col-lg-9 offset-lg-3">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </section>
