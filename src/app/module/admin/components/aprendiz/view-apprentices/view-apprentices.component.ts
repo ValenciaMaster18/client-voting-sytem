@@ -9,18 +9,23 @@ import { GetAprendizService } from '../../../services/get-aprendiz.service';
 })
 export class ViewApprenticesComponent implements OnInit, OnDestroy {
   valor: any;
+  loaders: boolean;
   data: IAprendiz[];
   suscribtion: Subscription;
   constructor(
     private __getAprendizService: GetAprendizService
   ) {
+    this.loaders = true;
     this.valor = '';
     this.data = [];
     this.suscribtion = new Subscription();
   };
   ngOnInit(): void {
     this.suscribtion = this.__getAprendizService.getAprendiz().subscribe(
-      { next: (valor: IAprendiz[] ) => { this.data = valor },
+      { next: (valor: IAprendiz[] ) => {
+        this.data = valor;
+        this.loaders = false
+      },
         error: (error: any) => { console.error(error) },
         complete: () => { console.error("Opereracion terminada") },
       }

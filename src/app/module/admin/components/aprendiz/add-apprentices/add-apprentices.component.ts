@@ -10,12 +10,14 @@ export class AddApprenticesComponent {
   miForm: FormGroup;
   mensaje: string;
   resultado: boolean;
+  loaders: boolean;
   constructor(
     private controles: FormBuilder,
     private _getAprendizService: GetAprendizService
   ){
     this.mensaje = '';
     this.resultado = false;
+    this.loaders = false;
     this.miForm = this.controles.group(
       {
         id:['', [Validators.required]],
@@ -35,8 +37,10 @@ export class AddApprenticesComponent {
     this._getAprendizService.enviarAprendiz(this.miForm.value).subscribe(
       {
         next: ( valor: any ) => {
+          this.loaders = true;
           console.info(valor)
           this.resultado = true;
+          this.loaders = false;
           this.mensaje = 'Aprendiz Guardado'
         },
         error: (error: any) => console.error(error),

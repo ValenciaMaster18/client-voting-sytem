@@ -7,11 +7,14 @@
       <h2>Agregar Aprendiz</h2>
       <span>Formulario de registro de aprendiz</span>
     </div>
-    <div *ngIf="resultado" [ngClass]="resultado ? 'alert alert-success' : 'alert alert-danger'" class="form__mensaje">
+    <ng-container *ngIf="resultado" [ngClass]="resultado ? 'alert alert-success' : 'alert alert-danger'" class="form__mensaje">
       <span>
         {{ mensaje | uppercase}}
       </span>
-    </div>
+    </ng-container>
+    <ng-container *ngIf="loaders">
+      <app-loaders></app-loaders>
+    </ng-container>
     <div class="form__contenedor">
       <input type="number" id="id" placeholder="Ingresar tu id" formControlName="id">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-123" viewBox="0 0 16 16">
