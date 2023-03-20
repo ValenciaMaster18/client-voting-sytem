@@ -2,16 +2,17 @@
 import { NgModule } from '@angular/core';
 // Module
 import { CommonModule } from '@angular/common';
-import { AprendizAdminModule } from './components/aprendiz/aprendiz-admin.module';
-import { HttpClientModule } from '@angular/common/http';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { AdminRoutingModule  } from './admin.routing.module';
+
+import { AprendizAdminModule } from './components/aprendiz/aprendiz-admin.module';
+import { CandidatosAdminModule } from './components/candidatos/candidatos-admin.module';
+import { VotacionesAdminModule } from './components/votaciones/votaciones-admin.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+
+import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 // Components
 import { HomeAdminComponent } from './pages/home-admin/home-admin.component';
-import { ViewCandidatesComponent } from './components/candidatos/view-candidates/view-candidates.component';
-import { CandidatosAdminModule } from './components/candidatos/candidatos-admin.module';
-
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CandidatosAdminModule } from './components/candidatos/candidatos-admin.
     // Mis Module
     AprendizAdminModule,
     CandidatosAdminModule,
+    VotacionesAdminModule,
     SharedModule,
     // Modulo para hacer peticiones http
     HttpClientModule,

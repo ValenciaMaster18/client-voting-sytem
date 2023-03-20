@@ -5,6 +5,8 @@ import { CsvApprenticesComponent } from "./components/aprendiz/csv-apprentices/c
 import { ViewApprenticesComponent } from "./components/aprendiz/view-apprentices/view-apprentices.component";
 import { AddCandidatesComponent } from "./components/candidatos/add-candidates/add-candidates.component";
 import { ViewCandidatesComponent } from "./components/candidatos/view-candidates/view-candidates.component";
+import { AddVotingComponent } from "./components/votaciones/add-voting/add-voting.component";
+import { ViewVotingComponent } from "./components/votaciones/view-voting/view-voting.component";
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'aprendiz' },
@@ -13,6 +15,8 @@ const routes: Routes = [
   { path: 'aprendiz/csv', component: CsvApprenticesComponent },
   { path: 'candidato', component: ViewCandidatesComponent },
   { path: 'candidato/add', component: AddCandidatesComponent },
+  { path: 'votacion', component: ViewVotingComponent },
+  { path: 'votacion/add', component: AddVotingComponent },
   { path: '**', redirectTo: 'aprendiz', pathMatch: 'full' }
 ];
 

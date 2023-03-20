@@ -7,25 +7,57 @@
   </picture>
   <nav class="header__navegacion">
     <ul>
-      <li (click)="openDialog('500ms','500ms')">
+      <!-- (click)="openDialog('500ms','500ms')" -->
+      <li class="header__navegacion-item candidato"(click)="desplegarMenu3()">
         Aprendices
+        <ul *ngIf="desplegar3" class="candidato__desplegable">
+          <li>
+            <a routerLink="/aprendiz/add" routerLinkActive="active-link">
+              Agregar Aprendiz
+            </a>
+          </li>
+          <li>
+            <a routerLink="/aprendiz/csv" routerLinkActive="active-link">
+              Agregar Aprendiz con csv
+            </a>
+          </li>
+          <li>
+            <a routerLink="/aprendiz" routerLinkActive="active-link">
+              Ver Aprendices
+            </a>
+          </li>
+        </ul>
       </li>
-      <li (click)="desplegarMenu()" class="candidato">
+      <li class="header__navegacion-item candidato" (click)="desplegarMenu()">
         Candidatos
         <ul *ngIf="desplegar" class="candidato__desplegable">
           <li>
-            <a routerLink="/candidato/add">
+            <a routerLink="/candidato/add" routerLinkActive="active-link">
               Agregar Candidato
             </a>
           </li>
           <li>
-            <a routerLink="/candidato">
+            <a routerLink="/candidato" routerLinkActive="active-link">
               Ver Candidato
             </a>
           </li>
         </ul>
       </li>
-      <li>Votaciones</li>
+      <li class="header__navegacion-item candidato" (click)="desplegarMenu2()">
+        Votaciones
+        <ul *ngIf="desplegar2" class="candidato__desplegable">
+          <li>
+            <a routerLink="/votacion/add" routerLinkActive="active-link">
+              Agregar Votacion
+            </a>
+          </li>
+          <li>
+            <a routerLink="/votacion" routerLinkActive="active-link">
+              Ver Votacion
+            </a>
+          </li>
+        </ul>
+      </li>
     </ul>
   </nav>
   <div class="header__redes">
