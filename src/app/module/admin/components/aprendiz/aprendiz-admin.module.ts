@@ -20,7 +20,6 @@ import { CsvApprenticesComponent } from './csv-apprentices/csv-apprentices.compo
     FormsModule,
     ReactiveFormsModule,
     SharedModule
-  ],
-  exports: [ViewApprenticesComponent]
+  ]
 })
 export class AprendizAdminModule { }

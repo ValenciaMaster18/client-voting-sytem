@@ -10,7 +10,21 @@
       <li (click)="openDialog('500ms','500ms')">
         Aprendices
       </li>
-      <li>Candidatos</li>
+      <li (click)="desplegarMenu()" class="candidato">
+        Candidatos
+        <ul *ngIf="desplegar" class="candidato__desplegable">
+          <li>
+            <a routerLink="/candidato/add">
+              Agregar Candidato
+            </a>
+          </li>
+          <li>
+            <a routerLink="/candidato">
+              Ver Candidato
+            </a>
+          </li>
+        </ul>
+      </li>
       <li>Votaciones</li>
     </ul>
   </nav>

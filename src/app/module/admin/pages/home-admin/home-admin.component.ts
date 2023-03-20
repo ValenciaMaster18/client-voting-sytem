@@ -8,10 +8,11 @@ import { DialogComponent } from 'src/app/shared/components/dialog/dialog.compone
   styleUrls: ['./home-admin.component.scss']
 })
 export class HomeAdminComponent{
-
+  desplegar: boolean;
   constructor(
     public dialog: MatDialog
   ) {
+    this.desplegar = false;
   }
 
   openDialog(animacionEntrar: string,  animacionSalir: string): void {
@@ -32,4 +33,7 @@ export class HomeAdminComponent{
       this.dialog.closeAll()
     }
   };
+  desplegarMenu(): void{
+    this.desplegar = !this.desplegar;
+  }
 };

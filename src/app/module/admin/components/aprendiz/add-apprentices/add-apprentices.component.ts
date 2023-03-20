@@ -1,16 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ReactiveFormsModule,FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { GetAprendizService } from '../../../services/get-aprendiz.service';
+import { delay, Subscription } from 'rxjs';
+import { GetAprendizService } from '../../../services/admin/aprendiz/get-aprendiz.service';
 @Component({
   selector: 'app-add-apprentices',
   templateUrl: './add-apprentices.component.html',
   styleUrls: ['./add-apprentices.component.scss']
 })
-export class AddApprenticesComponent {
+export class AddApprenticesComponent implements OnDestroy {
   miForm: FormGroup;
   mensaje: string;
   resultado: boolean;
   loaders: boolean;
+  suscribcion: Subscription;
+
   constructor(
     private controles: FormBuilder,
     private _getAprendizService: GetAprendizService
@@ -18,6 +21,7 @@ export class AddApprenticesComponent {
     this.mensaje = '';
     this.resultado = false;
     this.loaders = false;
+    this.suscribcion = new Subscription();
     this.miForm = this.controles.group(
       {
         id:['', [Validators.required]],
@@ -32,22 +36,30 @@ export class AddApprenticesComponent {
       }
     )
   }
+
   submit(): void{
-    console.log(this.miForm.value)
-    this._getAprendizService.enviarAprendiz(this.miForm.value).subscribe(
+    this.loaders = true;
+    this.suscribcion = this._getAprendizService.enviarAprendiz(this.miForm.value).pipe(
+      delay(300)
+    ).subscribe(
       {
-        next: ( valor: any ) => {
-          this.loaders = true;
-          console.info(valor)
+        next: () => {
           this.resultado = true;
           this.loaders = false;
           this.mensaje = 'Aprendiz Guardado'
         },
-        error: (error: any) => console.error(error),
-        complete: () => console.log("Aprendiz Guardado")
+        error: (error: any) => {
+          console.error(error);
+          this.mensaje = 'Aprendiz No Guardado'
+        },
+        complete: () => {
+          console.log("Aprendiz Guardado");
+        }
        }
-
     );
     this.miForm.reset()
+  }
+  ngOnDestroy(): void {
+    this.suscribcion.unsubscribe();
   }
 }

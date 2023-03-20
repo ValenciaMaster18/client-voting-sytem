@@ -7,11 +7,11 @@
       <h2>Agregar Aprendiz</h2>
       <span>Formulario de registro de aprendiz</span>
     </div>
-    <ng-container *ngIf="resultado" [ngClass]="resultado ? 'alert alert-success' : 'alert alert-danger'" class="form__mensaje">
+    <div class="form__mensaje mb-0" [ngClass]="resultado ? 'alert alert-success' : 'alert alert-danger'" *ngIf="resultado">
       <span>
-        {{ mensaje | uppercase}}
+        {{ mensaje | uppercase }}
       </span>
-    </ng-container>
+    </div>
     <ng-container *ngIf="loaders">
       <app-loaders></app-loaders>
     </ng-container>

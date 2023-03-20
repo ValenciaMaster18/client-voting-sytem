@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, delay  } from 'rxjs';
 import { IAprendiz } from '../../../models/iaprendiz';
-import { GetAprendizService } from '../../../services/get-aprendiz.service';
+import { GetAprendizService } from '../../../services/admin/aprendiz/get-aprendiz.service';
 @Component({
   selector: 'app-view-apprentices',
   templateUrl: './view-apprentices.component.html',
@@ -13,7 +13,7 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
   data: IAprendiz[];
   suscribtion: Subscription;
   constructor(
-    private __getAprendizService: GetAprendizService
+    private _getAprendizService: GetAprendizService
   ) {
     this.loaders = true;
     this.valor = '';
@@ -21,15 +21,32 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
     this.suscribtion = new Subscription();
   };
   ngOnInit(): void {
-    this.suscribtion = this.__getAprendizService.getAprendiz().subscribe(
-      { next: (valor: IAprendiz[] ) => {
+    /**
+     * Retrasamos un medio/segundo para mmostrar el loaders
+     */
+    // setTimeout(()  => this._getAprendizService.getAprendiz().subscribe(
+    //   { next: (valor: IAprendiz[] ) => {
+    //     this.data = valor;
+    //     this.loaders = false
+    //   },
+    //     error: (error: any) => { console.error(error) },
+    //     complete: () => { console.error("Opereracion terminada") },
+    //   }
+    // ), 500);
+    this.suscribtion = this._getAprendizService.getAprendiz().pipe(
+      delay(1000) // retraso de un segundo
+    ).subscribe({
+      next: (valor: IAprendiz[] ) => {
         this.data = valor;
         this.loaders = false
       },
-        error: (error: any) => { console.error(error) },
-        complete: () => { console.error("Opereracion terminada") },
-      }
-    );
+      error: (error: any) => {
+        console.error(error);
+        this.loaders = false;
+       },
+      complete: () => { console.error("Opereracion terminada") },
+    });
+
   };
   ngOnDestroy(): void {
     this.suscribtion.unsubscribe();
