@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { ReactiveFormsModule,FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { delay, Subscription } from 'rxjs';
 import { GetAprendizService } from '../../../services/admin/aprendiz/get-aprendiz.service';
 @Component({
@@ -47,10 +47,17 @@ export class AddApprenticesComponent implements OnDestroy {
           this.resultado = true;
           this.loaders = false;
           this.mensaje = 'Aprendiz Guardado'
+          setTimeout(() => {
+            this.resultado = false;
+          }, 1000)
         },
         error: (error: any) => {
           console.error(error);
+          this.resultado = true;
           this.mensaje = 'Aprendiz No Guardado'
+          setTimeout(() => {
+            this.resultado = false;
+          }, 1000)
         },
         complete: () => {
           console.log("Aprendiz Guardado");

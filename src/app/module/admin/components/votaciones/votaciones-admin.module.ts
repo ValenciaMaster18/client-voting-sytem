@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 // Module
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { SharedModule } from 'src/app/shared/shared.module';
 // Components
 import { AddVotingComponent } from './add-voting/add-voting.component';
 import { ViewVotingComponent } from './view-voting/view-voting.component';
@@ -14,7 +14,8 @@ import { ViewVotingComponent } from './view-voting/view-voting.component';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class VotacionesAdminModule { }

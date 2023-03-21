@@ -1,12 +1,27 @@
+<div class="row mt-5">
+  <div class="col-lg-6 offset-lg-6">
+    <span *ngIf="votaciones.length == 0" class="alert alert-danger">
+      Debe registrar una votacion Para poder Agregar un candidato
+    </span>
+  </div>
+</div>
 <section class="form mt-3" >
   <picture>
     <img src="../../../../../../assets/img/logo-sena.png" alt="">
   </picture>
-  <form class="form" [formGroup]="miForm" (ngSubmit)="onSubmit()">
+  <form *ngIf="votaciones.length != 0" class="form" [formGroup]="miForm" (ngSubmit)="onSubmit()">
     <div>
       <h2>Agregar Candidato</h2>
       <span>Formulario de registro de Candidatos</span>
     </div>
+    <div class="form__mensaje mb-0" [ngClass]="estilo ? 'alert alert-success' : 'alert alert-danger'" *ngIf="resultado">
+      <span>
+        {{ mensaje | uppercase }}
+      </span>
+    </div>
+    <ng-container *ngIf="loaders">
+      <app-loaders></app-loaders>
+    </ng-container>
     <div class="form__contenedor">
       <input type="number" id="id" placeholder="Ingresar tu id" formControlName="id">
         <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-123" viewBox="0 0 16 16">
@@ -22,9 +37,9 @@
     </div>
     <div class="form__contenedor">
       <select formControlName="votacion">
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <option [value]="item.name" *ngFor="let item of votaciones">
+          {{ item.name }}
+        </option>
       </select>
     </div>
     <div class="form__contenedor">

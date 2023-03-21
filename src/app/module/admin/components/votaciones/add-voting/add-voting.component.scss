@@ -61,18 +61,17 @@ picture{
     left: 7px;
   }
 }
-// .form__mensaje{
-//   width: 350px;
-//   height: 40px;
-//   display: flex;
-//   align-items: center;
-//   span{
-//     color: white;
-//     text-align: center;
-//     font-size: 1.2rem;
-//     font-weight: 900;
-//   }
-// }
+.form__mensaje{
+  width: 350px;
+  display: flex;
+  align-items: center;
+  span{
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+}
 button{
   background-color: black;
   color: white;
