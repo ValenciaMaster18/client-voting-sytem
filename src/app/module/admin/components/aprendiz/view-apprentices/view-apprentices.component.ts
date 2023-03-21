@@ -21,18 +21,6 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
     this.suscribtion = new Subscription();
   };
   ngOnInit(): void {
-    /**
-     * Retrasamos un medio/segundo para mmostrar el loaders
-     */
-    // setTimeout(()  => this._getAprendizService.getAprendiz().subscribe(
-    //   { next: (valor: IAprendiz[] ) => {
-    //     this.data = valor;
-    //     this.loaders = false
-    //   },
-    //     error: (error: any) => { console.error(error) },
-    //     complete: () => { console.error("Opereracion terminada") },
-    //   }
-    // ), 500);
     this.suscribtion = this._getAprendizService.getAprendiz().pipe(
       delay(1000) // retraso de un segundo
     ).subscribe({

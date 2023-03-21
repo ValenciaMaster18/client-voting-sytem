@@ -9,15 +9,17 @@ import { AddVotingComponent } from "./components/votaciones/add-voting/add-votin
 import { ViewVotingComponent } from "./components/votaciones/view-voting/view-voting.component";
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'aprendiz' },
-  { path: 'aprendiz', component: ViewApprenticesComponent  },
-  { path: 'aprendiz/add', component: AddApprenticesComponent },
-  { path: 'aprendiz/csv', component: CsvApprenticesComponent },
-  { path: 'candidato', component: ViewCandidatesComponent },
-  { path: 'candidato/add', component: AddCandidatesComponent },
-  { path: 'votacion', component: ViewVotingComponent },
-  { path: 'votacion/add', component: AddVotingComponent },
-  { path: '**', redirectTo: 'aprendiz', pathMatch: 'full' }
+  { path: '', children: [
+    { path: 'aprendiz', component: ViewApprenticesComponent  },
+    { path: 'aprendiz/add', component: AddApprenticesComponent },
+    { path: 'aprendiz/csv', component: CsvApprenticesComponent },
+    { path: 'candidato', component: ViewCandidatesComponent },
+    { path: 'candidato/add', component: AddCandidatesComponent },
+    { path: 'votacion', component: ViewVotingComponent },
+    { path: 'votacion/add', component: AddVotingComponent },
+    { path: '**', redirectTo: 'aprendiz', pathMatch: 'full' }
+  ] },
+
 ];
 
 @NgModule({

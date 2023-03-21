@@ -11,14 +11,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
-// Components
-import { HomeAdminComponent } from './pages/home-admin/home-admin.component';
 
 @NgModule({
-  declarations: [
-    // Componentes
-    HomeAdminComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     // Mis Module
@@ -34,6 +29,6 @@ import { HomeAdminComponent } from './pages/home-admin/home-admin.component';
     AdminRoutingModule
   ],
   // Para que sea visible en otros module los componentes
-  exports: [HomeAdminComponent]
+  exports: []
 })
 export class AdminModule { }

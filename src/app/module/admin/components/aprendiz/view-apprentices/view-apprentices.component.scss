@@ -19,10 +19,29 @@ table {
     }
   }
 }
+a.btn{
+  position: relative;
+  &::after{
+    content: "Agregar un aprendiz";
+    position: absolute;
+    background-color: gray;
+    border-radius: 20px;
+    padding: 0.1rem 0.2rem;
+    color: white;
+    top: -25px;
+    left: -50px;
+    display: inline-block;
+    width: 170px;
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+  }
+  &:hover::after{
+    opacity: 1;
+  }
+}
 
 .aprediz__filtar{
     display: flex;
-    line-height: 28px;
     justify-content: flex-end;
     align-items: center;
     position: relative;
