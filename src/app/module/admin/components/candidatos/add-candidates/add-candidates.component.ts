@@ -75,8 +75,21 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
           const buscandoIdDeAprendiz = this.aprendiz.find(
             data => data.id == this.miForm.value.id
           )
-
+          console.log(buscandoIdDeAprendiz)
           if (buscandoIdDeAprendiz) {
+            // this._candidatoServices.getCandidato().subscribe(
+            //   {
+            //     next: (value: any) => {
+            //       if (buscandoVotacionDeAprendiz) {
+            //         this.mensaje = 'Candidato no agregado tiene un registro en la misma votacion';
+            //         this.resultado = true;
+            //         this.estilo = false;
+            //         this.loaders = false;
+            //         setTimeout(() => {
+            //           this.resultado = false;
+            //         }, 3000)
+            //       }
+            //       else {
             this.mensaje = 'Candidato Agregado';
             this.resultado = true;
             this.estilo = true;
@@ -86,7 +99,7 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
             setTimeout(() => {
               this.resultado = false;
             }, 1000)
-          } else {
+          }else {
             this.mensaje = 'Candidato No agregado el id no esta en la BD';
             this.resultado = true;
             this.estilo = false;

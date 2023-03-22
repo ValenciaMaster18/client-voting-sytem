@@ -11,7 +11,7 @@
       <h2>Agregar Votacion</h2>
       <span>Formulario de Crear votaciones</span>
     </div>
-    <div class="form__mensaje mb-0" [ngClass]="resultado ? 'alert alert-success' : 'alert alert-danger'" *ngIf="resultado">
+    <div class="form__mensaje mb-0" [ngClass]="estilo ? 'alert alert-success' : 'alert alert-danger'" *ngIf="resultado">
       <span>
         {{ mensaje | uppercase }}
       </span>
@@ -19,6 +19,9 @@
     <ng-container *ngIf="loaders">
       <app-loaders></app-loaders>
     </ng-container>
+    <div class="form__contenedor">
+      <input type="text" id="name" placeholder="Ingresar el id" formControlName="id">
+    </div>
     <div class="form__contenedor">
       <input type="text" id="name" placeholder="Ingresar el nombre" formControlName="name">
     </div>
