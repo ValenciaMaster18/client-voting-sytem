@@ -10,6 +10,7 @@ import { GetAprendizService } from '../../../services/admin/aprendiz/get-aprendi
 export class ViewApprenticesComponent implements OnInit, OnDestroy {
   valor: any;
   loaders: boolean;
+  color: boolean;
   data: IAprendiz[];
   suscribtion: Subscription;
   constructor(
@@ -17,6 +18,7 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
   ) {
     this.loaders = true;
     this.valor = '';
+    this.color = false;
     this.data = [];
     this.suscribtion = new Subscription();
   };
@@ -39,4 +41,7 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.suscribtion.unsubscribe();
   };
+  cambiarColor(): void{
+    this.color = !this.color;
+  }
 };

@@ -35,6 +35,7 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
     this.resultado = false;
     this.loaders = false;
     this.suscription = new Subscription();
+
     this.miForm = this.controles.group({
       id: ['', [Validators.required]],
       img: ['', [Validators.required]],
@@ -48,6 +49,7 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
       {
         next: (valor: any) => {
           this.votaciones = valor;
+          console.log("wwww")
         },
         error: (error: any) => {
           console.error(error);
@@ -69,15 +71,18 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
         next: (valor: any) => {
           this.aprendiz = valor;
           // Devuelve el primer valor que coincida con la condicion
+          console.log(this.miForm.value)
           const buscandoIdDeAprendiz = this.aprendiz.find(
             data => data.id == this.miForm.value.id
           )
+
           if (buscandoIdDeAprendiz) {
             this.mensaje = 'Candidato Agregado';
             this.resultado = true;
             this.estilo = true;
             this.loaders = false;
             this._candidatoServices.addCandidato(this.miForm.value);
+            this.miForm.reset()
             setTimeout(() => {
               this.resultado = false;
             }, 1000)
@@ -86,6 +91,7 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
             this.resultado = true;
             this.estilo = false;
             this.loaders = false;
+            this.miForm.reset()
             setTimeout(() => {
               this.resultado = false;
             }, 1000)
@@ -96,6 +102,5 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
         },
         complete: () => { console.error("2") },
       });
-    this.miForm.reset()
   }
 }

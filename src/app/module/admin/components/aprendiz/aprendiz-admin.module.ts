@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 // Module
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AprendizAdminRoutingModule } from './aprendiz-admin-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { RouterModule } from '@angular/router';
 // Componentes
 import { AddApprenticesComponent } from './add-apprentices/add-apprentices.component';
 import { ViewApprenticesComponent } from './view-apprentices/view-apprentices.component';
@@ -17,10 +17,10 @@ import { CsvApprenticesComponent } from './csv-apprentices/csv-apprentices.compo
   ],
   imports: [
     CommonModule,
+    AprendizAdminRoutingModule,
     // Formularios y direcitavas ngModel
     FormsModule,
     ReactiveFormsModule,
-    RouterModule,
     SharedModule
   ]
 })

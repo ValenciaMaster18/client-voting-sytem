@@ -1,4 +1,4 @@
-section.form{
+div.form{
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -11,9 +11,9 @@ picture{
   justify-content: center;
   align-items: center;
   img{
-    width: 80%;
-    height: 80%;
-    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }
 .form{
@@ -78,14 +78,19 @@ picture{
   }
 }
 .form__contenedor-file{
+  display: flex;
+  gap: 10px;
+  width: 350px;
   input[type=file]{
-    width: 350px;
     font-size: 15px;
     outline: none;
-    cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    cursor: pointer;
+    &::-webkit-file-upload-button{
+      display: none;
+    }
   }
 }
 .form__mensaje{

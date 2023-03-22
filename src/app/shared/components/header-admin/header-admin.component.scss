@@ -4,10 +4,44 @@ header{
   justify-content: space-between;
   height: 80px;
   padding: 0 80px;
+
  }
+
 .header__logo{
+  display: flex;
+  align-items: center;
   h1{
-    font-size: 25px;
+    font-size: 30px;
+    width: 430px;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 0.7rem;
+    border-right: 3px solid black;
+    animation: dinamicText 2000ms alternate ease-in;
+  }
+  // span{
+  //   width: 25px;
+  //   height: 25px;
+  //   border-radius: 50%;
+  //   border: 3px solid black;
+  //   border-top: 3px red solid;
+  //   animation: spinner 2000ms ease infinite both;
+  // }
+}
+// @keyframes spinner {
+//   from{
+//     transform: rotate(0);
+//   }
+//   50%{
+//     transform: rotate(180deg);
+//   }
+//   100%{
+//     transform: rotate(360deg);
+//   }
+// }
+@keyframes dinamicText {
+  from{
+    width: 0%;
   }
 }
 .header__busqueda{

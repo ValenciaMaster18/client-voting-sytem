@@ -22,18 +22,27 @@ table {
 a.btn{
   position: relative;
   &::after{
-    content: "Agregar un aprendiz";
+    content: "";
     position: absolute;
     background-color: gray;
     border-radius: 20px;
     padding: 0.1rem 0.2rem;
     color: white;
-    top: -25px;
+    top: -30px;
     left: -50px;
     display: inline-block;
     width: 170px;
     opacity: 0;
     transition: opacity 500ms ease-in;
+  }
+  &:nth-child(1):after{
+    content: "Agregar un aprendiz";
+  }
+  &:nth-child(2):after{
+    content: "Agregar aprendiz csv";
+  }
+  &:nth-child(3):after{
+    content: "Cambiar color";
   }
   &:hover::after{
     opacity: 1;

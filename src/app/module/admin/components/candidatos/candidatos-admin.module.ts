@@ -6,7 +6,7 @@ import { SharedModule } from "../../../../shared/shared.module";
 // Components
 import { AddCandidatesComponent } from './add-candidates/add-candidates.component';
 import { ViewCandidatesComponent } from './view-candidates/view-candidates.component';
-
+import { CandidatosAdminRoutingModule } from './candidatos-admin-routing.module';
 
 
 @NgModule({
@@ -17,7 +17,9 @@ import { ViewCandidatesComponent } from './view-candidates/view-candidates.compo
     imports: [
         CommonModule,
         ReactiveFormsModule,
+        CandidatosAdminRoutingModule,
         SharedModule
-    ]
+    ],
+    exports: [AddCandidatesComponent,ViewCandidatesComponent]
 })
 export class CandidatosAdminModule { }
