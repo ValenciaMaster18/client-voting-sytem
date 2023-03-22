@@ -1,0 +1,43 @@
+<section class="login">
+  <div class="section__form">
+    <div class="form__text">
+      <h2>Sistema de votación institucional</h2>
+      <span>Bienvenido. Por favor, ingrese sus credenciales</span>
+    </div>
+    <div class="mensaje__container" *ngIf="estado">
+      <span class="mensaje">
+        {{ mensaje }}
+      </span>
+    </div>
+    <form class="login" [formGroup]="miForm" (ngSubmit)="onSubmit()">
+      <div class="usuario">
+        <label for="usuario">
+          Usuario
+        </label>
+        <input
+              type="text"
+              id="usuario"
+              name="username"
+              placeholder="Numero documento"
+              formControlName="user"
+              >
+      </div>
+      <div class="clave">
+        <label for="contraseña">
+          Contraseña
+        </label>
+        <input
+              type="password"
+              id="contraseña"
+              name="password"
+              placeholder="Contraseña"
+              formControlName="password"
+              >
+      </div>
+      <button type="submit">Entrar al sistema</button>
+    </form>
+  </div>
+  <picture class="login">
+    <img src="../../../assets/img/logo-sena.png" alt="logo sena">
+  </picture>
+</section>
