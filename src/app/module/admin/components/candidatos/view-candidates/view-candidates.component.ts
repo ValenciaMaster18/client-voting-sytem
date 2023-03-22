@@ -10,12 +10,16 @@ import { CandidatoService } from '../../../services/admin/candidato/candidato.se
 })
 export class ViewCandidatesComponent implements OnInit, OnDestroy {
   data: ICandidato[];
+  color: boolean;
+  valor: any;
   suscription: Subscription;
 
   constructor(
     private _candidatoServices: CandidatoService
   ){
     this.data = [];
+    this.valor = '';
+    this.color = false;
     this.suscription = new Subscription();
   }
 
@@ -38,4 +42,7 @@ export class ViewCandidatesComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.suscription.unsubscribe();
   };
+  cambiarColor(): void{
+    this.color = !this.color;
+  }
 };

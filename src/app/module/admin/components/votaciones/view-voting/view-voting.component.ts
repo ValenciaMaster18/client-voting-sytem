@@ -9,10 +9,13 @@ import { VotacionService } from '../../../services/admin/Votacion/votacion.servi
 })
 export class ViewVotingComponent implements OnInit {
   data: IVotacion[];
-
+  color: boolean;
+  valor: any;
   constructor(
     private _votacionService: VotacionService
    ){
+    this.valor = '';
+    this.color = false;
     this.data = []
    }
   ngOnInit(): void {
@@ -30,5 +33,7 @@ export class ViewVotingComponent implements OnInit {
       }
     )
   }
-
+  cambiarColor(): void{
+    this.color = !this.color;
+  }
 }

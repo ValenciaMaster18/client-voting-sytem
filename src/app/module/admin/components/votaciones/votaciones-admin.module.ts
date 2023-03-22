@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 // Module
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VotacionesAdminRoutingModule } from './votaciones-admin-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 // Components
@@ -16,6 +16,7 @@ import { ViewVotingComponent } from './view-voting/view-voting.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     VotacionesAdminRoutingModule,
     SharedModule
   ],

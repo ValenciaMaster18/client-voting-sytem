@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 // import { AdminPagesModule } from './pages/admin-pages.module';
 // Guards
 import { LoginGuard } from './guards/login/login.guard';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -15,6 +16,7 @@ import { LoginGuard } from './guards/login/login.guard';
     AppRoutingModule,
     HttpClientModule,
     // AdminPagesModule
+    SharedModule
   ],
   providers: [LoginGuard],
   bootstrap: [AppComponent]
