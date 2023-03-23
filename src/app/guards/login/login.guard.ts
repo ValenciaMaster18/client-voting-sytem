@@ -10,17 +10,17 @@ Los guards devuelven true o false para permitir el paso o no de un usuario a la 
 @Injectable()
 export class LoginGuard implements CanActivate {
   constructor(
-    private _loginServices: LoginService,
     private router: Router
   ) {
 
   }
-  canActivate(): boolean{
-    if(this._loginServices.getAdminAuth()){
+  canActivate(): boolean {
+    const token = localStorage.getItem('id_token');
+    if (token) {
       return true;
+    }else{
+      this.router.navigate(['/login'])
+      return false;
     }
-    this.router.navigate(['/login'])
-    return false;
   }
-
 }
