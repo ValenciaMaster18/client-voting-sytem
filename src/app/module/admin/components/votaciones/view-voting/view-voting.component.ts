@@ -36,4 +36,16 @@ export class ViewVotingComponent implements OnInit {
   cambiarColor(): void{
     this.color = !this.color;
   }
+  eliminarAprendiz(id: number){
+    this._votacionService.deleteVotacion(id).subscribe(
+      {
+        next: () => {
+          console.log("Eliminado");
+          this.ngOnInit();
+      },
+        error: (error: any) => console.error(error),
+        complete: () => console.info("votacion completa")
+      }
+    )
+  }
 }

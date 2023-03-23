@@ -45,4 +45,16 @@ export class ViewCandidatesComponent implements OnInit, OnDestroy {
   cambiarColor(): void{
     this.color = !this.color;
   }
+  eliminarAprendiz(id: number){
+    this._candidatoServices.deleteCandidato(id).subscribe(
+      {
+        next: () => {
+          console.log("Eliminado");
+          this.ngOnInit();
+      },
+        error: (error: any) => console.error(error),
+        complete: () => console.info("votacion completa")
+      }
+    )
+  }
 };

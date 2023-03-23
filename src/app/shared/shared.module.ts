@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DialogComponent } from './components/dialog/dialog.component';
 import { LoadersComponent } from './components/loaders/loaders.component';
 import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
 import { SidebarAdminComponent } from './components/sidebar/sidebar-admin.component';
@@ -9,7 +8,6 @@ import { FooterPageComponent } from './components/footer-page/footer-page.compon
 
 @NgModule({
   declarations: [
-    DialogComponent,
     LoadersComponent,
     HeaderAdminComponent,
     SidebarAdminComponent,
@@ -20,7 +18,6 @@ import { FooterPageComponent } from './components/footer-page/footer-page.compon
     RouterModule,
   ],
   exports: [
-    DialogComponent,
     LoadersComponent,
     HeaderAdminComponent,
     SidebarAdminComponent,

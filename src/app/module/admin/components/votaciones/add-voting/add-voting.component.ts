@@ -64,13 +64,23 @@ export class AddVotingComponent implements OnInit, OnDestroy {
     } else {
       setTimeout(() => {
         this.resultado = true;
-        this._votacionServices.addVotacion(this.miForm.value);
-        this.estilo = true;
-        this.mensaje = 'Votacion agregada';
-        this.loaders = false;
-        this.miForm.reset();
+        this._votacionServices.addVotacion(this.miForm.value).subscribe(
+          {
+            next: (value: any) => {
+              console.log(value);
+              this.estilo = true;
+              this.mensaje = 'Votacion agregada';
+              this.loaders = false;
+              this.miForm.reset();
+            },
+            error: (error: any) => console.error(error),
+            complete: () => console.info("votacion completa")
+          }
+        );
+
         setTimeout(() => {
           this.resultado = false;
+          this.miForm.reset();
         }, 1000)
       }, 300);
     }

@@ -77,11 +77,19 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
           )
           console.log(buscandoIdDeAprendiz)
           if (buscandoIdDeAprendiz) {
-            this.mensaje = 'Candidato Agregado';
-            this.resultado = true;
-            this.estilo = true;
-            this.loaders = false;
-            this._candidatoServices.addCandidato(this.miForm.value);
+
+            this._candidatoServices.addCandidato(this.miForm.value).subscribe(
+              {
+                next: (value: any) => {
+                  this.mensaje = 'Candidato Agregado';
+                  this.resultado = true;
+                  this.estilo = true;
+                  this.loaders = false;
+                },
+                error: (error: any) => console.error(error),
+                complete: () => console.info("votacion completa")
+              }
+            );
             this.miForm.reset()
             setTimeout(() => {
               this.resultado = false;

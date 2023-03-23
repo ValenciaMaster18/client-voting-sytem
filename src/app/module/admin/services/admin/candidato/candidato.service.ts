@@ -1,20 +1,25 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { RutasDeleteCandidato, RutasGetCandidato, RutasPostCandidato } from '../../../environments/rutas-dev';
 import { ICandidato } from '../../../models/Icandidato';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CandidatoService {
-  private candidatos: ICandidato[];
 
-  constructor() {
-    this.candidatos = []
+  constructor(
+    private http: HttpClient
+  ) {
    }
   getCandidato(): Observable<ICandidato[]> {
-    return of(this.candidatos);
+    return this.http.get<ICandidato[]>(RutasGetCandidato.url);
   }
-  addCandidato(candidatoNew: ICandidato): void {
-    this.candidatos.push(candidatoNew);
+  addCandidato(candidatoNew: ICandidato): Observable<ICandidato[]> {
+    return this.http.post<ICandidato[]>(RutasPostCandidato.url, candidatoNew );
+  }
+  deleteCandidato(id: number): Observable<ICandidato[]> {
+    return this.http.delete<ICandidato[]>(`${RutasDeleteCandidato.url}${id}`);
   }
 }
