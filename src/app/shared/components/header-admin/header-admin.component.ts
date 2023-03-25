@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/module/login/services/login.service';
+import { LoginService } from 'src/app/module/login/services/login/login.service';
 @Component({
   selector: 'app-header-admin',
   templateUrl: './header-admin.component.html',

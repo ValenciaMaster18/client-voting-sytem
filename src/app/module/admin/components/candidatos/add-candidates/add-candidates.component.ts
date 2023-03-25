@@ -13,27 +13,29 @@ import { VotacionService } from '../../../services/admin/Votacion/votacion.servi
   styleUrls: ['./add-candidates.component.scss']
 })
 export class AddCandidatesComponent implements OnInit, OnDestroy {
-  // Propiedades
   miForm: FormGroup;
+
   mensaje: string;
   resultado: boolean;
   estilo: boolean;
   loaders: boolean;
-  suscription: Subscription;
+
+  data$ = this._getAprendizService.aprendices$;
   votaciones: IVotacion[];
-  aprendiz: IAprendiz[];
+
+  suscription: Subscription;
   constructor(
     private controles: FormBuilder,
     private _getAprendizService: GetAprendizService,
     private _candidatoServices: CandidatoService,
     private _votacionService: VotacionService
   ) {
-    this.votaciones = [];
-    this.aprendiz = [];
     this.mensaje = '';
     this.estilo = false;
     this.resultado = false;
     this.loaders = false;
+    this.loaders = false;
+    this.votaciones = [];
     this.suscription = new Subscription();
 
     this.miForm = this.controles.group({
@@ -49,12 +51,13 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
       {
         next: (valor: any) => {
           this.votaciones = valor;
-          console.log("wwww")
         },
         error: (error: any) => {
           console.error(error);
         },
-        complete: () => { console.error("1") },
+        complete: () => {
+          //
+        },
       });
   }
 
@@ -64,52 +67,38 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     this.loaders = true;
-    this._getAprendizService.getAprendiz().pipe(
-      delay(300)
-    ).subscribe(
-      {
-        next: (valor: any) => {
-          this.aprendiz = valor;
-          // Devuelve el primer valor que coincida con la condicion
-          console.log(this.miForm.value)
-          const buscandoIdDeAprendiz = this.aprendiz.find(
-            data => data.id == this.miForm.value.id
-          )
-          console.log(buscandoIdDeAprendiz)
-          if (buscandoIdDeAprendiz) {
-
-            this._candidatoServices.addCandidato(this.miForm.value).subscribe(
-              {
-                next: (value: any) => {
-                  this.mensaje = 'Candidato Agregado';
-                  this.resultado = true;
-                  this.estilo = true;
-                  this.loaders = false;
-                },
-                error: (error: any) => console.error(error),
-                complete: () => console.info("votacion completa")
-              }
-            );
-            this.miForm.reset()
-            setTimeout(() => {
-              this.resultado = false;
-            }, 1000)
-          } else {
-            this.mensaje = 'Candidato No agregado el id no esta en la BD';
-            this.resultado = true;
-            this.estilo = false;
+    const buscandoIdDeAprendiz = this.data$.value.find(data => data.id == this.miForm.value.id)
+    if (buscandoIdDeAprendiz) {
+      this._candidatoServices.addCandidato(this.miForm.value).pipe(
+        delay(1000)
+      ).subscribe(
+        {
+          next: () => {
             this.loaders = false;
+            this.mensaje = 'Candidato Agregado';
+            this.resultado = true;
+            this.estilo = true;
             this.miForm.reset()
             setTimeout(() => {
               this.resultado = false;
-            }, 1000)
+            }, 3000)
+          },
+          error: (error: any) => {
+            console.error(error)
+          },
+          complete: () => {
+            //
           }
-
-        },
-        error: (error: any) => {
-          console.error(error);
-        },
-        complete: () => { console.error("2") }
-      })
+        }
+      );
+    } else {
+      this.loaders = false;
+      this.mensaje = 'Candidato No agregado el id no esta en la BD';
+      this.estilo = false;
+      this.resultado = true;
+      setTimeout(() => {
+        this.resultado = false;
+      }, 3000)
+    }
   }
 }

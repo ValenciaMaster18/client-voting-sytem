@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { delay, Subscription } from 'rxjs';
 import { IVotacion } from '../../../models/ivotacion';
 import { VotacionService } from '../../../services/admin/Votacion/votacion.service';
 @Component({
@@ -8,14 +8,17 @@ import { VotacionService } from '../../../services/admin/Votacion/votacion.servi
   templateUrl: './add-voting.component.html',
   styleUrls: ['./add-voting.component.scss']
 })
-export class AddVotingComponent implements OnInit, OnDestroy {
+export class AddVotingComponent implements OnDestroy {
   miForm: FormGroup;
-  loaders: boolean;
+
   mensaje: string;
   resultado: boolean;
   estilo: boolean;
-  data: IVotacion[];
+  loaders: boolean;
+
+  data$ = this._votacionServices.votacion$;
   suscribcion: Subscription;
+
   constructor(
     private controles: FormBuilder,
     private _votacionServices: VotacionService
@@ -24,7 +27,6 @@ export class AddVotingComponent implements OnInit, OnDestroy {
     this.loaders = false;
     this.resultado = false;
     this.estilo = false;
-    this.data = [];
 
     this.suscribcion = new Subscription();
     this.miForm = this.controles.group({
@@ -38,55 +40,42 @@ export class AddVotingComponent implements OnInit, OnDestroy {
     this.suscribcion.unsubscribe();
   }
 
-  ngOnInit(): void {
-    this.suscribcion = this._votacionServices.getVotacion().subscribe(
-      {
-        next: (value: any) => {
-          this.data = value
-        },
-        error: (error: any) => {
-          console.error(error);
-        },
-        complete: () => { console.error("1") },
-      });
-  }
+
   onSubmit(): void {
     this.loaders = true;
 
-    const buscandoIdDeVotacion: IVotacion | undefined = this.data.find(elemento =>
-      elemento.id == this.miForm.value.id
-    )
+    const buscandoIdDeVotacion = this.data$.value?.find(elemento => elemento.id == this.miForm.value.id)
     if (buscandoIdDeVotacion) {
-      setTimeout(() => {
-        this.loaders = false;
-      }, 300)
-      this.estilo = false;
+      this.loaders = false;
       this.mensaje = 'Votacion No aregada id estan en la BD';
+      this.estilo = false;
       this.resultado = true;
       setTimeout(() => {
         this.resultado = false;
       }, 3000)
     } else {
-      setTimeout(() => {
-        this.resultado = true;
-        this._votacionServices.addVotacion(this.miForm.value).subscribe(
-          {
-            next: (value: any) => {
-              this.data.push(value);
-              this.loaders = false;
-              this.estilo = true;
-              this.mensaje = 'Votacion agregada';
-              this.miForm.reset();
-            },
-            error: (error: any) => console.error(error),
-            complete: () => console.info("votacion completa")
+      this._votacionServices.addVotacion(this.miForm.value).pipe(
+        delay(1000)
+      ).subscribe(
+        {
+          next: () => {
+            this.loaders = false;
+            this.mensaje = 'Votacion agregada';
+            this.estilo = true;
+            this.resultado = true;
+            this.miForm.reset();
+            setTimeout(() => {
+              this.resultado = false;
+            }, 3000)
+          },
+          error: (error: any) => {
+            console.error(error)
+          },
+          complete: () => {
+            //
           }
-        );
-
-        setTimeout(() => {
-          this.resultado = false;
-        }, 3000)
-      }, 300);
+        }
+      );
     }
   }
 }

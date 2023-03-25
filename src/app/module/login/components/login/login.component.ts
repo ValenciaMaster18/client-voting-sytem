@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from '../../services/login.service';
+import { LoginService } from '../../services/login/login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -32,7 +32,6 @@ export class LoginComponent {
       this._loginService.login(username, password)
         .subscribe(
           () => {
-            this.mensaje = 'Usuario Logeado';
             this.router.navigateByUrl('/aprendiz');
             setTimeout(() => {
             this.estado = false;
@@ -45,7 +44,6 @@ export class LoginComponent {
       setTimeout(() => {
         this.estado = false;
       }, 1200)
-      this.miForm.reset()
     }
   }
 }

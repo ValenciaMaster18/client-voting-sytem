@@ -10,11 +10,9 @@ import { VotacionService } from '../../../services/admin/Votacion/votacion.servi
 export class ViewVotingComponent implements OnInit {
   data: IVotacion[];
   color: boolean;
-  valor: any;
   constructor(
     private _votacionService: VotacionService
    ){
-    this.valor = '';
     this.color = false;
     this.data = []
    }
@@ -28,7 +26,7 @@ export class ViewVotingComponent implements OnInit {
           console.error(error);
         },
         complete: () => {
-          console.log("Operacion completada")
+          //
         }
       }
     )
@@ -40,11 +38,14 @@ export class ViewVotingComponent implements OnInit {
     this._votacionService.deleteVotacion(id).subscribe(
       {
         next: () => {
-          console.log("Eliminado");
           this.ngOnInit();
       },
-        error: (error: any) => console.error(error),
-        complete: () => console.info("votacion completa")
+        error: (error: any) => {
+          console.error(error)
+        },
+        complete: () => {
+          //
+        }
       }
     )
   }

@@ -1,26 +1,31 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { IAprendiz } from '../../../models/iaprendiz';
-import { Observable } from 'rxjs';
-import { RutasGetAprendiz, RutasPostAprendiz, RutasDeleteAprendiz } from '../../../environments/rutas-dev';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { RutasGetAprendiz, RutasPostAprendiz, RutasDeleteAprendiz } from '@environments/admin/rutas-dev';
 @Injectable({
   providedIn: 'root'
 })
 export class GetAprendizService {
 
+  aprendices$ = new BehaviorSubject<IAprendiz[]>([]);
+
   constructor(
     private http: HttpClient,
   ) {
-    // ../../../../assets/json/data.json
   }
 
   getAprendiz(): Observable<IAprendiz[]>{
-    return this.http.get<IAprendiz[]>(RutasGetAprendiz.url);
+    return this.http.get<IAprendiz[]>(RutasGetAprendiz.url).pipe(
+      tap( response => {
+        this.aprendices$.next(response);
+      })
+    )
   }
   enviarAprendiz(nuevoAprendiz: IAprendiz){
     return this.http.post(RutasPostAprendiz.url, nuevoAprendiz);
   }
   eliminarAprendiz(id: number){
-    return this.http.delete(`${RutasDeleteAprendiz.url}${id}`)
+    return this.http.delete(`${RutasDeleteAprendiz.url}${id}`);
   }
 }

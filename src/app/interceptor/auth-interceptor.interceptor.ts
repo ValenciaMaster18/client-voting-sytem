@@ -6,15 +6,20 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { TokenService } from '../module/login/services/token/token.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthInterceptorInterceptor implements HttpInterceptor {
 
-  constructor() { }
+  constructor(
+    private _tokenService: TokenService
+  ) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // primero comenzamos recuperando la cadena JWT de Local Storage directamente
-    const idToken = localStorage.getItem("id_token");
+    const idToken = this._tokenService.getToken();
     // verificar si el JWT está presente
     if (idToken) {
       // si el JWT está presente, clonaremos los encabezados HTTP y agregaremos un extra Authorization encabezado, que contendrá el JWT

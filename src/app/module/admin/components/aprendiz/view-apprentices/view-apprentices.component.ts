@@ -8,11 +8,13 @@ import { GetAprendizService } from '../../../services/admin/aprendiz/get-aprendi
   styleUrls: ['./view-apprentices.component.scss']
 })
 export class ViewApprenticesComponent implements OnInit, OnDestroy {
+
   valor: any;
   loaders: boolean;
   color: boolean;
   data: IAprendiz[];
   suscribtion: Subscription;
+
   constructor(
     private _getAprendizService: GetAprendizService
   ) {
@@ -24,7 +26,7 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
   };
   ngOnInit(): void {
     this.suscribtion = this._getAprendizService.getAprendiz().pipe(
-      delay(1000) // retraso de un segundo
+      delay(1000)
     ).subscribe({
       next: (valor: IAprendiz[] ) => {
         this.data = valor;
@@ -34,7 +36,9 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
         console.error(error);
         this.loaders = false;
        },
-      complete: () => { console.error("Opereracion terminada") },
+      complete: () => {
+        //
+      },
     });
 
   };
@@ -45,7 +49,6 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
     this.color = !this.color;
   }
   eliminarAprendiz(id:number): void{
-    console.log(id)
     this._getAprendizService.eliminarAprendiz(id).subscribe(
       () => {
         this.ngOnInit();

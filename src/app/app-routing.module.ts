@@ -2,12 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 // Guards
 import { LoginGuard } from './guards/login/login.guard';
+import { RedirectLoginGuard } from './guards/redirect-login/redirect-login.guard';
 
 const routes: Routes = [
   {
-    path: 'login', loadChildren: () => import('./module/login/login.module').then(
+    path: 'login',
+    loadChildren: () => import('./module/login/login.module').then(
       m => m.LoginModule
-    )
+    ),
+    canActivate: [RedirectLoginGuard]
   },
   {
     path: 'aprendiz',

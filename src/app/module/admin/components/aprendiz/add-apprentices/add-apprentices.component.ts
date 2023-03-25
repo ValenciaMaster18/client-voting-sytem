@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { delay, Subscription } from 'rxjs';
 import { IAprendiz } from '../../../models/iaprendiz';
@@ -8,12 +8,14 @@ import { GetAprendizService } from '../../../services/admin/aprendiz/get-aprendi
   templateUrl: './add-apprentices.component.html',
   styleUrls: ['./add-apprentices.component.scss']
 })
-export class AddApprenticesComponent implements OnInit, OnDestroy {
+export class AddApprenticesComponent implements OnDestroy {
   miForm: FormGroup;
+
   mensaje: string;
   resultado: boolean;
   loaders: boolean;
-  data: IAprendiz[];
+  
+  data$ = this._getAprendizService.aprendices$;
   suscribcion: Subscription;
 
   constructor(
@@ -23,7 +25,6 @@ export class AddApprenticesComponent implements OnInit, OnDestroy {
     this.mensaje = '';
     this.resultado = false;
     this.loaders = false;
-    this.data = [];
     this.suscribcion = new Subscription();
     this.miForm = this.controles.group(
       {
@@ -39,60 +40,40 @@ export class AddApprenticesComponent implements OnInit, OnDestroy {
       }
     )
   }
-  ngOnInit(): void {
-    this._getAprendizService.getAprendiz().subscribe(
-      {
-        next: (valor: any) => {
-          this.data = valor;
-          console.log(this.data)
-        },
-        error: (error: any) => {
-          console.error(error);
-        },
-        complete: () => {
-          console.log("Aprendices cargados");
-        }
-      }
-    )
-  }
 
   submit(): void {
     this.loaders = true;
-    const buscarId: IAprendiz | undefined = this.data.find(element => element.id == this.miForm.value.id)
+    const buscarId: IAprendiz | undefined = this.data$.value.find(element => element.id == this.miForm.value.id)
     if (buscarId) {
-      this.resultado = true;
-      this.loaders = false;
       this.mensaje = 'Aprendiz no guardado id estan en la BD'
+      this.loaders = false;
+      this.resultado = true;
       setTimeout(() => {
         this.resultado = false;
       }, 3000)
     } else {
       this.suscribcion = this._getAprendizService.enviarAprendiz(this.miForm.value).pipe(
-        delay(300)
+        delay(1000)
       ).subscribe(
         {
           next: () => {
+            this.mensaje = 'Aprendiz Guardado'
             this.resultado = true;
             this.loaders = false;
-            this.mensaje = 'Aprendiz Guardado'
+            this.miForm.reset()
             setTimeout(() => {
               this.resultado = false;
-            }, 1000)
+            }, 3000)
           },
           error: (error: any) => {
             console.error(error);
-            this.resultado = true;
-            setTimeout(() => {
-              this.resultado = false;
-            }, 1000)
           },
           complete: () => {
-            console.log("Operacion culminada de agregar candidato");
+            //
           }
         }
       );
     }
-    this.miForm.reset()
   }
   ngOnDestroy(): void {
     this.suscribcion.unsubscribe();
