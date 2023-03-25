@@ -23,7 +23,13 @@ export class VotacionService {
     );
    }
    addVotacion(nuevaVotacion: IVotacion): Observable<IVotacion[]> {
-    return this.http.post<IVotacion[]>(RutasPostVotaciones.url, nuevaVotacion);
+    return this.http.post<IVotacion[]>(RutasPostVotaciones.url, nuevaVotacion).pipe(
+      tap(() => {
+        const candidatos = this.votacion$.value;
+        candidatos?.push(nuevaVotacion);
+        this.votacion$.next(candidatos);
+      })
+    );
    }
    deleteVotacion(id: number){
     return this.http.delete(`${RutasDeleteVotaciones.url}${id}`)

@@ -49,8 +49,8 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.suscription = this._votacionService.getVotacion().subscribe(
       {
-        next: (valor: any) => {
-          this.votaciones = valor;
+        next: (votacion: any) => {
+          this.votaciones = votacion;
         },
         error: (error: any) => {
           console.error(error);

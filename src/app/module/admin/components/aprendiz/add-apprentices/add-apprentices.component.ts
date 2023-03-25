@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { delay, Subscription } from 'rxjs';
 import { IAprendiz } from '../../../models/iaprendiz';
@@ -14,7 +14,7 @@ export class AddApprenticesComponent implements OnDestroy {
   mensaje: string;
   resultado: boolean;
   loaders: boolean;
-  
+
   data$ = this._getAprendizService.aprendices$;
   suscribcion: Subscription;
 
@@ -45,7 +45,7 @@ export class AddApprenticesComponent implements OnDestroy {
     this.loaders = true;
     const buscarId: IAprendiz | undefined = this.data$.value.find(element => element.id == this.miForm.value.id)
     if (buscarId) {
-      this.mensaje = 'Aprendiz no guardado id estan en la BD'
+      this.mensaje = 'Aprendiz no guardado id estan en la BD';
       this.loaders = false;
       this.resultado = true;
       setTimeout(() => {

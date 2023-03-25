@@ -13,32 +13,18 @@ const routes: Routes = [
     canActivate: [RedirectLoginGuard]
   },
   {
-    path: 'aprendiz',
-    loadChildren: () => import('./module/admin/components/aprendiz/aprendiz-admin.module').then(
-      m => m.AprendizAdminModule
-    ),
-    canActivate: [LoginGuard]
-  },
-  {
-    path: 'candidato',
-    loadChildren: () => import('./module/admin/components/candidatos/candidatos-admin.module').then(
-      m => m.CandidatosAdminModule
+    path: 'admin',
+    loadChildren: () => import('./module/admin/admin.module').then(
+      m => m.AdminModule
     ),
     canActivate: [LoginGuard]
 
   },
   {
-    path: 'votacion',
-    loadChildren: () => import('./module/admin/components/votaciones/votaciones-admin.module').then(
-      m => m.VotacionesAdminModule
-    ),
-    canActivate: [LoginGuard]
-  },
-  {
     path: '', redirectTo: 'login', pathMatch: 'full'
   },
   {
-    path: '**', pathMatch: 'full', redirectTo: 'aprendiz'
+    path: '**', pathMatch: 'full', redirectTo: 'admin'
   }
 ];
 

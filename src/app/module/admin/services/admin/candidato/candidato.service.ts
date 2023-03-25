@@ -22,7 +22,13 @@ export class CandidatoService {
     );
   }
   addCandidato(candidatoNew: ICandidato): Observable<ICandidato[]> {
-    return this.http.post<ICandidato[]>(RutasPostCandidato.url, candidatoNew );
+    return this.http.post<ICandidato[]>(RutasPostCandidato.url, candidatoNew ).pipe(
+      tap(() => {
+        const candidatos = this.candidato$.value;
+        candidatos?.push(candidatoNew);
+        this.candidato$.next(candidatos);
+      })
+    );
   }
   deleteCandidato(id: number): Observable<ICandidato[]> {
     return this.http.delete<ICandidato[]>(`${RutasDeleteCandidato.url}${id}`);

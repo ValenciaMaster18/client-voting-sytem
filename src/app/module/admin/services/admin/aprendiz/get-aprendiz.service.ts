@@ -23,7 +23,13 @@ export class GetAprendizService {
     )
   }
   enviarAprendiz(nuevoAprendiz: IAprendiz){
-    return this.http.post(RutasPostAprendiz.url, nuevoAprendiz);
+    return this.http.post(RutasPostAprendiz.url, nuevoAprendiz).pipe(
+      tap(() => {
+        const aprendices = this.aprendices$.value;
+        aprendices.push(nuevoAprendiz);
+        this.aprendices$.next(aprendices);
+      })
+    );
   }
   eliminarAprendiz(id: number){
     return this.http.delete(`${RutasDeleteAprendiz.url}${id}`);

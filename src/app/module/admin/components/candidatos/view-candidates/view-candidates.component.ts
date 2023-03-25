@@ -33,7 +33,7 @@ export class ViewCandidatesComponent implements OnInit, OnDestroy {
           console.error(error)
         },
         complete: () => {
-          console.log("Hemos terminado candidato")
+          //
         }
       }
     )
@@ -53,7 +53,9 @@ export class ViewCandidatesComponent implements OnInit, OnDestroy {
           this.ngOnInit();
       },
         error: (error: any) => console.error(error),
-        complete: () => console.info("votacion completa")
+        complete: () => {
+          // 
+        }
       }
     )
   }
