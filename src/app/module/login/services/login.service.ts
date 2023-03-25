@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { RutasPostLogin } from '../environments/rutas-dev';
 import { shareReplay, tap } from 'rxjs';
 import * as moment from 'moment';
+import { getCookie, setCookie, removeCookie } from 'typescript-cookie';
 @Injectable({
   providedIn: 'root'
 })
