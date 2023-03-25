@@ -25,6 +25,7 @@ export class AddVotingComponent implements OnInit, OnDestroy {
     this.resultado = false;
     this.estilo = false;
     this.data = [];
+
     this.suscribcion = new Subscription();
     this.miForm = this.controles.group({
       id: ['', [Validators.required]],
@@ -36,6 +37,7 @@ export class AddVotingComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.suscribcion.unsubscribe();
   }
+
   ngOnInit(): void {
     this.suscribcion = this._votacionServices.getVotacion().subscribe(
       {
@@ -50,14 +52,17 @@ export class AddVotingComponent implements OnInit, OnDestroy {
   }
   onSubmit(): void {
     this.loaders = true;
+
     const buscandoIdDeVotacion: IVotacion | undefined = this.data.find(elemento =>
       elemento.id == this.miForm.value.id
     )
     if (buscandoIdDeVotacion) {
-      this.resultado = true;
+      setTimeout(() => {
+        this.loaders = false;
+      }, 300)
       this.estilo = false;
       this.mensaje = 'Votacion No aregada id estan en la BD';
-      this.loaders = false;
+      this.resultado = true;
       setTimeout(() => {
         this.resultado = false;
       }, 3000)
@@ -67,10 +72,10 @@ export class AddVotingComponent implements OnInit, OnDestroy {
         this._votacionServices.addVotacion(this.miForm.value).subscribe(
           {
             next: (value: any) => {
-              console.log(value);
+              this.data.push(value);
+              this.loaders = false;
               this.estilo = true;
               this.mensaje = 'Votacion agregada';
-              this.loaders = false;
               this.miForm.reset();
             },
             error: (error: any) => console.error(error),
@@ -80,8 +85,7 @@ export class AddVotingComponent implements OnInit, OnDestroy {
 
         setTimeout(() => {
           this.resultado = false;
-          this.miForm.reset();
-        }, 1000)
+        }, 3000)
       }, 300);
     }
   }

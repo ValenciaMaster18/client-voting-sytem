@@ -11,6 +11,7 @@ export class LoginComponent {
   miForm: FormGroup;
   mensaje: string;
   estado: boolean;
+
   constructor(
     private _loginService: LoginService,
     private formBuilder: FormBuilder,
@@ -26,13 +27,12 @@ export class LoginComponent {
     )
   }
   onSubmit(): void {
-    const val = this.miForm.value;
-    if (val.username && val.password) {
-      this._loginService.login(val.username, val.password)
+    const {username, password } = this.miForm.getRawValue();
+    if (username && password) {
+      this._loginService.login(username, password)
         .subscribe(
           () => {
             this.mensaje = 'Usuario Logeado';
-            this.estado = true;
             this.router.navigateByUrl('/aprendiz');
             setTimeout(() => {
             this.estado = false;
@@ -47,6 +47,5 @@ export class LoginComponent {
       }, 1200)
       this.miForm.reset()
     }
-
   }
 }

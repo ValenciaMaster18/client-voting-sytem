@@ -9,7 +9,7 @@
         {{ mensaje }}
       </span>
     </div>
-    <form class="login" [formGroup]="miForm" (ngSubmit)="onSubmit()">
+    <form class="login" novalidate [formGroup]="miForm" (ngSubmit)="onSubmit()">
       <div class="usuario">
         <label for="usuario">
           Usuario
@@ -38,6 +38,6 @@
     </form>
   </div>
   <picture class="login">
-    <img src="../../../assets/img/logo-sena.png" alt="logo sena">
+    <img src="../../../assets/img/logo-sena-blanco.png" alt="logo sena">
   </picture>
 </section>
