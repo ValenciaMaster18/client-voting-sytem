@@ -24,7 +24,7 @@ export class ViewCandidatesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.suscription = this._candidatoServices.getCandidato().subscribe(
+    this.suscription = this._candidatoServices.candidato$.subscribe(
       {
         next: (value: any) => {
           this.data = value
@@ -49,12 +49,10 @@ export class ViewCandidatesComponent implements OnInit, OnDestroy {
     this._candidatoServices.deleteCandidato(id).subscribe(
       {
         next: () => {
-          console.log("Eliminado");
-          this.ngOnInit();
       },
         error: (error: any) => console.error(error),
         complete: () => {
-          // 
+          //
         }
       }
     )

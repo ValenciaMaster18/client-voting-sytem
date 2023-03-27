@@ -36,14 +36,15 @@ export class LoginComponent {
             setTimeout(() => {
             this.estado = false;
             }, 1200 )
+          },
+          () => {
+            this.mensaje = 'Acceso denegado. Credenciales Invalidas';
+            this.estado = true;
+            setTimeout(() => {
+              this.estado = false;
+            }, 1200)
           }
         );
-    }else{
-      this.mensaje = 'Usuario o contraseña incorrecta'
-      this.estado = true;
-      setTimeout(() => {
-        this.estado = false;
-      }, 1200)
     }
   }
 }

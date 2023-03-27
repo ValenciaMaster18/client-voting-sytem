@@ -37,9 +37,11 @@
         <thead class="text-center" [ngClass]="color ? 'table-success' : 'table-primary'">
           <tr>
             <th>ID</th>
+            <th>ID APRENDIZ</th>
             <th>FOTO</th>
             <th>VOTACION</th>
             <th>PROPUESTA</th>
+            <th>FECHA</th>
             <th>MODIFICAR</th>
           </tr>
         </thead>
@@ -47,6 +49,7 @@
           <tr *ngFor="let element of data">
             <ng-container *ngIf="valor == element.id || valor == ''">
               <td>{{ element.id }}</td>
+              <td>{{ element.idAprendiz }}</td>
               <td>
                 <picture>
                   <img [src]="element.img" alt="" width="50px" height="50px">
@@ -54,6 +57,7 @@
               </td>
               <td>{{ element.votacion }}</td>
               <td>{{ element.propuesta }}</td>
+              <td>{{ element.fecha | date: 'd/MM/yyyy h:mmaaa' }}</td>
               <td class="d-flex justify-content-center gap-2">
                 <button class="btn btn-danger" (click)="eliminarAprendiz(element.id)">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">

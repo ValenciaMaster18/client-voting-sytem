@@ -17,6 +17,7 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
 
   mensaje: string;
   resultado: boolean;
+  votacion: boolean;
   estilo: boolean;
   loaders: boolean;
 
@@ -35,19 +36,22 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
     this.resultado = false;
     this.loaders = false;
     this.loaders = false;
+    this.votacion = false;
     this.votaciones = [];
     this.suscription = new Subscription();
 
     this.miForm = this.controles.group({
-      id: ['', [Validators.required]],
+      id: [''],
+      idAprendiz: ['', [Validators.required]],
       img: ['', [Validators.required]],
       votacion: ['', [Validators.required]],
-      propuesta: ['', [Validators.required]]
+      propuesta: ['', [Validators.required]],
+      fecha: [Date()]
     })
   }
 
   ngOnInit(): void {
-    this.suscription = this._votacionService.getVotacion().subscribe(
+    this.suscription = this._votacionService.votacion$.subscribe(
       {
         next: (votacion: any) => {
           this.votaciones = votacion;
@@ -66,9 +70,21 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
+    this.miForm.value.id = this._candidatoServices.candidato$.value.length + 1;
+    this.votacion = false;
     this.loaders = true;
-    const buscandoIdDeAprendiz = this.data$.value.find(data => data.id == this.miForm.value.id)
-    if (buscandoIdDeAprendiz) {
+    const buscandoIdDeAprendiz = this.data$.value.find(data => data.id == this.miForm.value.idAprendiz)
+    this._candidatoServices.candidato$.subscribe(
+      (valor) => {
+        const candidato = valor.filter( cand =>
+          cand.idAprendiz == buscandoIdDeAprendiz!.id && cand.votacion == this.miForm.value.votacion
+           )
+           if (candidato.length === 0){
+              this.votacion = true;
+           }
+          }
+          )
+    if (buscandoIdDeAprendiz && this.votacion) {
       this._candidatoServices.addCandidato(this.miForm.value).pipe(
         delay(1000)
       ).subscribe(
@@ -93,7 +109,11 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
       );
     } else {
       this.loaders = false;
-      this.mensaje = 'Candidato No agregado el id no esta en la BD';
+      if (!buscandoIdDeAprendiz){
+        this.mensaje = 'Candidato No agregado el id no esta en la BD';
+      }else{
+        this.mensaje = 'El id ya tiene esta votacion agregada';
+      }
       this.estilo = false;
       this.resultado = true;
       setTimeout(() => {

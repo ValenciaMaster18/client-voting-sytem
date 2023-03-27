@@ -32,17 +32,23 @@ picture{
   }
 }
 .form__contenedor{
-  // position: relative;
+  position: relative;
   input{
     display: block;
     width: 350px;
     height: 40px;
-    padding: 0 10px;
+    padding: 0 40px;
     font-size: 15px;
     border: none;
     outline: none;
     background-color: #F2F2F2;
     border-radius: 10px;
+
+  }
+  svg{
+    position: absolute;
+    top: 15px;
+    left: 7px;
   }
   select{
     width: 350px;
@@ -64,7 +70,7 @@ picture{
     width: 350px;
     background-color: #F2F2F2;
     font-size: 15px;
-    padding: 10px 10px;
+    padding: 10px 40px;
     border: 0;
     outline: none;
     border-radius: 10px;

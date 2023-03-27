@@ -9,7 +9,7 @@ import { ICandidato } from '../../../models/Icandidato';
 })
 export class CandidatoService {
 
-  candidato$ = new BehaviorSubject<ICandidato[] | null>(null);
+  candidato$ = new BehaviorSubject<ICandidato[]>([]);
   constructor(
     private http: HttpClient
   ) {
@@ -25,12 +25,18 @@ export class CandidatoService {
     return this.http.post<ICandidato[]>(RutasPostCandidato.url, candidatoNew ).pipe(
       tap(() => {
         const candidatos = this.candidato$.value;
-        candidatos?.push(candidatoNew);
+        candidatos.push(candidatoNew);
         this.candidato$.next(candidatos);
       })
     );
   }
   deleteCandidato(id: number): Observable<ICandidato[]> {
-    return this.http.delete<ICandidato[]>(`${RutasDeleteCandidato.url}${id}`);
+    return this.http.delete<ICandidato[]>(`${RutasDeleteCandidato.url}${id}`).pipe(
+      tap(() => {
+        let candidatos = this.candidato$.value;
+        candidatos = candidatos.filter( candidato => candidato.id !== id)
+        this.candidato$.next(candidatos);
+      })
+    );
   }
 }

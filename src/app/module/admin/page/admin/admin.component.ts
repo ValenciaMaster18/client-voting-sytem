@@ -8,7 +8,6 @@ import { VotacionService } from '../../services/admin/Votacion/votacion.service'
   templateUrl: './admin.component.html'
 })
 export class AdminComponent implements OnInit {
-  cont: number = 1;
   constructor(
     private _getAprendizService: GetAprendizService,
     private _candidatoService: CandidatoService,
@@ -17,10 +16,20 @@ export class AdminComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    // this.cont++;
-    // this._getAprendizService.getAprendiz().subscribe()
-    // this._candidatoService.getCandidato().subscribe()
-    // this._votacionService.getVotacion().subscribe()
-    // console.log(this.cont)
+    this._getAprendizService.getAprendiz().subscribe(
+      () => {
+        console.log(this._getAprendizService.aprendices$)
+      }
+    )
+    this._candidatoService.getCandidato().subscribe(
+      () => {
+        console.log(this._candidatoService.candidato$)
+      }
+    )
+    this._votacionService.getVotacion().subscribe(
+      () => {
+        console.log(this._votacionService.votacion$)
+      }
+    )
   }
 }

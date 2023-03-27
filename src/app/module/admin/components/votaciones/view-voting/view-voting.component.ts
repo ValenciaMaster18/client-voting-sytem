@@ -17,7 +17,7 @@ export class ViewVotingComponent implements OnInit {
     this.data = []
    }
   ngOnInit(): void {
-    this._votacionService.getVotacion().subscribe(
+    this._votacionService.votacion$.subscribe(
       {
         next: (valor: any) => {
           this.data = valor;
@@ -38,7 +38,6 @@ export class ViewVotingComponent implements OnInit {
     this._votacionService.deleteVotacion(id).subscribe(
       {
         next: () => {
-          this.ngOnInit();
       },
         error: (error: any) => {
           console.error(error)

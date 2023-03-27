@@ -105,6 +105,9 @@ form.login button{
   background-color: #31572c;
   color: white;
   cursor: pointer;
+  &:disabled{
+    background-color: gray;
+  }
 }
 @media screen and (min-width: 768px) {
   section.login{

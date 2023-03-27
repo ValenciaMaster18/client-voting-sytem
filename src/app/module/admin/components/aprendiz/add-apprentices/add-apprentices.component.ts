@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { delay, Subscription } from 'rxjs';
+import { BehaviorSubject, delay, Subscription } from 'rxjs';
 import { IAprendiz } from '../../../models/iaprendiz';
 import { GetAprendizService } from '../../../services/admin/aprendiz/get-aprendiz.service';
 @Component({
@@ -13,9 +13,10 @@ export class AddApprenticesComponent implements OnDestroy {
 
   mensaje: string;
   resultado: boolean;
+  estilo: boolean;
   loaders: boolean;
 
-  data$ = this._getAprendizService.aprendices$;
+  data$: BehaviorSubject<IAprendiz[]> = this._getAprendizService.aprendices$;
   suscribcion: Subscription;
 
   constructor(
@@ -24,19 +25,18 @@ export class AddApprenticesComponent implements OnDestroy {
   ) {
     this.mensaje = '';
     this.resultado = false;
+    this.estilo = false;
     this.loaders = false;
     this.suscribcion = new Subscription();
     this.miForm = this.controles.group(
       {
-        id: ['', [Validators.required]],
-        name: ['', [Validators.required]],
+        id: [''],
+        ficha: ['', [Validators.required]],
+        documento: ['', [Validators.required]],
+        nombre: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [
-          Validators.required,
-          Validators.maxLength(16),
-          Validators.minLength(8)
-        ]],
-        createdAt: ['', [Validators.required]]
+        password: [''],
+        estado: ['', [Validators.required]]
       }
     )
   }
@@ -47,17 +47,21 @@ export class AddApprenticesComponent implements OnDestroy {
     if (buscarId) {
       this.mensaje = 'Aprendiz no guardado id estan en la BD';
       this.loaders = false;
+      this.estilo = false;
       this.resultado = true;
       setTimeout(() => {
         this.resultado = false;
       }, 3000)
     } else {
+      this.miForm.value.id = this._getAprendizService.aprendices$.value.length + 1
+      this.miForm.value.password = this.miForm.value.documento;
       this.suscribcion = this._getAprendizService.enviarAprendiz(this.miForm.value).pipe(
         delay(1000)
       ).subscribe(
         {
           next: () => {
             this.mensaje = 'Aprendiz Guardado'
+            this.estilo = true;
             this.resultado = true;
             this.loaders = false;
             this.miForm.reset()

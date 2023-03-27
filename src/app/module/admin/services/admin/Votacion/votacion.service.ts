@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class VotacionService {
 
-  votacion$ = new BehaviorSubject<IVotacion[] | null>(null);
+  votacion$ = new BehaviorSubject<IVotacion[]>([]);
 
   constructor(
     private http : HttpClient
@@ -26,12 +26,18 @@ export class VotacionService {
     return this.http.post<IVotacion[]>(RutasPostVotaciones.url, nuevaVotacion).pipe(
       tap(() => {
         const candidatos = this.votacion$.value;
-        candidatos?.push(nuevaVotacion);
+        candidatos.push(nuevaVotacion);
         this.votacion$.next(candidatos);
       })
     );
    }
    deleteVotacion(id: number){
-    return this.http.delete(`${RutasDeleteVotaciones.url}${id}`)
+    return this.http.delete(`${RutasDeleteVotaciones.url}${id}`).pipe(
+      tap(() => {
+        let votaciones = this.votacion$.value;
+        votaciones = votaciones.filter( votacion => votacion.id !== id );
+        this.votacion$.next(votaciones);
+      })
+    )
   }
 }

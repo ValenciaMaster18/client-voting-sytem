@@ -30,7 +30,7 @@ export class AddVotingComponent implements OnDestroy {
 
     this.suscribcion = new Subscription();
     this.miForm = this.controles.group({
-      id: ['', [Validators.required]],
+      id: [''],
       name: ['', [Validators.required]],
       estado: ['', [Validators.required]],
       descripcion: ['', [Validators.required]]
@@ -43,7 +43,7 @@ export class AddVotingComponent implements OnDestroy {
 
   onSubmit(): void {
     this.loaders = true;
-
+    this.miForm.value.id = this.data$.value.length + 1;
     const buscandoIdDeVotacion = this.data$.value?.find(elemento => elemento.id == this.miForm.value.id)
     if (buscandoIdDeVotacion) {
       this.loaders = false;

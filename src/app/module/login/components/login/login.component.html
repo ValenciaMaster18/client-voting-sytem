@@ -14,27 +14,31 @@
         <label for="usuario">
           Usuario
         </label>
-        <input
-              type="text"
-              id="usuario"
-              name="username"
-              placeholder="Numero documento"
-              formControlName="username"
-              >
+        <input type="text" id="usuario" name="username" placeholder="Numero documento" formControlName="username">
+        <ng-container *ngIf="
+        this.miForm.get('username')?.invalid &&
+        this.miForm.get('username')?.touched &&
+        this.miForm.get('username')?.errors?.['required']">
+  <span class="text-danger">
+    El Usuario no pueda estar vacia
+  </span>
+</ng-container>
       </div>
       <div class="clave">
         <label for="contraseña">
           Contraseña
         </label>
-        <input
-              type="password"
-              id="contraseña"
-              name="password"
-              placeholder="Contraseña"
-              formControlName="password"
-              >
+        <input type="password" id="contraseña" name="password" placeholder="Contraseña" formControlName="password">
+        <ng-container *ngIf="
+                this.miForm.get('password')?.invalid &&
+                this.miForm.get('password')?.touched &&
+                this.miForm.get('password')?.errors?.['required']">
+          <span class="text-danger">
+            La contraseña no pueda estar vacia
+          </span>
+        </ng-container>
       </div>
-      <button type="submit">Entrar al sistema</button>
+      <button type="submit" [disabled]="miForm.invalid">Entrar al sistema</button>
     </form>
   </div>
   <picture class="login">

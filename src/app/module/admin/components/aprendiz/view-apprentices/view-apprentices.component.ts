@@ -25,7 +25,7 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
     this.suscribtion = new Subscription();
   };
   ngOnInit(): void {
-    this.suscribtion = this._getAprendizService.getAprendiz().pipe(
+    this.suscribtion = this._getAprendizService.aprendices$.pipe(
       delay(1000)
     ).subscribe({
       next: (valor: IAprendiz[] ) => {
@@ -51,7 +51,6 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
   eliminarAprendiz(id:number): void{
     this._getAprendizService.eliminarAprendiz(id).subscribe(
       () => {
-        this.ngOnInit();
       }
     );
   }

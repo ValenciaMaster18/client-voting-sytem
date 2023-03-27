@@ -47,21 +47,25 @@
         <thead class="text-center" [ngClass]="color ? 'table-success' : 'table-primary'">
           <tr>
             <th>ID</th>
-            <th>NAME</th>
-            <th>EMAIL</th>
-            <th>PASSWORD</th>
-            <th>CREATEDAT</th>
-            <th>Modificar</th>
+            <th>FICHA</th>
+            <th>DOCUMENTO</th>
+            <th>NOMBRE</th>
+            <th>CORREO</th>
+            <th>CONTRASEÑA</th>
+            <th>ESTADO</th>
+            <th>ACCIONES</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let element of data">
             <ng-container *ngIf="valor == element.id || valor == ''">
               <td>{{ element.id }}</td>
-              <td>{{ element.name }}</td>
+              <td>{{ element.ficha }}</td>
+              <td>{{ element.documento }}</td>
+              <td>{{ element.nombre }}</td>
               <td>{{ element.email }}</td>
               <td>{{ element.password }}</td>
-              <td>{{ element.createdAt }}</td>
+              <td>{{ element.estado | uppercase  }}</td>
               <td class="d-flex justify-content-center gap-2">
                 <button class="btn btn-danger" (click)="eliminarAprendiz(element.id)">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"

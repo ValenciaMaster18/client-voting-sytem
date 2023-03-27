@@ -1,7 +1,9 @@
 export interface IAprendiz {
-  id: number,
-  name: string,
-  email: string,
-  password: string,
-  createdAt: string,
+  id: number;
+  ficha: string;
+  documento: string;
+  nombre: string;
+  email: string;
+  password: string;
+  estado: string;
 }
