@@ -15,6 +15,7 @@ export class AddApprenticesComponent implements OnDestroy {
   resultado: boolean;
   estilo: boolean;
   loaders: boolean;
+  estadoFormacion: string[];
 
   data$: BehaviorSubject<IAprendiz[]> = this._getAprendizService.aprendices$;
   suscribcion: Subscription;
@@ -27,6 +28,7 @@ export class AddApprenticesComponent implements OnDestroy {
     this.resultado = false;
     this.estilo = false;
     this.loaders = false;
+    this.estadoFormacion = ['En Formacion', 'Suspension', 'Retirado']
     this.suscribcion = new Subscription();
     this.miForm = this.controles.group(
       {
@@ -53,30 +55,46 @@ export class AddApprenticesComponent implements OnDestroy {
         this.resultado = false;
       }, 3000)
     } else {
-      this.miForm.value.id = this._getAprendizService.aprendices$.value.length + 1
-      this.miForm.value.password = this.miForm.value.documento;
-      this.suscribcion = this._getAprendizService.enviarAprendiz(this.miForm.value).pipe(
-        delay(1000)
-      ).subscribe(
-        {
-          next: () => {
-            this.mensaje = 'Aprendiz Guardado'
-            this.estilo = true;
-            this.resultado = true;
-            this.loaders = false;
-            this.miForm.reset()
-            setTimeout(() => {
-              this.resultado = false;
-            }, 3000)
-          },
-          error: (error: any) => {
-            console.error(error);
-          },
-          complete: () => {
-            //
-          }
+      const valDocCorreo = this.data$.value.find(element => {
+        if (element.documento == this.miForm.value.documento || element.email == this.miForm.value.email) {
+          return true;
         }
-      );
+        return false;
+      })
+      if (valDocCorreo) {
+        this.mensaje = 'Aprendiz no guardado documento o correo estan en la BD';
+        this.loaders = false;
+        this.estilo = false;
+        this.resultado = true;
+        setTimeout(() => {
+          this.resultado = false;
+        }, 3000)
+      } else {
+        this.miForm.value.id = this._getAprendizService.aprendices$.value.length + 1
+        this.miForm.value.password = this.miForm.value.documento;
+        this.suscribcion = this._getAprendizService.enviarAprendiz(this.miForm.value).pipe(
+          delay(1000)
+        ).subscribe(
+          {
+            next: () => {
+              this.mensaje = 'Aprendiz Guardado'
+              this.estilo = true;
+              this.resultado = true;
+              this.loaders = false;
+              this.miForm.reset()
+              setTimeout(() => {
+                this.resultado = false;
+              }, 3000)
+            },
+            error: (error: any) => {
+              console.error(error);
+            },
+            complete: () => {
+              //
+            }
+          }
+        );
+      }
     }
   }
   ngOnDestroy(): void {

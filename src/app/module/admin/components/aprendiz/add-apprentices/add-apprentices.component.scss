@@ -49,6 +49,22 @@ picture{
     top: 15px;
     left: 7px;
   }
+  select{
+    width: 350px;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 15px;
+    border: 0;
+    outline: none;
+    background-color: #F2F2F2;
+    border-radius: 10px;
+    option{
+      background-color: transparent;
+      border: 10px;
+      color: black;
+      font-size: 14px;
+    }
+  }
 }
 .form__mensaje{
   width: 350px;

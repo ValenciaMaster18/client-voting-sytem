@@ -57,28 +57,39 @@ export class AddVotingComponent implements OnDestroy {
         this.resultado = false;
       }, 3000)
     } else {
-      this._votacionServices.addVotacion(this.miForm.value).pipe(
-        delay(1000)
-      ).subscribe(
-        {
-          next: () => {
-            this.loaders = false;
-            this.mensaje = 'Votacion agregada';
-            this.estilo = true;
-            this.resultado = true;
-            this.miForm.reset();
-            setTimeout(() => {
-              this.resultado = false;
-            }, 3000)
-          },
-          error: (error: any) => {
-            console.error(error)
-          },
-          complete: () => {
-            //
+      const nombreVotacion = this.data$.value.find(element => element.name == this.miForm.value.name);
+      if (nombreVotacion) {
+        this.loaders = false;
+        this.mensaje = 'Votacion No aregada. Nombre votacion estan en la BD';
+        this.estilo = false;
+        this.resultado = true;
+        setTimeout(() => {
+          this.resultado = false;
+        }, 3000)
+      } else {
+        this._votacionServices.addVotacion(this.miForm.value).pipe(
+          delay(1000)
+        ).subscribe(
+          {
+            next: () => {
+              this.loaders = false;
+              this.mensaje = 'Votacion agregada';
+              this.estilo = true;
+              this.resultado = true;
+              this.miForm.reset();
+              setTimeout(() => {
+                this.resultado = false;
+              }, 3000)
+            },
+            error: (error: any) => {
+              console.error(error)
+            },
+            complete: () => {
+              //
+            }
           }
-        }
-      );
+        );
+      }
     }
   }
 }
