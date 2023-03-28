@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RutasPostLogin } from '@environments/login/rutas-dev';
+import { RutasLogin } from '@environments/login/rutas-dev';
 import { shareReplay, tap } from 'rxjs';
 
 import { IToken } from '../../models/token.interface';
@@ -9,15 +9,16 @@ import { TokenService } from '../token/token.service';
   providedIn: 'root'
 })
 export class LoginService {
-
+  API_URL: string;
   constructor(
     private httpClient: HttpClient,
     private _tokenService: TokenService
   ) {
+    this.API_URL = RutasLogin.url;
   }
 
   login(username: string, password: string) {
-    return this.httpClient.post<IToken>(`${RutasPostLogin.url}/login`, { username, password }).pipe(
+    return this.httpClient.post<IToken>(`${this.API_URL}/login`, { username, password }).pipe(
 
       tap(response => {
         this._tokenService.setToken(response.idToken)
