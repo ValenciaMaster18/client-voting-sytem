@@ -14,15 +14,24 @@ const routes: Routes = [
       },
       {
         path: 'aprendiz',
-        loadChildren: () => import('./components/aprendiz/aprendiz-admin.module').then(m => m.AprendizAdminModule)
+        loadChildren: () => import('./components/aprendiz/aprendiz-admin.module').then(m => m.AprendizAdminModule),
+        // data: {
+        //   preload: true
+        // }
       },
       {
         path: 'candidato',
-        loadChildren: () => import('./components/candidatos/candidatos-admin.module').then(m => m.CandidatosAdminModule)
+        loadChildren: () => import('./components/candidatos/candidatos-admin.module').then(m => m.CandidatosAdminModule),
+        // data: {
+        //   preload: true
+        // }
       },
       {
         path: 'votacion',
-        loadChildren: () => import('./components/votaciones/votaciones-admin.module').then(m => m.VotacionesAdminModule)
+        loadChildren: () => import('./components/votaciones/votaciones-admin.module').then(m => m.VotacionesAdminModule),
+        // data: {
+        //   preload: true
+        // }
       }
     ]
   }

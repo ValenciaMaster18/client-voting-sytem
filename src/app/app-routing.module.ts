@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+// Estrategias de precarga
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
+// import { CustomPreloadService } from './services/precarga/custom-preload.service';
+import { QuicklinkStrategy } from 'ngx-quicklink';
 // Guards
 import { LoginGuard } from './guards/login/login.guard';
 import { RedirectLoginGuard } from './guards/redirect-login/redirect-login.guard';
@@ -10,7 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('./module/login/login.module').then(
       m => m.LoginModule
     ),
-    canActivate: [RedirectLoginGuard]
+    canActivate: [RedirectLoginGuard],
+    // data: {
+    //   preload: true
+    // }
   },
   {
     path: 'admin',
@@ -18,7 +24,6 @@ const routes: Routes = [
       m => m.AdminModule
     ),
     canActivate: [LoginGuard]
-
   },
   {
     path: '', redirectTo: 'login', pathMatch: 'full'
@@ -29,7 +34,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    // Habilitamos la precarga de los modulos: Usar esta tecnica cuando sean pocos modulos a precargar
+    // preloadingStrategy: PreloadAllModules
+    // Precarga personalizada
+    // preloadingStrategy: CustomPreloadService
+    preloadingStrategy: QuicklinkStrategy
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
