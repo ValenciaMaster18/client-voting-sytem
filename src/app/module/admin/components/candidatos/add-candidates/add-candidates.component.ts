@@ -46,7 +46,7 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
       img: ['', [Validators.required]],
       votacion: ['', [Validators.required]],
       propuesta: ['', [Validators.required]],
-      fecha: [Date()]
+      fecha: ['']
     })
   }
 
@@ -71,6 +71,7 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     this.miForm.value.id = this._candidatoServices.candidato$.value.length + 1;
+    this.miForm.value.fecha = Date();
     this.votacion = false;
     this.loaders = true;
     const buscandoIdDeAprendiz = this.data$.value.find(data => data.id == this.miForm.value.idAprendiz)

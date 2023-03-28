@@ -32,8 +32,9 @@ export class AddVotingComponent implements OnDestroy {
     this.miForm = this.controles.group({
       id: [''],
       name: ['', [Validators.required]],
-      estado: ['', [Validators.required]],
-      descripcion: ['', [Validators.required]]
+      estado: [''],
+      descripcion: ['', [Validators.required]],
+      fecha: ['']
     })
   }
   ngOnDestroy(): void {
@@ -44,6 +45,8 @@ export class AddVotingComponent implements OnDestroy {
   onSubmit(): void {
     this.loaders = true;
     this.miForm.value.id = this.data$.value.length + 1;
+    this.miForm.value.estado = 'CERRADA';
+    this.miForm.value.fecha = Date();
     const buscandoIdDeVotacion = this.data$.value?.find(elemento => elemento.id == this.miForm.value.id)
     if (buscandoIdDeVotacion) {
       this.loaders = false;

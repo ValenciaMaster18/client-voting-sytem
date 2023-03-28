@@ -24,6 +24,10 @@ export const RutasPostVotaciones = {
   prduction: false,
   url: 'http://localhost:3001/votaciones/add'
 }
+export const RutasPutVotaciones = {
+  prduction: false,
+  url: 'http://localhost:3001/votaciones/update/estado/'
+}
 export const RutasDeleteVotaciones = {
   prduction: false,
   url: 'http://localhost:3001/votaciones/delete/'
