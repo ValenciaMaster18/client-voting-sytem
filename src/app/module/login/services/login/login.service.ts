@@ -5,6 +5,7 @@ import { shareReplay, tap } from 'rxjs';
 
 import { IToken } from '../../models/token.interface';
 import { TokenService } from '../token/token.service';
+import { checkToken } from 'src/app/interceptor/auth-interceptor.interceptor';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +19,7 @@ export class LoginService {
   }
 
   login(username: string, password: string) {
-    return this.httpClient.post<IToken>(`${this.API_URL}/login`, { username, password }).pipe(
+    return this.httpClient.post<IToken>(`${this.API_URL}/login`, { username, password }, { context: checkToken() }).pipe(
 
       tap(response => {
         this._tokenService.setToken(response.idToken)

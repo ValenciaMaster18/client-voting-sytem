@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
-
 import { QuicklinkModule } from 'ngx-quicklink';
 
 import { AdminComponent } from './page/admin/admin.component';

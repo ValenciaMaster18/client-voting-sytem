@@ -1,9 +1,11 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { LoginRoutingModule } from "./components/login/login-routing.module";
+import { LoginRoutingModule } from "./login-routing.module";
 import { ReactiveFormsModule } from "@angular/forms";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthInterceptorInterceptor } from "src/app/interceptor/auth-interceptor.interceptor";
 
-import { LoginComponent } from "./components/login/login.component";
+import { LoginComponent } from "./login/login.component";
 
 @NgModule({
   declarations: [
@@ -13,6 +15,11 @@ import { LoginComponent } from "./components/login/login.component";
     CommonModule,
     ReactiveFormsModule,
     LoginRoutingModule
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorInterceptor, multi: true
+    }
   ]
 })
 export class LoginModule{}

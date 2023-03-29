@@ -3,34 +3,58 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpContextToken,
+  HttpContext
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TokenService } from '../module/login/services/token/token.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+// Se define una constante que representa el token para indicar si se debe agregar un token JWT a la solicitud.
+const CHECK_TOKEN = new HttpContextToken<boolean>(() => false);
+
+// Función para crear un nuevo objeto de contexto HTTP con la propiedad CHECK_TOKEN establecida en true.
+export function checkToken() {
+  return new HttpContext().set(CHECK_TOKEN, true);
+}
+
+// Se marca la clase como un proveedor de servicio.
+@Injectable()
 export class AuthInterceptorInterceptor implements HttpInterceptor {
 
   constructor(
     private _tokenService: TokenService
   ) { }
 
+  // Método para interceptar cada solicitud HTTP y agregar un token JWT.
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    // primero comenzamos recuperando la cadena JWT de Local Storage directamente
+
+    // Si la propiedad CHECK_TOKEN está presente en el contexto HTTP de la solicitud, se agrega un token JWT.
+    if (request.context.get(CHECK_TOKEN)) {
+      return this.addTokenrequest(request, next);
+    }
+
+    // Si la propiedad CHECK_TOKEN no está presente en el contexto HTTP de la solicitud, se llama al siguiente interceptor HTTP en la cadena.
+    return next.handle(request);
+  }
+
+  // Método para agregar un token JWT a la solicitud HTTP.
+  private addTokenrequest(request: HttpRequest<unknown>, next: HttpHandler) {
+
+    // Se obtiene el token JWT del servicio TokenService.
     const idToken = this._tokenService.getToken();
-    // verificar si el JWT está presente
+    // Si el token JWT está presente, se clona la solicitud original y se agrega un encabezado "Authorization" con el token JWT.
     if (idToken) {
-      // si el JWT está presente, clonaremos los encabezados HTTP y agregaremos un extra Authorization encabezado, que contendrá el JWT
       const cloned = request.clone({
         headers: request.headers.set("Authorization",
           "Bearer " + idToken)
       });
 
+      // Se llama al siguiente interceptor HTTP en la cadena con la solicitud clonada que contiene el token JWT.
       return next.handle(cloned);
     }
-    // si el JWT no está presente, la solicitud pasa al servidor sin modificaciones
+
+    // Si el token JWT no está presente, se llama al siguiente interceptor HTTP en la cadena con la solicitud original sin modificaciones.
     else {
       return next.handle(request);
     }
