@@ -1,7 +1,7 @@
 export interface IVotacion {
   id: number;
-  name: string;
-  estado: string;
+  nombre: string;
   descripcion: string;
-  fecha: string;
+  estado: string;
+  current: boolean;
 }

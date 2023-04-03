@@ -1,8 +1,7 @@
 export interface ICandidato {
   id: number;
-  idAprendiz: number;
-  img: string;
-  votacion: string;
+  documento: number;
+  imagen: string;
+  idVotacion: number;
   propuesta: string;
-  fecha: string;
 }
