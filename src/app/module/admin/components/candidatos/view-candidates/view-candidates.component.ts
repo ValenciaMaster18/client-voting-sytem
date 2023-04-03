@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ICandidato } from '../../../models/Icandidato';
-import { CandidatoService } from '../../../services/admin/candidato/candidato.service';
+import { ICandidato } from '../../../../../models/Icandidato';
+import { CandidatoService } from '../../../../../services/candidato/candidato.service';
 
 @Component({
   selector: 'app-view-candidates',

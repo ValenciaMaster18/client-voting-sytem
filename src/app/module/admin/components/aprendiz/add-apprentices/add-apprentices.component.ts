@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BehaviorSubject, delay, Subscription } from 'rxjs';
-import { IAprendiz } from '../../../models/iaprendiz';
-import { GetAprendizService } from '../../../services/admin/aprendiz/get-aprendiz.service';
+import { IAprendiz } from '../../../../../models/iaprendiz';
+import { GetAprendizService } from '../../../../../services/aprendiz/get-aprendiz.service';
 @Component({
   selector: 'app-add-apprentices',
   templateUrl: './add-apprentices.component.html',

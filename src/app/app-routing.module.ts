@@ -26,6 +26,12 @@ const routes: Routes = [
     canActivate: [LoginGuard]
   },
   {
+    path: 'aprendiz',
+    loadChildren: () => import('./module/aprendiz/aprendiz.module').then(
+      m => m.AprendizModule
+    )
+  },
+  {
     path: '', redirectTo: 'login', pathMatch: 'full'
   },
   {

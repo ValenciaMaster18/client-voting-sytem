@@ -1,0 +1,54 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  height: 80px;
+  padding: 0 10px;
+}
+
+.header__logo {
+  h1 {
+    font-size: 2.1rem;
+    width: 290px;
+    line-height: 3.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid black;
+    animation: dinamicText 2000ms alternate ease-in;
+  }
+}
+
+@keyframes dinamicText {
+  from {
+    width: 0%;
+  }
+}
+
+button {
+  background-color: transparent;
+  border: 0;
+
+  svg {
+    fill: red;
+    transition: all 500ms ease-in;
+
+    &:hover {
+      transform: translateX(8px);
+    }
+  }
+}
+
+@media screen and (min-width: 998px) {
+  header {
+    padding: 0 60px;
+  }
+
+  .header__logo {
+    h1 {
+      font-size: 3rem;
+      line-height: 5rem;
+      width: 430px;
+    }
+  }
+}

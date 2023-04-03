@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="team__comt">
+    <section class="team" *ngFor="let cant of candidatos$">
+      <div class="team__borde">
+      </div>
+      <picture class="team__picture">
+          <source media="(min-width: )" srcset="">
+          <img loading="lazy" class="team__picture-img" [src]="cant.img" alt="">
+      </picture>
+      <div class="team__div d-flex flex-column align-items-center">
+          <span class="team__div-name">
+              {{ cant.idAprendiz }}
+          </span>
+          <span class="team__div-description">
+              {{ cant.propuesta }}
+          </span>
+      </div>
+    </section>
+  </div>
+</div>
+

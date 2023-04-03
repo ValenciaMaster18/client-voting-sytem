@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { RutasCandidato } from '@environments/admin/rutas-dev';
-import { ICandidato } from '../../../models/Icandidato';
+import { ICandidato } from '../../models/Icandidato';
 
 @Injectable({
   providedIn: 'root'

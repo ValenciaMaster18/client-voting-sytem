@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IVotacion } from '../../../models/ivotacion';
-import { VotacionService } from '../../../services/admin/Votacion/votacion.service';
+import { IVotacion } from '../../../../../models/ivotacion';
+import { VotacionService } from '../../../../../services/Votacion/votacion.service';
 
 @Component({
   selector: 'app-view-voting',

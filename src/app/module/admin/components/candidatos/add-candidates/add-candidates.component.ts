@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 // import { GetAprendizService } from '../../../services/get-aprendiz.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { delay, Subscription } from 'rxjs';
-import { IAprendiz } from '../../../models/iaprendiz';
-import { IVotacion } from '../../../models/ivotacion';
-import { GetAprendizService } from '../../../services/admin/aprendiz/get-aprendiz.service';
-import { CandidatoService } from '../../../services/admin/candidato/candidato.service';
-import { VotacionService } from '../../../services/admin/Votacion/votacion.service';
+import { IAprendiz } from '../../../../../models/iaprendiz';
+import { IVotacion } from '../../../../../models/ivotacion';
+import { GetAprendizService } from '../../../../../services/aprendiz/get-aprendiz.service';
+import { CandidatoService } from '../../../../../services/candidato/candidato.service';
+import { VotacionService } from '../../../../../services/Votacion/votacion.service';
 @Component({
   selector: 'app-add-candidates',
   templateUrl: './add-candidates.component.html',

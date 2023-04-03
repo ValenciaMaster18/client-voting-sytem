@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { IVotacion } from '../../../models/ivotacion';
+import { IVotacion } from '../../models/ivotacion';
 import { RutasVotaciones } from '@environments/admin/rutas-dev';
 import { HttpClient } from '@angular/common/http';
 @Injectable({

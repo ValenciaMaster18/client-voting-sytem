@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { delay, Subscription } from 'rxjs';
-import { IVotacion } from '../../../models/ivotacion';
-import { VotacionService } from '../../../services/admin/Votacion/votacion.service';
+import { IVotacion } from '../../../../../models/ivotacion';
+import { VotacionService } from '../../../../../services/Votacion/votacion.service';
 @Component({
   selector: 'app-add-voting',
   templateUrl: './add-voting.component.html',

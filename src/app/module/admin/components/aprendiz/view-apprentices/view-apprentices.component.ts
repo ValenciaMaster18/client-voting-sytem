@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, delay  } from 'rxjs';
-import { IAprendiz } from '../../../models/iaprendiz';
-import { GetAprendizService } from '../../../services/admin/aprendiz/get-aprendiz.service';
+import { IAprendiz } from '../../../../../models/iaprendiz';
+import { GetAprendizService } from '../../../../../services/aprendiz/get-aprendiz.service';
 @Component({
   selector: 'app-view-apprentices',
   templateUrl: './view-apprentices.component.html',

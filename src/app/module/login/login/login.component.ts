@@ -33,7 +33,7 @@ export class LoginComponent {
         .subscribe(
           {
             next: () => {
-              this.router.navigateByUrl('/aprendiz');
+              this.router.navigateByUrl('/admin');
               setTimeout(() => {
                 this.estado = false;
               }, 4000)
@@ -46,7 +46,7 @@ export class LoginComponent {
               }, 4000)
             },
             complete: () => {
-              // 
+              //
             }
           })
     }
