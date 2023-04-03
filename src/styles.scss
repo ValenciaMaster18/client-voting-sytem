@@ -1,12 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;900&display=swap');
-// html{
-//   min-height: 100%;
-//   position: relative;
-// }
-// body
-// {
-//   margin: 0;
-//   margin-bottom: 50px;
-// }
+html{
+  // min-height: 100%;
+  // position: relative;
+  font-size: 62.5%;
+}
+body
+{
+  overflow-x: hidden;
+}

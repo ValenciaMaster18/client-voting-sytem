@@ -1,32 +1,41 @@
 /* Structure */
+.container {
+  margin-top: 50px;
+}
+
 table {
   width: 100%;
-  thead{
-    tr{
-      th{
-        font-size: 1.1rem;
+
+  thead {
+    tr {
+      th {
+        font-size: 1.4rem;
         text-transform: uppercase;
         font-weight: bold;
       }
     }
   }
-  tbody{
-    tr{
-      td{
+
+  tbody {
+    tr {
+      td {
         text-align: center;
-        font-size: 1rem;
+        font-size: 1.3rem;
       }
     }
   }
 }
-a.btn{
+
+a.btn {
   position: relative;
-  &::after{
+
+  &::after {
     content: "";
     position: absolute;
     background-color: gray;
     border-radius: 20px;
     padding: 0.1rem 0.2rem;
+    font-size: 1.4rem;
     color: white;
     top: -30px;
     left: -50px;
@@ -35,53 +44,58 @@ a.btn{
     opacity: 0;
     transition: opacity 500ms ease-in;
   }
-  &:nth-child(1):after{
+
+  &:nth-child(1):after {
+    display: none;
+
     content: "Agregar un aprendiz";
   }
-  &:nth-child(2):after{
+
+  &:nth-child(2):after {
+    display: none;
+
     content: "Agregar aprendiz csv";
   }
-  &:nth-child(3):after{
+
+  &:nth-child(3):after {
+    display: none;
     content: "Cambiar color";
   }
-  &:hover::after{
+
+  &:hover::after {
     opacity: 1;
   }
 }
 
-.aprediz__filtar{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    position: relative;
-    .input {
-      width: 300px;
-      height: 40px;
-      line-height: 28px;
-      padding: 0 1rem;
-      padding-left: 2.5rem;
-      border: 2px solid transparent;
-      border-radius: 8px;
-      outline: none;
-      background-color: #f3f3f4;
-      color: #0d0c22;
-      transition: .3s ease;
-      &::placeholder{
-          color: #9e9ea7;
-      }
+.aprediz__filtar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  .input {
+    width: 300px;
+    height: 40px;
+    line-height: 28px;
+    font-size: 1.8rem;
+    padding: 0 1rem;
+    padding-left: 2.5rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    background-color: #f3f3f4;
+    color: #0d0c22;
+    transition: .3s ease;
+
+    &::placeholder {
+      font-size: 1.8rem;
+      color: #9e9ea7;
     }
-    .icon {
-      position: absolute;
-      right: 17rem;
-      fill: #9e9ea7;
-      width: 1rem;
-      height: 1rem;
-    }
+  }
 }
 
-.loaders{
+.loaders {
   position: absolute;
-  z-index: 10;
+  z-index: 40;
   background-color: rgba(0, 0, 0, 0.211);
   top: 0;
   left: 0;
@@ -92,57 +106,22 @@ a.btn{
   align-items: center;
 }
 
-// Fromulario modal
-section.form{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-}
-
-.form{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 15px;
-}
-.form__contenedor{
-  position: relative;
-  input{
-    display: block;
-    width: 350px;
-    height: 40px;
-    padding: 0 40px;
-    font-size: 15px;
-    border: 1px solid rgba(128, 128, 128, 0.245);
-    outline: none;
-    background-color: white;
-    border-radius: 10px;
-    &:focus{
-      border: 3px solid #294AC1;
+@media screen and (min-width: 998px) {
+  table {
+    thead {
+      tr {
+        th {
+          font-size: 2rem;
+        }
+      }
     }
-  }
-  svg{
-    position: absolute;
-    top: 15px;
-    left: 7px;
-  }
-  select{
-    width: 350px;
-    height: 40px;
-    padding: 0 10px;
-    font-size: 15px;
-    border: 0;
-    outline: none;
-    border: 1px solid rgba(128, 128, 128, 0.245);
-    background-color: white;
-    border-radius: 10px;
-    option{
-      background-color: transparent;
-      border: 10px;
-      color: black;
-      font-size: 14px;
+
+    tbody {
+      tr {
+        td {
+          font-size: 1.6rem;
+        }
+      }
     }
   }
 }
-

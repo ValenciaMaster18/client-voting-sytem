@@ -55,7 +55,7 @@ export class AddVotingComponent implements OnDestroy {
       this.resultado = true;
       setTimeout(() => {
         this.resultado = false;
-      }, 3000)
+      }, 4000)
     } else {
       const nombreVotacion = this.data$.value.find(element => element.name == this.miForm.value.name);
       if (nombreVotacion) {
@@ -65,7 +65,7 @@ export class AddVotingComponent implements OnDestroy {
         this.resultado = true;
         setTimeout(() => {
           this.resultado = false;
-        }, 3000)
+        }, 4000)
       } else {
         this._votacionServices.addVotacion(this.miForm.value).pipe(
           delay(1000)
@@ -79,7 +79,7 @@ export class AddVotingComponent implements OnDestroy {
               this.miForm.reset();
               setTimeout(() => {
                 this.resultado = false;
-              }, 3000)
+              }, 4000)
             },
             error: (error: any) => {
               console.error(error)

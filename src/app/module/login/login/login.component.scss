@@ -1,20 +1,14 @@
-*{
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 section.login{
   height: 100vh;
   width: 100%;
-  background-color: #D3D0DF;
   display: flex;
   flex-direction: column;
-  padding: 50px;
+  align-items: center;
+  gap: 40px;
 }
 .section__form{
   height: 70%;
   width: 100%;
-  background-color: white;
   order: 2;
   display: flex;
   flex-direction: column;
@@ -27,28 +21,29 @@ section.login{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 300;
   text-align: center;
+  font-size: 2.1rem;
 }
 .form__text span{
   display: inline-block;
   width: 100%;
   text-align: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 12px;
+  font-size: 1.4rem;
 }
 picture.login{
   width: 100%;
-  height: 30%;
+  height: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #198754;
 }
 picture.login img{
-  width: 30%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 form.login{
-  /* background-color: blue; */
   width: 80%;
   display: flex;
   flex-direction: column;
@@ -74,26 +69,26 @@ form.login{
 }
 
 form.login .usuario{
-  /* background-color: red; */
   display: flex;
   flex-direction: column;
   gap: 5px;
+  font-size: 1.5rem;
 }
 form.login .clave{
-  /* background-color: red; */
   display: flex;
   flex-direction: column;
   gap: 5px;
+  font-size: 1.5rem;
 }
 form.login div label{
-  font-size: 15px;
+  font-size: 1.5rem;
   font-weight: 600;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 form.login div input{
   width: 100%;
   height: 40px;
-  border: 1px solid rgba(128, 128, 128, 0.274);
+  border: 1px solid #80808046;
   border-radius: 5px;
   outline: none;
   padding: 0 10px;
@@ -103,6 +98,7 @@ form.login button{
   border-radius: 5px;
   border: 0;
   background-color: #31572c;
+  font-size: 1.5rem;
   color: white;
   cursor: pointer;
   &:disabled{
@@ -112,17 +108,17 @@ form.login button{
 @media screen and (min-width: 768px) {
   section.login{
       flex-direction: row;
-      /* background-color: aqua; */
   }
   .section__form{
       height: 100%;
   }
   picture.login{
-      height: 100%;
+      height: 70%;
       order: 2;
   }
   picture.login img{
-      width: 60%;
-      height: 60%;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
   }
 }

@@ -6,12 +6,14 @@ import { Component } from "@angular/core";
   styleUrls: ['./sidebar-admin.component.scss']
 })
 export class SidebarAdminComponent {
+  desplegarMenuSidebar: boolean;
   desplegar: boolean;
   desplegar2: boolean;
   desplegar3: boolean;
   constructor(
     // public dialog: MatDialog
   ) {
+    this.desplegarMenuSidebar = false;
     this.desplegar = false;
     this.desplegar2 = false;
     this.desplegar3 = false;
@@ -36,6 +38,9 @@ export class SidebarAdminComponent {
   //     this.dialog.closeAll()
   //   }
   // };
+  cambiarEstadoSideBar(): void{
+    this.desplegarMenuSidebar = !this.desplegarMenuSidebar
+  }
   desplegarMenu(): void {
     this.desplegar = !this.desplegar;
     this.desplegar2 = false;

@@ -27,24 +27,28 @@ export class LoginComponent {
     )
   }
   onSubmit(): void {
-    const {username, password } = this.miForm.getRawValue();
+    const { username, password } = this.miForm.getRawValue();
     if (username && password) {
       this._loginService.login(username, password)
         .subscribe(
-          () => {
-            this.router.navigateByUrl('/aprendiz');
-            setTimeout(() => {
-            this.estado = false;
-            }, 1200 )
-          },
-          () => {
-            this.mensaje = 'Acceso denegado. Credenciales Invalidas';
-            this.estado = true;
-            setTimeout(() => {
-              this.estado = false;
-            }, 1200)
-          }
-        );
+          {
+            next: () => {
+              this.router.navigateByUrl('/aprendiz');
+              setTimeout(() => {
+                this.estado = false;
+              }, 4000)
+            },
+            error: () => {
+              this.mensaje = 'Acceso denegado. Credenciales Invalidas';
+              this.estado = true;
+              setTimeout(() => {
+                this.estado = false;
+              }, 4000)
+            },
+            complete: () => {
+              // 
+            }
+          })
     }
   }
 }

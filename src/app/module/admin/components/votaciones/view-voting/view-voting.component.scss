@@ -1,19 +1,126 @@
+/* Structure */
+.container {
+  margin-top: 50px;
+}
+
 table {
   width: 100%;
-  thead{
-    tr{
-      th{
-        font-size: 1.1rem;
+
+  thead {
+    tr {
+      th {
+        font-size: 1.4rem;
         text-transform: uppercase;
         font-weight: bold;
       }
     }
   }
-  tbody{
-    tr{
-      td{
+
+  tbody {
+    tr {
+      td {
         text-align: center;
-        font-size: 1rem;
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+a.btn {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    background-color: gray;
+    border-radius: 20px;
+    padding: 0.1rem 0.2rem;
+    font-size: 1.4rem;
+    color: white;
+    top: -30px;
+    left: -50px;
+    display: inline-block;
+    width: 170px;
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+  }
+
+  &:nth-child(1):after {
+    display: none;
+
+    content: "Agregar un aprendiz";
+  }
+
+  &:nth-child(2):after {
+    display: none;
+
+    content: "Agregar aprendiz csv";
+  }
+
+  &:nth-child(3):after {
+    display: none;
+    content: "Cambiar color";
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+.aprediz__filtar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  .input {
+    width: 300px;
+    height: 40px;
+    line-height: 28px;
+    font-size: 1.8rem;
+    padding: 0 1rem;
+    padding-left: 2.5rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    background-color: #f3f3f4;
+    color: #0d0c22;
+    transition: .3s ease;
+
+    &::placeholder {
+      font-size: 1.8rem;
+      color: #9e9ea7;
+    }
+  }
+}
+
+.loaders {
+  position: absolute;
+  z-index: 40;
+  background-color: rgba(0, 0, 0, 0.211);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 998px) {
+  table {
+    thead {
+      tr {
+        th {
+          font-size: 2rem;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          font-size: 1.6rem;
+        }
       }
     }
   }

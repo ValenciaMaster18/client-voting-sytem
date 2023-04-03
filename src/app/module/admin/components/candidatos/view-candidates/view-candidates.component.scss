@@ -1,9 +1,13 @@
+/* Structure */
+.container{
+  margin-top: 50px;
+}
 table {
   width: 100%;
   thead{
     tr{
       th{
-        font-size: 1.1rem;
+        font-size: 1.4rem;
         text-transform: uppercase;
         font-weight: bold;
       }
@@ -13,7 +17,7 @@ table {
     tr{
       td{
         text-align: center;
-        font-size: 1rem;
+        font-size: 1.3rem;
       }
     }
   }
@@ -22,11 +26,12 @@ table {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  position: relative;
+
   .input {
     width: 300px;
     height: 40px;
     line-height: 28px;
+    font-size: 1.8rem;
     padding: 0 1rem;
     padding-left: 2.5rem;
     border: 2px solid transparent;
@@ -35,15 +40,30 @@ table {
     background-color: #f3f3f4;
     color: #0d0c22;
     transition: .3s ease;
-    &::placeholder{
-        color: #9e9ea7;
+
+    &::placeholder {
+      font-size: 1.8rem;
+      color: #9e9ea7;
     }
   }
-  .icon {
-    position: absolute;
-    right: 17rem;
-    fill: #9e9ea7;
-    width: 1rem;
-    height: 1rem;
+}
+@media screen and (min-width: 998px) {
+  table {
+    thead {
+      tr {
+        th {
+          font-size: 2rem;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          font-size: 1.6rem;
+        }
+      }
+    }
   }
+
 }

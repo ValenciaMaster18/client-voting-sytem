@@ -53,7 +53,7 @@ export class AddApprenticesComponent implements OnDestroy {
       this.resultado = true;
       setTimeout(() => {
         this.resultado = false;
-      }, 3000)
+      }, 4000)
     } else {
       const valDocCorreo = this.data$.value.find(element => {
         if (element.documento == this.miForm.value.documento || element.email == this.miForm.value.email) {
@@ -68,7 +68,7 @@ export class AddApprenticesComponent implements OnDestroy {
         this.resultado = true;
         setTimeout(() => {
           this.resultado = false;
-        }, 3000)
+        }, 4000)
       } else {
         this.miForm.value.id = this._getAprendizService.aprendices$.value.length + 1
         this.miForm.value.password = this.miForm.value.documento;
@@ -84,7 +84,7 @@ export class AddApprenticesComponent implements OnDestroy {
               this.miForm.reset()
               setTimeout(() => {
                 this.resultado = false;
-              }, 3000)
+              }, 4000)
             },
             error: (error: any) => {
               console.error(error);
