@@ -24,7 +24,7 @@ export class VotacionService {
     );
   }
   addVotacion(nuevaVotacion: IVotacion): Observable<IVotacion[]> {
-    return this.http.post<IVotacion[]>(`${this.API_URL}/add`, nuevaVotacion).pipe(
+    return this.http.post<IVotacion[]>(this.API_URL, nuevaVotacion).pipe(
       tap(() => {
         const candidatos = this.votacion$.value;
         candidatos.push(nuevaVotacion);
@@ -32,20 +32,20 @@ export class VotacionService {
       })
     );
   }
-  updateEstadoVotacion(id: number, estado: string) {
-    return this.http.put(`${this.API_URL}/update/estado/${id}`, { estado }).pipe(
-      tap((valor) => {
-        this.getVotacion().subscribe()
-      })
-    );
-  }
-  deleteVotacion(id: number) {
-    return this.http.delete(`${this.API_URL}/delete/${id}`).pipe(
-      tap(() => {
-        let votaciones = this.votacion$.value;
-        votaciones = votaciones.filter(votacion => votacion.id !== id);
-        this.votacion$.next(votaciones);
-      })
-    )
-  }
+  // updateEstadoVotacion(id: number, estado: string) {
+  //   return this.http.put(`${this.API_URL}/update/estado/${id}`, { estado }).pipe(
+  //     tap((valor) => {
+  //       this.getVotacion().subscribe()
+  //     })
+  //   );
+  // }
+  // deleteVotacion(id: number) {
+  //   return this.http.delete(`${this.API_URL}/delete/${id}`).pipe(
+  //     tap(() => {
+  //       let votaciones = this.votacion$.value;
+  //       votaciones = votaciones.filter(votacion => votacion.id !== id);
+  //       this.votacion$.next(votaciones);
+  //     })
+  //   )
+  // }
 }

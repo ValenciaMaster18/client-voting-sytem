@@ -1,3 +1,7 @@
-<section class="container col-lg-8 offset-3">
-
+<section class="container form">
+  <form (submit)="onSubmit()">
+    <label for="csv">Formato csv</label>
+    <input id="csv" type="file" accept=".csv" (change)="onFileSelected($event)" required>
+    <button type="submit">Cargar archivo</button>
+  </form>
 </section>

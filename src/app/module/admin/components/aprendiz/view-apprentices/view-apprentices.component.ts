@@ -48,7 +48,7 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
   cambiarColor(): void{
     this.color = !this.color;
   }
-  eliminarAprendiz(id:number): void{
-    this._getAprendizService.eliminarAprendiz(id).subscribe();
-  }
+  // eliminarAprendiz(id: string): void{
+  //   this._getAprendizService.eliminarAprendiz(numeroDocumento).subscribe();
+  // }
 };

@@ -5,6 +5,7 @@ export interface IAprendiz {
   numeroDocumento: string;
   nombre: string;
   apellido: string;
+  celular: string;
   correoElectronico: string;
   estado: string;
 }

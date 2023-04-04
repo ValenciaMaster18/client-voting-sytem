@@ -12,7 +12,7 @@ import { CandidatoService } from 'src/app/services/candidato/candidato.service';
   styleUrls: ['./votacion-aprendiz.component.scss']
 })
 export class VotacionAprendizComponent implements OnInit {
-  candidatos$: ICandidato[];
+  candidatos$: FormData[];
   votaciones$: IVotacion[];
   aprendices$: IAprendiz[];
   constructor(
@@ -29,7 +29,7 @@ export class VotacionAprendizComponent implements OnInit {
   ngOnInit(): void {
     this._candidatoService.candidato$.subscribe(
       {
-        next: (value: ICandidato[]) => {
+        next: (value: FormData[]) => {
           this.candidatos$ = value;
          }
       }

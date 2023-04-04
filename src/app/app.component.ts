@@ -19,17 +19,14 @@ export class AppComponent {
   ngOnInit(): void {
     this._getAprendizService.getAprendiz().subscribe(
       () => {
-        // console.log(this._getAprendizService.aprendices$)
       }
     )
     this._candidatoService.getCandidato().subscribe(
       () => {
-        // console.log(this._candidatoService.candidato$)
       }
     )
     this._votacionService.getVotacion().subscribe(
       () => {
-        // console.log(this._votacionService.votacion$)
       }
     )
   }

@@ -34,29 +34,29 @@ export class ViewVotingComponent implements OnInit {
   cambiarColor(): void{
     this.color = !this.color;
   }
-  actualizarEstadoAprendiz(id: number, modo: string){
-    switch(modo){
-      case 'ABIERTA':
-        modo = 'CERRADA';
-        break;
-      case 'CERRADA':
-        modo = 'ABIERTA';
-        break;
-    }
-    this._votacionService.updateEstadoVotacion(id, modo).subscribe();
-  }
-  eliminarAprendiz(id: number){
-    this._votacionService.deleteVotacion(id).subscribe(
-      {
-        next: () => {
-      },
-        error: (error: any) => {
-          console.error(error)
-        },
-        complete: () => {
-          //
-        }
-      }
-    )
-  }
+  // actualizarEstadoAprendiz(id: number, modo: string){
+  //   switch(modo){
+  //     case 'ABIERTA':
+  //       modo = 'CERRADA';
+  //       break;
+  //     case 'CERRADA':
+  //       modo = 'ABIERTA';
+  //       break;
+  //   }
+  //   this._votacionService.updateEstadoVotacion(id, modo).subscribe();
+  // }
+  // eliminarAprendiz(id: number){
+  //   this._votacionService.deleteVotacion(id).subscribe(
+  //     {
+  //       next: () => {
+  //     },
+  //       error: (error: any) => {
+  //         console.error(error)
+  //       },
+  //       complete: () => {
+  //         //
+  //       }
+  //     }
+  //   )
+  // }
 }

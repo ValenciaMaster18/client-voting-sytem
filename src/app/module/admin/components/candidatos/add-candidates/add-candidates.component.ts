@@ -7,6 +7,7 @@ import { IVotacion } from '../../../../../models/ivotacion';
 import { GetAprendizService } from '../../../../../services/aprendiz/get-aprendiz.service';
 import { CandidatoService } from '../../../../../services/candidato/candidato.service';
 import { VotacionService } from '../../../../../services/Votacion/votacion.service';
+import { ICandidato } from 'src/app/models/Icandidato';
 @Component({
   selector: 'app-add-candidates',
   templateUrl: './add-candidates.component.html',
@@ -20,7 +21,7 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
   votacion: boolean;
   estilo: boolean;
   loaders: boolean;
-
+  selectedImage!: File;
   data$ = this._getAprendizService.aprendices$;
   votaciones: IVotacion[];
 
@@ -41,12 +42,9 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
     this.suscription = new Subscription();
 
     this.miForm = this.controles.group({
-      id: [''],
-      idAprendiz: ['', [Validators.required]],
-      img: ['', [Validators.required]],
-      votacion: ['', [Validators.required]],
-      propuesta: ['', [Validators.required]],
-      fecha: ['']
+      documento: ['', [Validators.required]],
+      idVotacion: [''],
+      propuestas: ['', [Validators.required]],
     })
   }
 
@@ -69,24 +67,31 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
     this.suscription.unsubscribe();
   }
 
+  onImageSelected(event: any) {
+    this.selectedImage = event.target.files[0];
+  }
+
   onSubmit(): void {
-    this.miForm.value.id = this._candidatoServices.candidato$.value.length + 1;
-    this.miForm.value.fecha = Date();
     this.votacion = false;
     this.loaders = true;
-    const buscandoIdDeAprendiz = this.data$.value.find(data => data.id == this.miForm.value.idAprendiz)
+    const buscandoIdDeAprendiz = this.data$.value.find(data => data.numeroDocumento == this.miForm.value.documento)
     this._candidatoServices.candidato$.subscribe(
       (valor) => {
-        const candidato = valor.filter( cand =>
-          cand.idAprendiz == buscandoIdDeAprendiz!.id && cand.votacion == this.miForm.value.votacion
-           )
-           if (candidato.length === 0){
-              this.votacion = true;
-           }
-          }
-          )
+        const candidato = valor.filter(cand =>
+          cand.get('numeroDocumento') == buscandoIdDeAprendiz!.numeroDocumento && cand.get('idVotacion') == this.miForm.value.idVotacion
+        )
+        if (candidato.length === 0) {
+          this.votacion = true;
+        }
+      }
+    )
     if (buscandoIdDeAprendiz && this.votacion) {
-      this._candidatoServices.addCandidato(this.miForm.value).pipe(
+      const formData = new FormData();
+      formData.append('documento', this.miForm.value.documento);
+      formData.append('imagen', this.selectedImage);
+      formData.append('idVotacion', this.miForm.value.idVotacion);
+      formData.append('propuestas', this.miForm.value.propuestas);
+      this._candidatoServices.addCandidato(formData).pipe(
         delay(1000)
       ).subscribe(
         {
@@ -110,10 +115,10 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
       );
     } else {
       this.loaders = false;
-      if (!buscandoIdDeAprendiz){
-        this.mensaje = 'Candidato No agregado el id no esta en la BD';
-      }else{
-        this.mensaje = 'El id ya tiene esta votacion agregada';
+      if (!buscandoIdDeAprendiz) {
+        this.mensaje = 'Candidato No agregado el Documento no esta en la BD';
+      } else {
+        this.mensaje = 'El Documento ya tiene esta votacion agregada';
       }
       this.estilo = false;
       this.resultado = true;

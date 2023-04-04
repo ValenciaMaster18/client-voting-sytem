@@ -5,14 +5,14 @@
       </div>
       <picture class="team__picture">
           <source media="(min-width: )" srcset="">
-          <img loading="lazy" class="team__picture-img" [src]="cant.img" alt="">
+          <img loading="lazy" class="team__picture-img" [src]="cant.get('imagen')" alt="">
       </picture>
       <div class="team__div d-flex flex-column align-items-center">
           <span class="team__div-name">
-              {{ cant.idAprendiz }}
+              {{ cant.get('documento') }}
           </span>
           <span class="team__div-description">
-              {{ cant.propuesta }}
+              {{ cant.get('propuestas') }}
           </span>
       </div>
     </section>

@@ -15,7 +15,8 @@ export class AddApprenticesComponent implements OnDestroy {
   resultado: boolean;
   estilo: boolean;
   loaders: boolean;
-  estadoFormacion: string[];
+  tipoDocumento: string[];
+  estadoAprendiz: string[];
 
   data$: BehaviorSubject<IAprendiz[]> = this._getAprendizService.aprendices$;
   suscribcion: Subscription;
@@ -28,16 +29,26 @@ export class AddApprenticesComponent implements OnDestroy {
     this.resultado = false;
     this.estilo = false;
     this.loaders = false;
-    this.estadoFormacion = ['En Formacion', 'Suspension', 'Retirado']
+    this.tipoDocumento = ['CC', 'TI', 'PEP', 'PPT', 'CE']
+    this.estadoAprendiz = ['EN FORMACION', 'CANCELADO', 'RETIRADO', 'TRASLADADO', 'SUSPENDIDO']
     this.suscribcion = new Subscription();
+
+    // const documento = this.controles.group(
+    //   {
+    //     tipoDocumento: ['', Validators.required],
+    //     numeroDocumento: ['', Validators.required]
+    //   }
+    // )
     this.miForm = this.controles.group(
       {
-        id: [''],
         ficha: ['', [Validators.required]],
-        documento: ['', [Validators.required]],
+        programa: ['', [Validators.required]],
+        tipoDocumento: ['', Validators.required],
+        numeroDocumento: ['', Validators.required],
         nombre: ['', [Validators.required]],
-        email: ['', [Validators.required, Validators.email]],
-        password: [''],
+        apellido: ['', [Validators.required]],
+        celular: ['', [Validators.required]],
+        correoElectronico: ['', [Validators.required, Validators.email]],
         estado: ['', [Validators.required]]
       }
     )
@@ -45,9 +56,9 @@ export class AddApprenticesComponent implements OnDestroy {
 
   submit(): void {
     this.loaders = true;
-    const buscarId: IAprendiz | undefined = this.data$.value.find(element => element.id == this.miForm.value.id)
-    if (buscarId) {
-      this.mensaje = 'Aprendiz no guardado id estan en la BD';
+    const buscarNumeroDocumento: IAprendiz | undefined = this.data$.value.find(element => element.numeroDocumento == this.miForm.value.documento.numeroDocumento)
+    if (buscarNumeroDocumento) {
+      this.mensaje = 'Aprendiz no guardado numero documento estan en la BD';
       this.loaders = false;
       this.estilo = false;
       this.resultado = true;
@@ -56,7 +67,7 @@ export class AddApprenticesComponent implements OnDestroy {
       }, 4000)
     } else {
       const valDocCorreo = this.data$.value.find(element => {
-        if (element.documento == this.miForm.value.documento || element.email == this.miForm.value.email) {
+        if (element.numeroDocumento == this.miForm.value.numeroDocumento || element.correoElectronico == this.miForm.value.correoElectronico) {
           return true;
         }
         return false;
@@ -70,8 +81,6 @@ export class AddApprenticesComponent implements OnDestroy {
           this.resultado = false;
         }, 4000)
       } else {
-        this.miForm.value.id = this._getAprendizService.aprendices$.value.length + 1
-        this.miForm.value.password = this.miForm.value.documento;
         this.suscribcion = this._getAprendizService.enviarAprendiz(this.miForm.value).pipe(
           delay(1000)
         ).subscribe(

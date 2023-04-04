@@ -1,7 +1,7 @@
 export interface ICandidato {
-  id: number;
-  documento: number;
-  imagen: string;
+  id?: number;
+  documento: string;
+  imagen: File;
   idVotacion: number;
-  propuesta: string;
+  propuestas: string;
 }

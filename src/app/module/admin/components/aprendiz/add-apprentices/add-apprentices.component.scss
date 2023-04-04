@@ -38,6 +38,11 @@ picture {
     font-size: 1.4rem;
   }
 }
+
+.form__contenedor-anidado{
+  display: flex;
+  gap: 25px;
+}
 .form__contenedor {
   position: relative;
   width: 100%;

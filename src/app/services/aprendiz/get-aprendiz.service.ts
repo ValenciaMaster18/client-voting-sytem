@@ -24,7 +24,7 @@ export class GetAprendizService {
     )
   }
   enviarAprendiz(nuevoAprendiz: IAprendiz) {
-    return this.http.post(`${this.API_URL}/add`, nuevoAprendiz).pipe(
+    return this.http.post(this.API_URL, nuevoAprendiz).pipe(
       tap(() => {
         const aprendices = this.aprendices$.value;
         aprendices.push(nuevoAprendiz);
@@ -32,13 +32,16 @@ export class GetAprendizService {
       })
     );
   }
-  eliminarAprendiz(id: number) {
-    return this.http.delete(`${this.API_URL}/delete/${id}`).pipe(
-      tap(() => {
-        let aprendices = this.aprendices$.value;
-        aprendices = aprendices.filter(aprendiz => aprendiz.id !== id);
-        this.aprendices$.next(aprendices);
-      })
-    );
+  enviarAprendizCSV(csv: FormData) {
+    return this.http.post(`${this.API_URL}`, csv);
   }
+  // eliminarAprendiz(id: number) {
+  //   return this.http.delete(`${this.API_URL}/delete/${id}`).pipe(
+  //     tap(() => {
+  //       let aprendices = this.aprendices$.value;
+  //       aprendices = aprendices.filter(aprendiz => aprendiz.id !== id);
+  //       this.aprendices$.next(aprendices);
+  //     })
+  //   );
+  // }
 }

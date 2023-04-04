@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { LoginService } from 'src/app/module/login/services/login/login.service';
 import { TokenService } from 'src/app/module/login/services/token/token.service';
 /**
  * Los guards se implementan para ser inyectandos por lo tanto tenemos que usar la etiqueta @Inyectable, como si fueran Servicios en Angular.
