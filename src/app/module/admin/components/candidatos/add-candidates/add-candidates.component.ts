@@ -89,7 +89,10 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
           this.estilo = true;
           this.miForm.reset()
           setTimeout(() => {
-            this.resultado = false;
+            this.loaders = false;
+            this.mensaje = 'Candidato No Agregado';
+            this.resultado = true;
+            this.estilo = false;
           }, 4000)
         },
         error: (error: any) => {

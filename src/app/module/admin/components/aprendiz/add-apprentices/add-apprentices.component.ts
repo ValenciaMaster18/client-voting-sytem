@@ -67,7 +67,6 @@ export class AddApprenticesComponent implements OnDestroy {
           this.estilo = false;
           this.resultado = true;
           this.loaders = false;
-          this.miForm.reset()
           setTimeout(() => {
             this.resultado = false;
           }, 4000)
