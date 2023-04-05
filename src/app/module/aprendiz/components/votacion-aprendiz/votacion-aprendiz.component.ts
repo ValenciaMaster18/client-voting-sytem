@@ -27,27 +27,8 @@ export class VotacionAprendizComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this._candidatoService.candidato$.subscribe(
-      {
-        next: (value: FormData[]) => {
-          this.candidatos$ = value;
-         }
-      }
-    )
-    this._votacionService.votacion$.subscribe(
-      {
-        next: (value: IVotacion[]) => {
-          this.votaciones$ = value;
-        }
-      }
-    )
-    this._aprendizService.aprendices$.subscribe(
-      {
-        next: (value: IAprendiz[]) => {
-          this.aprendices$ = value;
-        }
-      }
-    )
+    this._candidatoService.getCandidato(0,9).subscribe()
+    this._votacionService.getVotacion(0,6).subscribe()
+    this._aprendizService.getAprendiz(0,9).subscribe()
   }
-
 }

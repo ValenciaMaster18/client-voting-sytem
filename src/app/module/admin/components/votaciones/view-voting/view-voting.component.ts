@@ -10,6 +10,7 @@ import { VotacionService } from '../../../../../services/Votacion/votacion.servi
 export class ViewVotingComponent implements OnInit {
   data: IVotacion[];
   color: boolean;
+
   constructor(
     private _votacionService: VotacionService
    ){
@@ -17,10 +18,10 @@ export class ViewVotingComponent implements OnInit {
     this.data = []
    }
   ngOnInit(): void {
-    this._votacionService.votacion$.subscribe(
+    this._votacionService.getVotacion(0,6).subscribe(
       {
         next: (valor: any) => {
-          this.data = valor;
+          this.data = valor.content
         },
         error: (error: any ) => {
           console.error(error);

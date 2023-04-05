@@ -24,10 +24,10 @@ export class ViewCandidatesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.suscription = this._candidatoServices.candidato$.subscribe(
+    this.suscription = this._candidatoServices.getCandidato(0,9).subscribe(
       {
         next: (value: any) => {
-          this.data = value
+          this.data = value.content
         },
         error: (error: any) => {
           console.error(error)
@@ -45,16 +45,4 @@ export class ViewCandidatesComponent implements OnInit, OnDestroy {
   cambiarColor(): void{
     this.color = !this.color;
   }
-  // eliminarAprendiz(id: number){
-  //   this._candidatoServices.deleteCandidato(id).subscribe(
-  //     {
-  //       next: () => {
-  //     },
-  //       error: (error: any) => console.error(error),
-  //       complete: () => {
-  //         //
-  //       }
-  //     }
-  //   )
-  // }
 };

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import {  Observable } from 'rxjs';
 import { IVotacion } from '../../models/ivotacion';
 import { RutasVotaciones } from '@environments/routes-production';
 import { HttpClient } from '@angular/common/http';
@@ -7,7 +7,6 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class VotacionService {
-  votacion$ = new BehaviorSubject<IVotacion[]>([]);
   API_URL: string;
 
   constructor(
@@ -16,21 +15,11 @@ export class VotacionService {
     this.API_URL = RutasVotaciones.url;
   }
 
-  getVotacion(): Observable<IVotacion[]> {
-    return this.http.get<IVotacion[]>(this.API_URL).pipe(
-      tap(response => {
-        this.votacion$.next(response)
-      })
-    );
+  getVotacion(page: number, size: number): Observable<IVotacion[]> {
+    return this.http.get<IVotacion[]>(`${this.API_URL}?page=${page}&size=${size}`)
   }
   addVotacion(nuevaVotacion: IVotacion): Observable<IVotacion[]> {
-    return this.http.post<IVotacion[]>(this.API_URL, nuevaVotacion).pipe(
-      tap(() => {
-        const candidatos = this.votacion$.value;
-        candidatos.push(nuevaVotacion);
-        this.votacion$.next(candidatos);
-      })
-    );
+    return this.http.post<IVotacion[]>(this.API_URL, nuevaVotacion)
   }
   // updateEstadoVotacion(id: number, estado: string) {
   //   return this.http.put(`${this.API_URL}/update/estado/${id}`, { estado }).pipe(

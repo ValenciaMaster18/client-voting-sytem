@@ -25,11 +25,11 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
     this.suscribtion = new Subscription();
   };
   ngOnInit(): void {
-    this.suscribtion = this._getAprendizService.aprendices$.pipe(
+    this.suscribtion = this._getAprendizService.getAprendiz(0,9).pipe(
       delay(1000)
     ).subscribe({
-      next: (valor: IAprendiz[] ) => {
-        this.data = valor;
+      next: (valor: any) => {
+        this.data = valor.content;
         this.loaders = false
       },
       error: (error: any) => {

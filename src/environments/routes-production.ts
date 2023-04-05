@@ -1,6 +1,6 @@
 export const RutasAprendiz = {
   prduction: true,
-  url: 'http://152.204.160.15:14156/api/v1/aprendices'
+  url: 'http://localhost:14156/api/v1/aprendices'
 }
 
 export const RutasVotaciones = {
@@ -13,10 +13,10 @@ export const RutasCandidato = {
 }
 export const RutasVotos = {
   prduction: true,
-  url: 'http://localhost:14156/api/v1/votos'
+  url: ''
 }
 
 export const RutasLogin = {
   prduction: true,
-  url: 'http://localhost:14156/api/v1/'
+  url: 'http://localhost:14156/api/v1/auth'
 }

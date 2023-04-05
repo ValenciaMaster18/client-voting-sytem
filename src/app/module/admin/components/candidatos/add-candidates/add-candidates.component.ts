@@ -22,7 +22,6 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
   estilo: boolean;
   loaders: boolean;
   selectedImage!: File;
-  data$ = this._getAprendizService.aprendices$;
   votaciones: IVotacion[];
 
   suscription: Subscription;
@@ -43,16 +42,16 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
 
     this.miForm = this.controles.group({
       documento: ['', [Validators.required]],
-      idVotacion: [''],
+      idVotacion: ['', [Validators.required]],
       propuestas: ['', [Validators.required]],
     })
   }
 
   ngOnInit(): void {
-    this.suscription = this._votacionService.votacion$.subscribe(
+    this.suscription = this._votacionService.getVotacion(0,6).subscribe(
       {
         next: (votacion: any) => {
-          this.votaciones = votacion;
+          this.votaciones = votacion.content;
         },
         error: (error: any) => {
           console.error(error);
@@ -74,57 +73,32 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     this.votacion = false;
     this.loaders = true;
-    const buscandoIdDeAprendiz = this.data$.value.find(data => data.numeroDocumento == this.miForm.value.documento)
-    this._candidatoServices.candidato$.subscribe(
-      (valor) => {
-        const candidato = valor.filter(cand =>
-          cand.get('numeroDocumento') == buscandoIdDeAprendiz!.numeroDocumento && cand.get('idVotacion') == this.miForm.value.idVotacion
-        )
-        if (candidato.length === 0) {
-          this.votacion = true;
+    const formData = new FormData();
+    formData.append('documento', this.miForm.value.documento);
+    formData.append('imagen', this.selectedImage);
+    formData.append('idVotacion', this.miForm.value.idVotacion);
+    formData.append('propuestas', this.miForm.value.propuestas);
+    this._candidatoServices.addCandidato(formData).pipe(
+      delay(1000)
+    ).subscribe(
+      {
+        next: () => {
+          this.loaders = false;
+          this.mensaje = 'Candidato Agregado';
+          this.resultado = true;
+          this.estilo = true;
+          this.miForm.reset()
+          setTimeout(() => {
+            this.resultado = false;
+          }, 4000)
+        },
+        error: (error: any) => {
+          console.error(error)
+        },
+        complete: () => {
+          //
         }
       }
-    )
-    if (buscandoIdDeAprendiz && this.votacion) {
-      const formData = new FormData();
-      formData.append('documento', this.miForm.value.documento);
-      formData.append('imagen', this.selectedImage);
-      formData.append('idVotacion', this.miForm.value.idVotacion);
-      formData.append('propuestas', this.miForm.value.propuestas);
-      this._candidatoServices.addCandidato(formData).pipe(
-        delay(1000)
-      ).subscribe(
-        {
-          next: () => {
-            this.loaders = false;
-            this.mensaje = 'Candidato Agregado';
-            this.resultado = true;
-            this.estilo = true;
-            this.miForm.reset()
-            setTimeout(() => {
-              this.resultado = false;
-            }, 4000)
-          },
-          error: (error: any) => {
-            console.error(error)
-          },
-          complete: () => {
-            //
-          }
-        }
-      );
-    } else {
-      this.loaders = false;
-      if (!buscandoIdDeAprendiz) {
-        this.mensaje = 'Candidato No agregado el Documento no esta en la BD';
-      } else {
-        this.mensaje = 'El Documento ya tiene esta votacion agregada';
-      }
-      this.estilo = false;
-      this.resultado = true;
-      setTimeout(() => {
-        this.resultado = false;
-      }, 4000)
-    }
+    );
   }
 }

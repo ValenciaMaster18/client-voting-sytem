@@ -28,6 +28,7 @@ export class LoginComponent {
   }
   onSubmit(): void {
     const { username, password } = this.miForm.getRawValue();
+    console.log(username, password)
     if (username && password) {
       this._loginService.login(username, password)
         .subscribe(
