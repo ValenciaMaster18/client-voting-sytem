@@ -63,9 +63,14 @@ export class AddApprenticesComponent implements OnDestroy {
           }, 4000)
         },
         error: (error: any) => {
-          console.error(error);
-          this.mensaje = 'Aprendiz No Guardado'
-
+          this.mensaje = "Aprendiz No Guardado"
+          this.estilo = false;
+          this.resultado = true;
+          this.loaders = false;
+          this.miForm.reset()
+          setTimeout(() => {
+            this.resultado = false;
+          }, 4000)
         },
         complete: () => {
           //

@@ -18,7 +18,7 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
   constructor(
     private _getAprendizService: GetAprendizService
   ) {
-    this.loaders = true;
+    this.loaders = false;
     this.valor = '';
     this.color = false;
     this.data = [];
@@ -30,11 +30,9 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
     ).subscribe({
       next: (valor: any) => {
         this.data = valor.content;
-        this.loaders = false
       },
       error: (error: any) => {
         console.error(error);
-        this.loaders = false;
        },
       complete: () => {
         //
