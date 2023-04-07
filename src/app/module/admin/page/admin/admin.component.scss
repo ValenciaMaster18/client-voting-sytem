@@ -4,6 +4,9 @@
   padding: 10px 50px;
   margin-left: 240px;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   section{
     background-color: white;
     padding: 10px;

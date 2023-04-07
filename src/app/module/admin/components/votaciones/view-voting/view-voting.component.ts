@@ -10,7 +10,7 @@ import { VotacionService } from '../../../../../services/Votacion/votacion.servi
 export class ViewVotingComponent implements OnInit {
   data: IVotacion[];
   color: boolean;
-  votacionActiva: string = '';
+  votacionActiva: string | null = localStorage.getItem("votacion");
 
   constructor(
     private _votacionService: VotacionService
@@ -40,17 +40,16 @@ export class ViewVotingComponent implements OnInit {
     this._votacionService.getEstadisticasVotacion(id).subscribe((valor) => console.log(valor))
   }
   updateStatusDisableVotaciones(id: number) {
-    this._votacionService.updateStatusDisableVotacion(id).subscribe((valor) => console.log(valor))
+    this._votacionService.updateStatusDisableVotacion(id).subscribe((valor) => this.ngOnInit())
   }
   updateStatusEnableVotaciones(id: number) {
-    this._votacionService.updateStatusEnableVotacion(id).subscribe((valor) => console.log(valor))
+    this._votacionService.updateStatusEnableVotacion(id).subscribe((valor) => this.ngOnInit())
   }
   eliminarAprendiz(id: number) {
     this._votacionService.deleteVotacion(id).subscribe((valor) => console.log(valor))
   }
   actualVotacion(id: number){
     this._votacionService.actualVotacion(id).subscribe((valor: IVotacion) => {
-      console.log(valor)
     })
   }
 }
