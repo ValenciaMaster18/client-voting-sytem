@@ -59,7 +59,14 @@ export class AddVotingComponent implements OnDestroy {
           }, 4000)
         },
         error: (error: any) => {
-          console.error(error)
+          this.loaders = false;
+          this.mensaje = 'Votacion No agregada';
+          this.estilo = false;
+          this.resultado = true;
+          this.miForm.reset();
+          setTimeout(() => {
+            this.resultado = false;
+          }, 4000)
         },
         complete: () => {
           //

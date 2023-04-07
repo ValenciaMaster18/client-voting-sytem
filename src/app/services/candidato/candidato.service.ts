@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {  Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { RutasCandidato } from '@environments/routes-production';
 import { ICandidato } from '../../models/Icandidato';
 
@@ -16,10 +16,14 @@ export class CandidatoService {
   ) {
     this.API_URL = RutasCandidato.url;
    }
-  getCandidato(page: number, size: number): Observable<FormData[]> {
-    return this.http.get<FormData[]>(`${this.API_URL}?page=${page}&size=${size}`)
+  getCandidato(page: number, size: number): Observable<ICandidato[]> {
+    return this.http.get<ICandidato[]>(`${this.API_URL}?page=${page}&size=${size}`)
   }
-  addCandidato(candidatoNew: FormData): Observable<ICandidato[]> {
-    return this.http.post<ICandidato[]>(this.API_URL, candidatoNew )
+  candidatosVotacionActual(){
+    return this.http.get<any>(`${this.API_URL}/current-votacion`);
   }
+  addCandidato(candidatoDTO: ICandidato){
+    return this.http.post(this.API_URL,  candidatoDTO);
+  }
+
 }

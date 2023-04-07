@@ -16,7 +16,12 @@ const routes: Routes = [
       {
         path: 'votaciones',
         component: VotacionAprendizComponent
-      }
+      },
+      {
+        path: '**',
+        redirectTo: 'votaciones',
+        pathMatch: 'full'
+      },
     ]
   }
 ];

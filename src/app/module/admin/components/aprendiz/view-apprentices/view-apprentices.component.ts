@@ -12,27 +12,29 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
   valor: any;
   loaders: boolean;
   color: boolean;
+  pagina = 0;
   data: IAprendiz[];
   suscribtion: Subscription;
 
   constructor(
     private _getAprendizService: GetAprendizService
   ) {
-    this.loaders = false;
+    this.loaders = true;
     this.valor = '';
     this.color = false;
     this.data = [];
     this.suscribtion = new Subscription();
   };
   ngOnInit(): void {
-    this.suscribtion = this._getAprendizService.getAprendiz(0,9).pipe(
-      delay(1000)
+    this.suscribtion = this._getAprendizService.getAprendiz(this.pagina,9).pipe(
     ).subscribe({
       next: (valor: any) => {
         this.data = valor.content;
+        this.loaders = false;
       },
       error: (error: any) => {
         console.error(error);
+        this.loaders = false;
        },
       complete: () => {
         //
@@ -46,7 +48,7 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
   cambiarColor(): void{
     this.color = !this.color;
   }
-  // eliminarAprendiz(id: string): void{
-  //   this._getAprendizService.eliminarAprendiz(numeroDocumento).subscribe();
-  // }
+  eliminarAprendiz(id: string): void{
+    this._getAprendizService.deleteAprendiz(id).subscribe();
+  }
 };

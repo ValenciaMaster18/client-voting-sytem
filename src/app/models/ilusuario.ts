@@ -1,6 +1,6 @@
 export interface IUsuario {
-  id?: number;
-  username: string;
-  password: string;
-  role: string;
+  exp?: number;
+  iat?: number;
+  role?: 'ROLE_ADMINISTRADOR' | 'ROLE_APRENDIZ';
+  sub?: string;
 }

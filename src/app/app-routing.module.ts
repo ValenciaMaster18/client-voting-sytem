@@ -4,16 +4,16 @@ import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 // import { CustomPreloadService } from './services/precarga/custom-preload.service';
 import { QuicklinkStrategy } from 'ngx-quicklink';
 // Guards
-import { LoginGuard } from './guards/login/login.guard';
-import { RedirectLoginGuard } from './guards/redirect-login/redirect-login.guard';
+import { LoginGuardAdmin } from './guards/login/login-admin.guard';
+import { LoginGuardUser } from './guards/login/login-user.guard';
+
 
 const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./module/login/login.module').then(
       m => m.LoginModule
-    ),
-    canActivate: [RedirectLoginGuard],
+    )
     // data: {
     //   preload: true
     // }
@@ -23,19 +23,20 @@ const routes: Routes = [
     loadChildren: () => import('./module/admin/admin.module').then(
       m => m.AdminModule
     ),
-    canActivate: [LoginGuard]
+    canActivate: [LoginGuardAdmin]
   },
   {
-    path: 'aprendiz',
+    path: 'usuario',
     loadChildren: () => import('./module/aprendiz/aprendiz.module').then(
       m => m.AprendizModule
-    )
+    ),
+    canActivate: [LoginGuardUser]
   },
   {
     path: '', redirectTo: 'login', pathMatch: 'full'
   },
   {
-    path: '**', pathMatch: 'full', redirectTo: 'admin'
+    path: '**', pathMatch: 'full', redirectTo: 'login'
   }
 ];
 

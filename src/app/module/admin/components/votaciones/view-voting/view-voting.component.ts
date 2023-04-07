@@ -10,20 +10,21 @@ import { VotacionService } from '../../../../../services/Votacion/votacion.servi
 export class ViewVotingComponent implements OnInit {
   data: IVotacion[];
   color: boolean;
+  votacionActiva: string = '';
 
   constructor(
     private _votacionService: VotacionService
-   ){
+  ) {
     this.color = false;
     this.data = []
-   }
+  }
   ngOnInit(): void {
-    this._votacionService.getVotacion(0,6).subscribe(
+    this._votacionService.getVotacion(0, 6).subscribe(
       {
         next: (valor: any) => {
           this.data = valor.content
         },
-        error: (error: any ) => {
+        error: (error: any) => {
           console.error(error);
         },
         complete: () => {
@@ -32,32 +33,24 @@ export class ViewVotingComponent implements OnInit {
       }
     )
   }
-  cambiarColor(): void{
+  cambiarColor(): void {
     this.color = !this.color;
   }
-  // actualizarEstadoAprendiz(id: number, modo: string){
-  //   switch(modo){
-  //     case 'ABIERTA':
-  //       modo = 'CERRADA';
-  //       break;
-  //     case 'CERRADA':
-  //       modo = 'ABIERTA';
-  //       break;
-  //   }
-  //   this._votacionService.updateEstadoVotacion(id, modo).subscribe();
-  // }
-  // eliminarAprendiz(id: number){
-  //   this._votacionService.deleteVotacion(id).subscribe(
-  //     {
-  //       next: () => {
-  //     },
-  //       error: (error: any) => {
-  //         console.error(error)
-  //       },
-  //       complete: () => {
-  //         //
-  //       }
-  //     }
-  //   )
-  // }
+  verEstadisticas(id: number){
+    this._votacionService.getEstadisticasVotacion(id).subscribe((valor) => console.log(valor))
+  }
+  updateStatusDisableVotaciones(id: number) {
+    this._votacionService.updateStatusDisableVotacion(id).subscribe((valor) => console.log(valor))
+  }
+  updateStatusEnableVotaciones(id: number) {
+    this._votacionService.updateStatusEnableVotacion(id).subscribe((valor) => console.log(valor))
+  }
+  eliminarAprendiz(id: number) {
+    this._votacionService.deleteVotacion(id).subscribe((valor) => console.log(valor))
+  }
+  actualVotacion(id: number){
+    this._votacionService.actualVotacion(id).subscribe((valor: IVotacion) => {
+      console.log(valor)
+    })
+  }
 }

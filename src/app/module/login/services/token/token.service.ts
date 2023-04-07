@@ -6,14 +6,14 @@ import { getCookie, setCookie, removeCookie } from 'typescript-cookie';
 export class TokenService {
 
   setToken(token: string): void{
-    setCookie('idToken', token, { expires: 365, path: '/' });
+    setCookie('token', token, { expires: 365, path: '/' });
   }
 
   getToken(): string | undefined{
-    const token = getCookie('idToken');
+    const token = getCookie('token');
     return token;
   }
   removeToken(){
-    removeCookie('idToken');
+    removeCookie('token');
   }
 }

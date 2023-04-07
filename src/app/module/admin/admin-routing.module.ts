@@ -32,6 +32,11 @@ const routes: Routes = [
         // data: {
         //   preload: true
         // }
+      },
+      {
+        path: '**',
+        redirectTo: 'aprendiz',
+        pathMatch: 'full'
       }
     ]
   }

@@ -28,7 +28,7 @@ export class AddApprenticesComponent implements OnDestroy {
     this.estilo = false;
     this.loaders = false;
     this.tipoDocumento = ['CC', 'TI', 'PEP', 'PPT', 'CE']
-    this.estadoAprendiz = ['EN FORMACION', 'CANCELADO', 'RETIRADO', 'TRASLADADO', 'SUSPENDIDO']
+    this.estadoAprendiz = ['EN_FORMACION', 'CANCELADO', 'RETIRADO', 'TRASLADADO', 'SUSPENDIDO']
     this.suscribcion = new Subscription();
 
     this.miForm = this.controles.group(
@@ -63,6 +63,7 @@ export class AddApprenticesComponent implements OnDestroy {
           }, 4000)
         },
         error: (error: any) => {
+          console.log(error)
           this.mensaje = "Aprendiz No Guardado"
           this.estilo = false;
           this.resultado = true;

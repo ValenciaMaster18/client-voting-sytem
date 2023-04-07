@@ -6,12 +6,14 @@ import { QuicklinkModule } from 'ngx-quicklink';
 import { AdminComponent } from './page/admin/admin.component';
 import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
 import { SidebarAdminComponent } from './components/sidebar/sidebar-admin.component';
+import { EstadisticasVotingComponent } from './votaciones/view-voting/estadisticas-voting/estadisticas-voting.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
     HeaderAdminComponent,
-    SidebarAdminComponent
+    SidebarAdminComponent,
+    EstadisticasVotingComponent
   ],
   imports: [
     CommonModule,

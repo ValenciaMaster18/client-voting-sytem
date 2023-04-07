@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IAprendiz } from '../../models/iaprendiz';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { RutasAprendiz } from '@environments/routes-production';
 @Injectable({
   providedIn: 'root'
 })
 export class GetAprendizService {
   API_URL: string;
-
+  aprendiz$ = new BehaviorSubject<IAprendiz[]>([]);
   constructor(
     private http: HttpClient,
   ) {
@@ -16,12 +16,20 @@ export class GetAprendizService {
   }
 
   getAprendiz(page: number, size: number): Observable<IAprendiz[]> {
-    return this.http.get<IAprendiz[]>(`${this.API_URL}?page=${page}&size=${size}`)
+    return this.http.get<IAprendiz[]>(`${this.API_URL}?page=${page}&size=${size}`).pipe(
+      tap(( respuesta ) => this.aprendiz$.next(respuesta))
+    )
   }
   enviarAprendiz(nuevoAprendiz: IAprendiz) {
     return this.http.post(this.API_URL, nuevoAprendiz)
   }
-  enviarAprendizCSV(csv: FormData) {
-    return this.http.post(`${this.API_URL}`, csv);
+  enviarAprendizCSV(csvFile: FormData) {
+    // Agregar las cabeceras necesarias para enviar un archivo a través de un formulario
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'multipart/form-data')
+    return this.http.post(`${this.API_URL}/csv`, csvFile, { headers });
+  }
+  deleteAprendiz(id: string){
+    return this.http.delete<any>(`${this.API_URL}/${id}`)
   }
 }

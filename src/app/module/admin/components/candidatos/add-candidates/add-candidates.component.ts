@@ -6,6 +6,7 @@ import { IVotacion } from '../../../../../models/ivotacion';
 import { GetAprendizService } from '../../../../../services/aprendiz/get-aprendiz.service';
 import { CandidatoService } from '../../../../../services/candidato/candidato.service';
 import { VotacionService } from '../../../../../services/Votacion/votacion.service';
+import { ICandidato } from 'src/app/models/Icandidato';
 @Component({
   selector: 'app-add-candidates',
   templateUrl: './add-candidates.component.html',
@@ -19,7 +20,7 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
   votacion: boolean;
   estilo: boolean;
   loaders: boolean;
-  selectedImage!: File;
+  imagen: string = '';
   votaciones: IVotacion[];
 
   suscription: Subscription;
@@ -65,18 +66,27 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
   }
 
   onImageSelected(event: any) {
-    this.selectedImage = event.target.files[0];
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.imagen = reader.result!.toString();
+      console.log(this.imagen); // muestra la cadena base64 en la consola
+    };
   }
 
   onSubmit(): void {
     this.votacion = false;
     this.loaders = true;
-    const formData = new FormData();
-    formData.append('documento', this.miForm.value.documento);
-    formData.append('imagen', this.selectedImage);
-    formData.append('idVotacion', this.miForm.value.idVotacion);
-    formData.append('propuestas', this.miForm.value.propuestas);
-    this._candidatoServices.addCandidato(formData).pipe(
+    const candidato: ICandidato = {
+      id: null,
+      documento: this.miForm.value.documento,
+      imagen: this.imagen,
+      idVotacion: this.miForm.value.idVotacion,
+      propuestas: this.miForm.value.propuestas,
+    }
+    console.log(candidato)
+    this._candidatoServices.addCandidato(candidato).pipe(
       delay(1000)
     ).subscribe(
       {
@@ -104,57 +114,5 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
         }
       }
     );
-    // const buscandoIdDeAprendiz = this.data$.value.find(data => data.numeroDocumento == this.miForm.value.documento)
-    // this._candidatoServices.candidato$.subscribe(
-    //   (valor) => {
-    //     const candidato = valor.filter(cand =>
-    //       cand.get('numeroDocumento') == buscandoIdDeAprendiz!.numeroDocumento && cand.get('idVotacion') == this.miForm.value.idVotacion
-    //     )
-    //     if (candidato.length === 0) {
-    //       this.votacion = true;
-    //     }
-    //   }
-    // )
-    // if (buscandoIdDeAprendiz && this.votacion) {
-    //   const formData = new FormData();
-    //   formData.append('documento', this.miForm.value.documento);
-    //   formData.append('imagen', this.selectedImage);
-    //   formData.append('idVotacion', this.miForm.value.idVotacion);
-    //   formData.append('propuestas', this.miForm.value.propuestas);
-    //   this._candidatoServices.addCandidato(formData).pipe(
-    //     delay(1000)
-    //   ).subscribe(
-    //     {
-    //       next: () => {
-    //         this.loaders = false;
-    //         this.mensaje = 'Candidato Agregado';
-    //         this.resultado = true;
-    //         this.estilo = true;
-    //         this.miForm.reset()
-    //         setTimeout(() => {
-    //           this.resultado = false;
-    //         }, 4000)
-    //       },
-    //       error: (error: any) => {
-    //         console.error(error)
-    //       },
-    //       complete: () => {
-    //         //
-    //       }
-    //     }
-    //   );
-    // } else {
-    //   this.loaders = false;
-    //   if (!buscandoIdDeAprendiz) {
-    //     this.mensaje = 'Candidato No agregado el Documento no esta en la BD';
-    //   } else {
-    //     this.mensaje = 'El Documento ya tiene esta votacion agregada';
-    //   }
-    //   this.estilo = false;
-    //   this.resultado = true;
-    //   setTimeout(() => {
-    //     this.resultado = false;
-    //   }, 4000)
-    // }
   }
 }

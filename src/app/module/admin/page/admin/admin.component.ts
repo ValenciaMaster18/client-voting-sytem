@@ -16,18 +16,8 @@ export class AdminComponent {
 
   }
   ngOnInit(): void {
-    this._getAprendizService.getAprendiz(0, 9).subscribe(
-      () => {
-      }
-    )
-    this._candidatoService.getCandidato(0, 9).subscribe(
-      () => {
-      }
-    )
-    this._votacionService.getVotacion(0, 6).subscribe(
-      () => {
-      }
-    )
+    this._getAprendizService.getAprendiz(0, 9).subscribe()
+    this._candidatoService.getCandidato(0, 9).subscribe()
+    this._votacionService.getVotacion(0, 6).subscribe()
   }
-
 }

@@ -3,12 +3,13 @@
 }
 .team__comt{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
   place-items: center;
 }
 .team{
-  width: 240px;
-  height: 350px;
+  width: 300px;
+  height: 450px;
   border-radius: 10px;
   background-color: white;
   margin: auto;
@@ -16,15 +17,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
   gap: 20px;
   position: relative;
   transition: all .7s;
   margin-bottom: 25px;
+  button{
+    font-size: 1.5rem;
+    height: 40px;
+    width: 150px;
+  }
 }
-.team:hover{
-  transform: scale(0.98);
-  box-shadow:  0 10px 15px -3px #39A900, 0 4px 6px -2px #39A900;
-}
+
 .team__borde{
   position: absolute;
   top: 0;
@@ -37,15 +41,13 @@
 
 .team__picture{
   margin-top: 40px;
-  width: 50%;
-  height: 120px;
-  border-radius: 50%;
+  width: 300px;
+  height: 280px;
 }
 .team__picture-img{
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .team__div-name{
   font-size: 2.5rem;

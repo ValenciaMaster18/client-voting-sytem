@@ -1,7 +1,12 @@
 <section class="container form">
-  <form (submit)="onSubmit()">
+  <div class="form__mensaje mb-0" [ngClass]="estilo ? 'alert alert-success' : 'alert alert-danger'" *ngIf="resultado">
+    <span>
+      {{ mensaje | uppercase }}
+    </span>
+  </div>
+  <form>
     <label for="csv">Formato csv</label>
     <input id="csv" type="file" accept=".csv" (change)="onFileSelected($event)" required>
-    <button type="submit">Cargar archivo</button>
+    <button (click)="onSubmit()" type="submit" [disabled]="isUploading">Cargar archivo</button>
   </form>
 </section>

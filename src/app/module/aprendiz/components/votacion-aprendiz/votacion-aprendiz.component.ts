@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICandidato } from 'src/app/models/Icandidato';
-import { IAprendiz } from 'src/app/models/iaprendiz';
-import { IVotacion } from 'src/app/models/ivotacion';
-import { VotacionService } from 'src/app/services/Votacion/votacion.service';
-import { GetAprendizService } from 'src/app/services/aprendiz/get-aprendiz.service';
+import { LoginService } from 'src/app/module/login/services/login/login.service';
 import { CandidatoService } from 'src/app/services/candidato/candidato.service';
+import { VotosService } from 'src/app/services/votos/votos.service';
 
 @Component({
   selector: 'app-votacion-aprendiz',
@@ -12,23 +11,36 @@ import { CandidatoService } from 'src/app/services/candidato/candidato.service';
   styleUrls: ['./votacion-aprendiz.component.scss']
 })
 export class VotacionAprendizComponent implements OnInit {
-  candidatos$: FormData[];
-  votaciones$: IVotacion[];
-  aprendices$: IAprendiz[];
+  candidatos: ICandidato[];
   constructor(
-    private _candidatoService: CandidatoService,
-    private _votacionService: VotacionService,
-    private _aprendizService: GetAprendizService,
+    private _candidatosService: CandidatoService,
+    private _votosService: VotosService,
+    private _loginService: LoginService,
+    private router: Router
 
-  ){
-    this.candidatos$ = []
-    this.votaciones$ = []
-    this.aprendices$ = []
-
+  ) {
+    this.candidatos = []
   }
   ngOnInit(): void {
-    this._candidatoService.getCandidato(0,9).subscribe()
-    this._votacionService.getVotacion(0,6).subscribe()
-    this._aprendizService.getAprendiz(0,9).subscribe()
+    this._candidatosService.candidatosVotacionActual().subscribe((valor: ICandidato[]) => {
+      this.candidatos = valor
+    }
+    )
+  }
+  votarCandidato(id: number) {
+    this._votosService.enviarVoto(id).subscribe(
+      {
+        next: (value: any) => {
+          this.router.navigate(['/login'])
+          this._loginService.logout()
+        },
+        error: (error: any) => {
+          console.log(error)
+        },
+        complete: () => {
+          //
+        }
+      }
+    )
   }
 }
