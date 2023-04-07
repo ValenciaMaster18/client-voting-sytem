@@ -1,7 +1,4 @@
 /* Structure */
-.container{
-  margin-top: 50px;
-}
 table {
   width: 100%;
   thead{
@@ -9,7 +6,6 @@ table {
       th{
         font-size: 1.4rem;
         text-transform: uppercase;
-        font-weight: bold;
       }
     }
   }
@@ -17,7 +13,7 @@ table {
     tr{
       td{
         text-align: center;
-        font-size: 1.3rem;
+        font-size: 1rem;
       }
     }
   }
@@ -52,7 +48,7 @@ table {
     thead {
       tr {
         th {
-          font-size: 2rem;
+          font-size: 1.8rem;
         }
       }
     }
@@ -60,7 +56,7 @@ table {
     tbody {
       tr {
         td {
-          font-size: 1.6rem;
+          font-size: 1.4rem;
         }
       }
     }

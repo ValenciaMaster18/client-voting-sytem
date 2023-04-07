@@ -5,7 +5,8 @@ import { VotacionService } from '../../../../services/Votacion/votacion.service'
 
 @Component({
   selector: 'app-admin',
-  templateUrl: './admin.component.html'
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent {
   constructor(

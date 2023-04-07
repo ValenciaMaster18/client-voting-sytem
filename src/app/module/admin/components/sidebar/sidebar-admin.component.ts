@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { LoginService } from "src/app/module/login/services/login/login.service";
 
 @Component({
   selector: 'app-sidebar-admin',
@@ -7,55 +9,18 @@ import { Component } from "@angular/core";
 })
 export class SidebarAdminComponent {
   desplegarMenuSidebar: boolean;
-  desplegar: boolean;
-  desplegar2: boolean;
-  desplegar3: boolean;
   constructor(
-    // public dialog: MatDialog
+    private _loginService: LoginService,
+    private router: Router
   ) {
     this.desplegarMenuSidebar = false;
-    this.desplegar = false;
-    this.desplegar2 = false;
-    this.desplegar3 = false;
-
   }
 
-  // openDialog(animacionEntrar: string,  animacionSalir: string): void {
-  //   Cambiamos en el archivo su modificador de acceso de private a public
-  //   if (this.dialog._openDialogsAtThisLevel.length == 0){
-  //     this.dialog.open(DialogComponent, {
-  //       width: '600px',
-  //       height: '150px',
-  //       enterAnimationDuration: animacionEntrar,
-  //       exitAnimationDuration: animacionSalir,
-  //       position: {
-  //         // top: '-10%',
-  //         left: '30%',
-  //         bottom: '50px'
-  //       }
-  //     });
-  //   }else{
-  //     this.dialog.closeAll()
-  //   }
-  // };
+  cerrarSesion(): void{
+    this._loginService.logout();
+    this.router.navigate(['/login']);
+  }
   cambiarEstadoSideBar(): void{
     this.desplegarMenuSidebar = !this.desplegarMenuSidebar
-  }
-  desplegarMenu(): void {
-    this.desplegar = !this.desplegar;
-    this.desplegar2 = false;
-    this.desplegar3 = false;
-
-
-  }
-  desplegarMenu2(): void {
-    this.desplegar2 = !this.desplegar2;
-    this.desplegar = false;
-    this.desplegar3 = false;
-  }
-  desplegarMenu3(): void {
-    this.desplegar3 = !this.desplegar3;
-    this.desplegar = false;
-    this.desplegar2 = false;
   }
 }

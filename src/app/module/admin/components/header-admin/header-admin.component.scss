@@ -3,17 +3,19 @@
   align-items: center;
   justify-content: flex-end;
   gap: 60px;
-  padding-right: 100px;
-  padding-top: 25px;
+  padding-right: 50px;
+  height: 80px;
 }
 .header__nav{
+  height: 100%;
   .header__nav-ul{
+    height: 100%;
     list-style: none;
     display: flex;
+    align-items: center;
     gap: 35px;
     .header__nav-li{
       display: flex;
-      align-items: center;
       gap: 20px;
       span{
         font-size: 1.6rem;

@@ -1,8 +1,4 @@
 /* Structure */
-.container {
-  margin-top: 50px;
-}
-
 table {
   width: 100%;
 
@@ -11,7 +7,6 @@ table {
       th {
         font-size: 1.4rem;
         text-transform: uppercase;
-        font-weight: bold;
       }
     }
   }
@@ -20,7 +15,7 @@ table {
     tr {
       td {
         text-align: center;
-        font-size: 1.3rem;
+        font-size: 1rem;
       }
     }
   }
@@ -109,17 +104,16 @@ a.btn {
 @media screen and (min-width: 998px) {
   table {
     thead {
-      tr {
+      tr{
         th {
-          font-size: 2rem;
+          font-size: 1.8rem;
         }
       }
     }
-
     tbody {
       tr {
         td {
-          font-size: 1.6rem;
+          font-size: 1.4rem;
         }
       }
     }
