@@ -21,13 +21,13 @@ table {
 }
 .team__comt{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 40px;
   place-items: center;
 }
 .team{
-  width: 300px;
-  height: 450px;
+  width: 200px;
+  height: 280px;
   border-radius: 10px;
   background-color: white;
   margin: auto;
@@ -35,15 +35,9 @@ table {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   position: relative;
   transition: all .7s;
-  margin-bottom: 25px;
-  button{
-    font-size: 1.5rem;
-    height: 40px;
-    width: 150px;
-  }
 }
 .mensaje{
   font-size: 1.5rem;
@@ -60,8 +54,8 @@ table {
 
 .team__picture{
   margin-top: 40px;
-  width: 300px;
-  height: 280px;
+  width: 120px;
+  height: 180px;
 }
 .team__picture-img{
   width: 100%;
@@ -69,9 +63,9 @@ table {
   object-fit: contain;
 }
 .team__div-name{
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 400;
 }
 .team__div-description{
-  font-size: 1.8rem;
+  font-size: 1.4rem;
 }

@@ -24,6 +24,7 @@
     "chart.js": "^4.2.1",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
+    "ngx-csv": "^0.3.2",
     "ngx-quicklink": "^0.4.1",
     "primeng": "^15.3.0",
     "rxjs": "~7.8.0",
