@@ -1,4 +1,4 @@
-.header{
+.header {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -6,36 +6,43 @@
   padding-right: 50px;
   height: 80px;
 }
-.header__nav{
+
+.header__nav {
   height: 100%;
-  .header__nav-ul{
+
+  .header__nav-ul {
     height: 100%;
     list-style: none;
     display: flex;
     align-items: center;
     gap: 35px;
-    .header__nav-li{
+
+    .header__nav-li {
       display: flex;
       gap: 20px;
-      span{
+
+      span {
         font-size: 1.6rem;
       }
     }
   }
 }
 
-.header__section{
+.header__section {
   display: flex;
   align-items: center;
   gap: 20px;
-  .header__section-img{
+
+  .header__section-img {
     display: flex;
     align-items: center;
     gap: 15px;
-    span{
+
+    span {
       font-size: 1.6rem;
     }
-    button{
+
+    button {
       background-color: transparent;
       border: 0;
     }

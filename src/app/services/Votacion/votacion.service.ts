@@ -3,12 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { IVotacion } from '../../models/ivotacion';
 import { RutasVotaciones } from '@environments/routes-production';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { IEstadisticas } from 'src/app/models/iestadisticas';
 @Injectable({
   providedIn: 'root'
 })
 export class VotacionService {
   API_URL: string;
   private votacionSubject = new BehaviorSubject<IVotacion[]>([]);
+  private votacionEstadisticas = new BehaviorSubject<IEstadisticas[]>([]);
+  votacionEstadisticas$: Observable<IEstadisticas[]> = this.votacionEstadisticas.asObservable();
   votacion$: Observable<IVotacion[]> = this.votacionSubject.asObservable();
 
   constructor(
@@ -23,7 +26,9 @@ export class VotacionService {
     )
   }
   getEstadisticasVotacion(id: number){
-    return this.http.get(`${this.API_URL}/estadisticas/${id}`)
+    return this.http.get(`${this.API_URL}/estadisticas/${id}`).pipe(
+      tap((estadisticas: any) => this.votacionEstadisticas.next(estadisticas))
+    )
   }
   addVotacion(nuevaVotacion: IVotacion): Observable<IVotacion[]> {
     return this.http.post<IVotacion[]>(this.API_URL, nuevaVotacion)
@@ -33,9 +38,7 @@ export class VotacionService {
   }
   actualVotacion(id: number){
     const url = `${this.API_URL}/current/${id}`;
-    return this.http.put<any>(url, {}).pipe(
-      tap((votacion) => localStorage.setItem("votacion", votacion.nombre))
-    )
+    return this.http.put<any>(url, {})
   }
   updateStatusDisableVotacion(id: number): Observable<any> {
     const url = `${this.API_URL}/disable/${id}`;

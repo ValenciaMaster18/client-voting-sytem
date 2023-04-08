@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AddVotingComponent } from "./add-voting/add-voting.component";
 import { ViewVotingComponent } from "./view-voting/view-voting.component";
+import { EstadisticasVotingComponent } from "./view-voting/estadisticas/estadisticas.component";
 
 const routes: Routes = [
   {
@@ -9,6 +10,10 @@ const routes: Routes = [
   },
   {
     path: 'add', component: AddVotingComponent
+  },
+  {
+    path: 'estadisticas',
+    component: EstadisticasVotingComponent
   }
 ]
 

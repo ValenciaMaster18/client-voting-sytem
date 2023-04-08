@@ -10,7 +10,6 @@ import { VotacionService } from '../../../../../services/Votacion/votacion.servi
 export class ViewVotingComponent implements OnInit {
   data: IVotacion[];
   color: boolean;
-  votacionActiva: string | null = localStorage.getItem("votacion");
 
   constructor(
     private _votacionService: VotacionService
@@ -33,6 +32,7 @@ export class ViewVotingComponent implements OnInit {
       }
     )
   }
+  
   cambiarColor(): void {
     this.color = !this.color;
   }

@@ -7,15 +7,13 @@ import { AdminComponent } from './page/admin/admin.component';
 import { HeaderAdminComponent } from './components/header-admin/header-admin.component';
 import { HeaderAdminSecundaryComponent } from './components/header-admin-secundary/header-admin-secundary.component';
 import { SidebarAdminComponent } from './components/sidebar/sidebar-admin.component';
-import { EstadisticasVotingComponent } from './votaciones/view-voting/estadisticas-voting/estadisticas-voting.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
     HeaderAdminComponent,
     HeaderAdminSecundaryComponent,
-    SidebarAdminComponent,
-    EstadisticasVotingComponent
+    SidebarAdminComponent
   ],
   imports: [
     CommonModule,

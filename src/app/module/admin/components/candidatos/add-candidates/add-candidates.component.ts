@@ -98,7 +98,7 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
           this.miForm.reset()
           setTimeout(() => {
             this.resultado = false;
-          }, 4000)
+          }, 7000)
         },
         error: (error: any) => {
           this.loaders = false;
@@ -107,7 +107,7 @@ export class AddCandidatesComponent implements OnInit, OnDestroy {
           this.estilo = false;
           setTimeout(() => {
             this.resultado = false;
-          }, 4000)
+          }, 7000)
         },
         complete: () => {
           //

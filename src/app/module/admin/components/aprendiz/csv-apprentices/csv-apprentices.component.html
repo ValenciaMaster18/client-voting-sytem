@@ -1,8 +1,11 @@
 <section class="container form">
   <div class="form__mensaje mb-0" [ngClass]="estilo ? 'alert alert-success' : 'alert alert-danger'" *ngIf="resultado">
     <span>
-      {{ mensaje | uppercase }}
+      {{ mensaje}}
     </span>
+  </div>
+  <div class="loaders" *ngIf="loaders">
+    <app-loaders></app-loaders>
   </div>
   <form>
     <label for="csv">Formato csv</label>

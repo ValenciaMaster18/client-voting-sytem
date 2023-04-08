@@ -48,6 +48,17 @@ export class AddApprenticesComponent implements OnDestroy {
 
   submit(): void {
     this.loaders = true;
+
+    this._getAprendizService.aprendiz$.subscribe(
+      {
+        next: (value: any) => {
+          console.log(value)
+        },
+        error: (err: any) => {
+          console.log(err)
+        },
+        complete: () => { }
+      });
     this.suscribcion = this._getAprendizService.enviarAprendiz(this.miForm.value).pipe(
       delay(1000)
     ).subscribe(
@@ -60,17 +71,17 @@ export class AddApprenticesComponent implements OnDestroy {
           this.miForm.reset()
           setTimeout(() => {
             this.resultado = false;
-          }, 4000)
+          }, 7000)
         },
         error: (error: any) => {
           console.log(error)
-          this.mensaje = "Aprendiz No Guardado"
+          this.mensaje = "Aprendiz No Guardado, correo o numero documento existe"
           this.estilo = false;
           this.resultado = true;
           this.loaders = false;
           setTimeout(() => {
             this.resultado = false;
-          }, 4000)
+          }, 7000)
         },
         complete: () => {
           //

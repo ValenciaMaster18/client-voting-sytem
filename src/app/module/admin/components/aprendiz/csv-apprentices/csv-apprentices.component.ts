@@ -10,6 +10,7 @@ export class CsvApprenticesComponent {
   mensaje: string;
   resultado: boolean;
   estilo: boolean;
+  loaders: boolean;
   csvFile!: File;
   isUploading = false;
   constructor(
@@ -18,12 +19,14 @@ export class CsvApprenticesComponent {
     this.mensaje = '';
     this.resultado = false;
     this.estilo = false;
+    this.loaders = false;
   }
 
   onFileSelected(event: any) {
     this.csvFile = event.target.files[0];
   }
   onSubmit() {
+    this.loaders = true;
     if(this.csvFile){
       const formData = new FormData();
       formData.append('csvFile', this.csvFile);
@@ -34,20 +37,21 @@ export class CsvApprenticesComponent {
             this.mensaje = 'Archivo CSV cargado correctamente';
             this.resultado = true;
             this.estilo = true;
+            this.loaders = false;
             this.isUploading = false;
             setTimeout(() =>{
               this.resultado = true;
-
-            }, 4000)
+            }, 7000)
           },
           error: (error: any) => {
-            this.mensaje = error.message
+            this.mensaje = 'Archivo csv No cargado correctamente, hay aprendices que ya estan en nuestra base de datos'
             this.resultado = true;
             this.estilo = false;
+            this.loaders = false;
             this.isUploading = false;
             setTimeout(() =>{
-              this.resultado = true;
-            }, 4000)
+              this.resultado = false;
+            }, 7000)
           }
         }
       )

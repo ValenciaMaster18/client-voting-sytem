@@ -8,7 +8,8 @@ import { RutasAprendiz } from '@environments/routes-production';
 })
 export class GetAprendizService {
   API_URL: string;
-  aprendiz$ = new BehaviorSubject<IAprendiz[]>([]);
+  private aprendiz = new BehaviorSubject<IAprendiz[]>([]);
+  aprendiz$: Observable<IAprendiz[]> = this.aprendiz.asObservable()
   constructor(
     private http: HttpClient,
   ) {
@@ -17,7 +18,7 @@ export class GetAprendizService {
 
   getAprendiz(page: number, size: number): Observable<IAprendiz[]> {
     return this.http.get<IAprendiz[]>(`${this.API_URL}?page=${page}&size=${size}`).pipe(
-      tap(( respuesta ) => this.aprendiz$.next(respuesta))
+      tap(( respuesta ) => this.aprendiz.next(respuesta))
     )
   }
   enviarAprendiz(nuevoAprendiz: IAprendiz) {

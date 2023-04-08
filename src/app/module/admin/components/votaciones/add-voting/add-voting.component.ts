@@ -56,7 +56,7 @@ export class AddVotingComponent implements OnDestroy {
           this.miForm.reset();
           setTimeout(() => {
             this.resultado = false;
-          }, 4000)
+          }, 7000)
         },
         error: (error: any) => {
           this.loaders = false;
@@ -66,7 +66,7 @@ export class AddVotingComponent implements OnDestroy {
           this.miForm.reset();
           setTimeout(() => {
             this.resultado = false;
-          }, 4000)
+          }, 7000)
         },
         complete: () => {
           //
