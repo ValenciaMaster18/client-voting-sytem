@@ -9,13 +9,13 @@ import { VotacionService } from 'src/app/services/Votacion/votacion.service';
 export class EstadisticasVotingComponent implements OnInit {
   data: any;
   options: any;
-  estadisticas!: IEstadisticas[];
+  estadisticas!: IEstadisticas;
 
   constructor(
     private _votacionService: VotacionService
   ) {
-    this._votacionService.votacionEstadisticas$.subscribe({
-      next: (value: IEstadisticas[]) => {
+    this._votacionService.votacionEstadisticas.subscribe({
+      next: (value: IEstadisticas) => {
         this.estadisticas = value;
       }
     });

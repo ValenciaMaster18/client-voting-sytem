@@ -9,10 +9,9 @@ import { IEstadisticas } from 'src/app/models/iestadisticas';
 })
 export class VotacionService {
   API_URL: string;
+  estadisticasValida!: Observable<boolean>;
   private votacionSubject = new BehaviorSubject<IVotacion[]>([]);
-  private votacionEstadisticas = new BehaviorSubject<IEstadisticas[]>([]);
-  votacionEstadisticas$: Observable<IEstadisticas[]> = this.votacionEstadisticas.asObservable();
-  votacion$: Observable<IVotacion[]> = this.votacionSubject.asObservable();
+  votacionEstadisticas = new BehaviorSubject<IEstadisticas>({});
 
   constructor(
     private http: HttpClient

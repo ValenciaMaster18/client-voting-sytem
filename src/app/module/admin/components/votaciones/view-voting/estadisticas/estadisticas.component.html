@@ -1,13 +1,78 @@
-<div class="row">
-  <div class="col-lg-6">
-    <div class="card">
+<ng-container *ngIf="estadisticas.candidatos == undefined">
+  <div class="row">
+    <div class="p-4 col">
+      <span class="mensaje alert alert-danger">
+        Estadisticas no disponibles. No hay una votacion seleccionada para mostrar estadisticas
+      </span>
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="estadisticas.candidatos != undefined">
+  <div class="row">
+    <div class="col-lg-6">
       <div class="card">
-        <p-chart type="doughnut" [data]="data" [options]="options"></p-chart>
+          <!-- <p-chart type="doughnut" [data]="data" [options]="options"></p-chart> -->
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="team__comt">
+        <section class="team">
+          <div class="team__borde">
+          </div>
+          <picture class="team__picture">
+            <source media="(min-width: )" srcset="">
+            <img loading="lazy" class="team__picture-img" [src]="estadisticas.candidatoMasVotado?.imagen" alt="">
+        </picture>
+        <p class="team__div-name">
+          {{ estadisticas.candidatoMasVotado?.documento }}
+        </p>
+        <span class="team__div-description">
+          <!-- <ng-container *ngIf="estadisticas.candidatoMasVotado?.documento == cant.numeroDocumento">
+            {{ cant.canditadVotos }}
+          </ng-container> -->
+          {{ estadisticas.votosPorCandidato?.[estadisticas.candidatoMasVotado!.documento] }}
+        </span>
+
+        </section>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="table-responsive">
+          <table class="table table-borderless">
+            <thead class="table-success text-center">
+              <tr>
+                <th>Id Votacion</th>
+                <th>Votacion</th>
+                <th>Votantes Habilitados</th>
+                <th>Cantidad de Votos</th>
+                <th>Fecha creacion Votacion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  {{ estadisticas.votacion?.id }}
+                </td>
+                <td>
+                  {{ estadisticas.votacion?.nombre }}
+                </td>
+                <td>
+                  {{ estadisticas.votantesHabilitados }}
+                </td>
+                <td>
+                  {{ estadisticas.cantidadVotos }}
+                </td>
+                <td>
+                  {{ estadisticas.creationDateTime | date }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-  <div class="col-lg-6">
+</ng-container>
 
-  </div>
-</div>
 

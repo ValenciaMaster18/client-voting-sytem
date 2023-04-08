@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IVotacion } from '../../../../../models/ivotacion';
 import { VotacionService } from '../../../../../services/Votacion/votacion.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-voting',
@@ -10,9 +11,12 @@ import { VotacionService } from '../../../../../services/Votacion/votacion.servi
 export class ViewVotingComponent implements OnInit {
   data: IVotacion[];
   color: boolean;
+  resultado: boolean = false;
+  mensaje!: string;
 
   constructor(
-    private _votacionService: VotacionService
+    private _votacionService: VotacionService,
+    private router: Router
   ) {
     this.color = false;
     this.data = []
@@ -32,12 +36,26 @@ export class ViewVotingComponent implements OnInit {
       }
     )
   }
-  
+
   cambiarColor(): void {
     this.color = !this.color;
   }
   verEstadisticas(id: number){
-    this._votacionService.getEstadisticasVotacion(id).subscribe((valor) => console.log(valor))
+    this._votacionService.getEstadisticasVotacion(id).subscribe({
+      next: () => {
+        this.router.navigate(['admin/votacion/estadisticas'])
+      },
+      error: () => {
+        this.mensaje = "Esta votacion no ha sido activada para ninguna votacion. No hay estadisticas disponibles"
+        this.resultado = true
+        setTimeout(() => {
+          this.resultado = false
+        }, 7000)
+      },
+      complete: () => {
+
+      }
+    })
   }
   updateStatusDisableVotaciones(id: number) {
     this._votacionService.updateStatusDisableVotacion(id).subscribe((valor) => this.ngOnInit())
