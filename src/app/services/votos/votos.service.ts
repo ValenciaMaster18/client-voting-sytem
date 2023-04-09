@@ -6,7 +6,7 @@ import { RutasVotos } from '@environments/routes-production';
   providedIn: 'root'
 })
 export class VotosService {
-
+  mensaje: string = '';
   API_URL: string;
   estado: boolean = false;
   constructor(

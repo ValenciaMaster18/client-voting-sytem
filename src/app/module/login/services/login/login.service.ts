@@ -39,7 +39,6 @@ export class LoginService {
 
   logout() {
     this._tokenService.removeToken();
-
     return this.httpClient.get(this.API_URL_LOGOUT).subscribe()
   }
 }

@@ -6,6 +6,7 @@ import { QuicklinkStrategy } from 'ngx-quicklink';
 // Guards
 import { LoginGuardAdmin } from './guards/login/login-admin.guard';
 import { LoginGuardUser } from './guards/login/login-user.guard';
+import { RedirectLogin } from './guards/login/redirect-login.guatd';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./module/login/login.module').then(
       m => m.LoginModule
-    )
+    ),
+    canActivate: [RedirectLogin]
     // data: {
     //   preload: true
     // }

@@ -11,6 +11,16 @@
             {{ mensaje }}
           </span>
         </div>
+        <div class="mensaje__container" *ngIf="_votosService.estado">
+          <span class="mensaje">
+            {{ _votosService.mensaje }}
+          </span>
+        </div>
+        <div class="mensaje__container" *ngIf="estadoVotacion">
+          <span class="mensaje">
+            {{ _votosService.mensaje }}
+          </span>
+        </div>
         <form class="login" novalidate [formGroup]="miForm" (ngSubmit)="onSubmit()">
           <div class="usuario">
             <label for="usuario">

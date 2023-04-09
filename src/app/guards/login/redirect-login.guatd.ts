@@ -13,26 +13,30 @@ Los guards devuelven true o false para permitir el paso o no de un usuario a la 
     providedIn: 'root'
   }
 )
-export class LoginGuardAdmin implements CanActivate {
+export class RedirectLogin implements CanActivate {
   constructor(
     private router: Router,
-    protected _tokenService: TokenService
+    private _tokenService: TokenService
   ) {
 
   }
+
   canActivate(): boolean {
-    const token = this._tokenService.getToken() ?? null;
-    // Json con el token decodificado
+    const token = this._tokenService.getToken();
+    console.log(token)
     if (token) {
-      const tokenPayload: IUsuario = jwt_decode(token!);
-      if (token && tokenPayload.role == "ROLE_ADMINISTRADOR") {
-        return true;
-      }else{
+      const tokenPayload: IUsuario = jwt_decode(token);
+      console.log(tokenPayload)
+      if (tokenPayload.role == "ROLE_ADMINISTRADOR") {
+        this.router.navigate(['/admin'])
+        return false;
+
+      } else if (tokenPayload.role == "ROLE_APRENDIZ") {
         this.router.navigate(['/usuario'])
-        return true;
+        return false;
       }
     }
-    this.router.navigate([''])
-    return false;
+    return true;
   }
+
 }

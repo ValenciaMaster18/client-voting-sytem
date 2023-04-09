@@ -24,25 +24,34 @@ export class LoginGuardUser implements CanActivate {
 
   }
   async canActivate(): Promise<boolean> {
-    const token = this._tokenService.getToken();
-    const tokenPayload: IUsuario = jwt_decode(token!);
-
-    if (token && tokenPayload.role == "ROLE_APRENDIZ") {
-      const pasar = await new Promise<boolean>((resolve, reject) => {
-        this._votosService.getEstadoVotoAprendiz(tokenPayload.sub!).subscribe({
-          next: (value: any | boolean) => {
-            resolve(!value);
-          },
-          error: (err: any) => {
-            resolve(false);
-          },
-          complete: () => {}
+    const token = this._tokenService.getToken() ?? null;
+    if (token) {
+      const tokenPayload: IUsuario = jwt_decode(token!);
+      if (token && tokenPayload.role == "ROLE_APRENDIZ") {
+        const pasar = await new Promise<boolean>((resolve, reject) => {
+          this._votosService.getEstadoVotoAprendiz(tokenPayload.sub!).subscribe({
+            next: (value: any | boolean) => {
+              this._votosService.mensaje = "Acceso denegado. Votacion cerrada o ya votastes"
+              resolve(!value);
+            },
+            error: (err: any) => {
+              this._votosService.mensaje = "Acceso denegado. Votacion cerrada o ya votastes"
+              resolve(false);
+            },
+            complete: () => { }
+          });
         });
-      });
-      return pasar;
+        if (!pasar) {
+          this._votosService.estado = true;
+          this._tokenService.removeToken()
+          setTimeout(() => {
+            this._votosService.estado = false;
+          }, 7000)
+        }
+        return pasar;
+      }
     }
-
-    this.router.navigate(['/login']);
+    this.router.navigate(['']);
     return false;
   }
 
