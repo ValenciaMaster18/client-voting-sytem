@@ -4,13 +4,13 @@ header {
   justify-content: space-between;
   width: 100vw;
   height: 80px;
-  padding: 0 10px;
+  padding: 0 20px;
 }
 
 .header__logo {
   h1 {
-    font-size: 2.1rem;
-    width: 290px;
+    font-size: 1.8rem;
+    width: 250px;
     line-height: 3.5rem;
     white-space: nowrap;
     overflow: hidden;
@@ -39,16 +39,33 @@ button {
   }
 }
 
-@media screen and (min-width: 998px) {
-  header {
-    padding: 0 60px;
+@media screen and (min-width: 600px) {
+  .header__logo {
+    padding: 0 40px;
+
+    h1 {
+      font-size: 2.4rem;
+      line-height: 5rem;
+      width: 350px;
+    }
   }
 
+  .header__salir {
+    padding: 0 40px;
+  }
+}
+
+@media screen and (min-width: 990px) {
   .header__logo {
+    padding: 0 60px;
+
     h1 {
       font-size: 3rem;
-      line-height: 5rem;
       width: 430px;
     }
+  }
+
+  .header__salir {
+    padding: 0 60px;
   }
 }
