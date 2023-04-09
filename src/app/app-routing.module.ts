@@ -15,7 +15,8 @@ const routes: Routes = [
     loadChildren: () => import('./module/login/login.module').then(
       m => m.LoginModule
     ),
-    canActivate: [RedirectLogin]
+    canActivate: [RedirectLogin],
+    title: 'Login | Sistema de Votaciones'
     // data: {
     //   preload: true
     // }
@@ -25,14 +26,16 @@ const routes: Routes = [
     loadChildren: () => import('./module/admin/admin.module').then(
       m => m.AdminModule
     ),
-    canActivate: [LoginGuardAdmin]
+    canActivate: [LoginGuardAdmin],
+    title: 'Administrador | Sistema de Votaciones'
   },
   {
     path: 'usuario',
     loadChildren: () => import('./module/aprendiz/aprendiz.module').then(
       m => m.AprendizModule
     ),
-    canActivate: [LoginGuardUser]
+    canActivate: [LoginGuardUser],
+    title: 'Usuario | Sistema de Votaciones'
   },
   {
     path: '', redirectTo: 'login', pathMatch: 'full'
