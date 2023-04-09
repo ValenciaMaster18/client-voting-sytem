@@ -23,7 +23,6 @@ export class RedirectLogin implements CanActivate {
 
   canActivate(): boolean {
     const token = this._tokenService.getToken();
-    console.log(token)
     if (token) {
       const tokenPayload: IUsuario = jwt_decode(token);
       console.log(tokenPayload)

@@ -1,24 +1,4 @@
-table {
-  width: 100%;
-
-  thead {
-    tr {
-      th {
-        font-size: 1.8rem;
-        text-transform: uppercase;
-      }
-    }
-  }
-
-  tbody {
-    tr {
-      td {
-        text-align: center;
-        font-size: 1.4rem;
-      }
-    }
-  }
-}
+@import '../../../../../../../assets/css/tablas.scss';
 .team__comt{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

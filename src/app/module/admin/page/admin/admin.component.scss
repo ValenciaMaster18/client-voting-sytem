@@ -1,14 +1,21 @@
 // F7F7F7
-.main{
+.main {
   background-color: #F7F7F7;
-  padding: 10px 50px;
-  margin-left: 240px;
+  padding: 10px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  section{
+
+  section {
     background-color: white;
     padding: 10px;
+  }
+}
+
+@media screen and (min-width: 998px) {
+  .main {
+    margin-left: 240px;
+    padding: 10px 20px;
   }
 }

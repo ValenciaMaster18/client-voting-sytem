@@ -44,6 +44,7 @@ export class EstadisticasVotingComponent implements OnInit {
         }
       }
     };
+
   }
   exportCsv(): void {
     this.estadisticas.candidatos!.forEach((candidato) => {

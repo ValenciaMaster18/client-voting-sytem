@@ -1,4 +1,7 @@
-<header class="header">
+<header class="header" [ngClass]="desplegarMenuSidebar ? 'abrir' : 'cerrar'">
+  <button (click)="cambiarEstadoSideBar()" class="menu">
+    x
+  </button>
   <section class="header__cont">
     <picture class="header__picture">
       <img routerLink="/admin/aprendiz" class="header__picture-img" src="../../../../../assets/img/logo-sena.png" alt="">

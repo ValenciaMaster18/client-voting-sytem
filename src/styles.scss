@@ -1,18 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;600&display=swap');
 @import url('../node_modules/primeicons/primeicons.css');
 @import url('../node_modules/primeng/resources/primeng.min.css');
 @import url('../node_modules/primeng/resources/themes/saga-blue/theme.css');
-html{
-  // min-height: 100%;
-  // position: relative;
-  font-size: 62.5%;
-}
-body
-{
-  overflow-x: hidden;
-}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
+html,
+body {
+  height: 100%;
+  font-size: 62.5%;
+  overflow-x: hidden;
+  margin: 0;
+  font-family: 'Anuphan', sans-serif;
+}

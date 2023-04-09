@@ -3,8 +3,9 @@
   align-items: center;
   justify-content: flex-end;
   gap: 60px;
-  padding-right: 50px;
+  padding: 0 20px;
   height: 80px;
+  display: none;
 }
 
 .header__nav {
@@ -45,6 +46,29 @@
     button {
       background-color: transparent;
       border: 0;
+    }
+  }
+}
+@media screen and (min-width: 780px)  {
+  .header {
+    display: flex;
+  }
+}
+@media screen and (min-width: 998px)  {
+  .header__nav {
+    .header__nav-ul {
+      .header__nav-li {
+        span {
+          font-size: 1.8rem;
+        }
+      }
+    }
+  }
+  .header__section {
+    .header__section-img {
+      span {
+        font-size: 1.8rem;
+      }
     }
   }
 }
