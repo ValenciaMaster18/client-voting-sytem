@@ -13,7 +13,7 @@ import { AprendizComponent } from './pages/aprendiz/aprendiz.component';
   ],
   imports: [
     CommonModule,
-    AprendizRoutingModule
+    AprendizRoutingModule,
   ]
 })
 export class AprendizModule { }

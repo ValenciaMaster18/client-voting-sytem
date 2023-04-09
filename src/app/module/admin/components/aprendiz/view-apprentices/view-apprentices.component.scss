@@ -87,6 +87,7 @@ a.btn {
     }
   }
 }
+
 .loaders {
   position: fixed;
   z-index: 40;
@@ -119,3 +120,8 @@ a.btn {
     }
   }
 }
+.mi-clase-css .p-paginator .p-paginator-pages .p-paginator-page {
+  font-size: 40px !important; /* Tamaño de letra personalizado */
+}
+
+

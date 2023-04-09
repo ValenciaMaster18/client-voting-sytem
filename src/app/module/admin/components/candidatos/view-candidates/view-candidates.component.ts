@@ -12,6 +12,8 @@ export class ViewCandidatesComponent implements OnInit, OnDestroy {
   data: ICandidato[];
   color: boolean;
   valor: any;
+  first: number = 0;
+
   suscription: Subscription;
 
   constructor(
@@ -21,6 +23,21 @@ export class ViewCandidatesComponent implements OnInit, OnDestroy {
     this.valor = '';
     this.color = false;
     this.suscription = new Subscription();
+  }
+  onPageChange(event: any) {
+    this.first = event.first;
+    this.suscription = this._candidatoServices.getCandidato(this.first, 9).subscribe(
+      {
+        next: (valor: any) => {
+          this.data = valor.content;
+        },
+        error: (error: any) => {
+          console.error(error);
+        },
+        complete: () => {
+          //
+        },
+      });
   }
 
   ngOnInit(): void {

@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoadersComponent } from './components/loaders/loaders.component';
 import { RouterModule } from '@angular/router';
+import { PaginatorModule } from 'primeng/paginator';
+
+import { LoadersComponent } from './components/loaders/loaders.component';
 import { FooterPageComponent } from './components/footer-page/footer-page.component';
 
 @NgModule({
@@ -11,11 +13,13 @@ import { FooterPageComponent } from './components/footer-page/footer-page.compon
   ],
   imports: [
     CommonModule,
-    RouterModule,
+    PaginatorModule,
+    RouterModule
   ],
   exports: [
     LoadersComponent,
-    FooterPageComponent
+    FooterPageComponent,
+    PaginatorModule
   ]
 })
 export class SharedModule { }

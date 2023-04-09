@@ -13,6 +13,7 @@ export class ViewVotingComponent implements OnInit {
   color: boolean;
   resultado: boolean = false;
   mensaje!: string;
+  first: number = 0;
 
   constructor(
     private _votacionService: VotacionService,
@@ -20,6 +21,21 @@ export class ViewVotingComponent implements OnInit {
   ) {
     this.color = false;
     this.data = []
+  }
+  onPageChange(event: any) {
+    this.first = event.first;
+    this._votacionService.getVotacion(this.first, 6).subscribe(
+      {
+        next: (valor: any) => {
+          this.data = valor.content;
+        },
+        error: (error: any) => {
+          console.error(error);
+        },
+        complete: () => {
+          //
+        },
+      });
   }
   ngOnInit(): void {
     this._votacionService.getVotacion(0, 6).subscribe(
