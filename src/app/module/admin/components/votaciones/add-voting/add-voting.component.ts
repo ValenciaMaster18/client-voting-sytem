@@ -60,7 +60,7 @@ export class AddVotingComponent implements OnDestroy {
         },
         error: (error: any) => {
           this.loaders = false;
-          this.mensaje = 'Votacion No agregada';
+          this.mensaje = 'Votacion No agregada. Nombre de votacion existente en la base de datos';
           this.estilo = false;
           this.resultado = true;
           this.miForm.reset();

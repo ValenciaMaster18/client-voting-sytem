@@ -48,18 +48,13 @@
             <table class="table table-borderless">
               <thead class="table-success text-center">
                 <tr>
-                  <th>Id Votacion</th>
                   <th>Votacion</th>
                   <th>Votantes Habilitados</th>
                   <th>Cantidad de Votos</th>
-                  <th>Fecha creacion Votacion</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>
-                    {{ estadisticas.votacion?.id }}
-                  </td>
                   <td>
                     {{ estadisticas.votacion?.nombre }}
                   </td>
@@ -68,9 +63,6 @@
                   </td>
                   <td>
                     {{ estadisticas.cantidadVotos }}
-                  </td>
-                  <td>
-                    {{ estadisticas.creationDateTime | date }}
                   </td>
                 </tr>
               </tbody>

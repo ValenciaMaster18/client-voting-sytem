@@ -14,6 +14,9 @@ export class ViewVotingComponent implements OnInit {
   resultado: boolean = false;
   mensaje!: string;
   first: number = 0;
+  paginador: number = 1;
+  lastFirst: number = 0;
+  estadoPaginador: boolean = true;
 
   constructor(
     private _votacionService: VotacionService,
@@ -28,9 +31,30 @@ export class ViewVotingComponent implements OnInit {
       {
         next: (valor: any) => {
           this.data = valor.content;
+          if (event.first > this.lastFirst && valor.numberOfElements == 6) {
+            console.log('Se hizo click en el botón de avanzar.');
+            this.paginador++;
+          } else if (
+            event.first < this.lastFirst &&
+            valor.numberOfElements == 6 &&
+            this.estadoPaginador
+            ) {
+            console.log('Se hizo click en el botón de retroceder.');
+            this.paginador--;
+          }
+          if(this.paginador == 1){
+            this.paginador++;
+          }
+          if (valor.numberOfElements < 6){
+            this.estadoPaginador = false;
+          }else{
+            this.estadoPaginador = true;
+          }
+
+          this.lastFirst = event.first;
         },
         error: (error: any) => {
-          console.error(error);
+          // console.error(error);
         },
         complete: () => {
           //
@@ -42,9 +66,14 @@ export class ViewVotingComponent implements OnInit {
       {
         next: (valor: any) => {
           this.data = valor.content
+          if (valor.numberOfElements == 6){
+            this.paginador++;
+          }else{
+            this.paginador--;
+          }
         },
         error: (error: any) => {
-          console.error(error);
+          // console.error(error);
         },
         complete: () => {
           //

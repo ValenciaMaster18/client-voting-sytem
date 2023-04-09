@@ -13,6 +13,9 @@ export class ViewCandidatesComponent implements OnInit, OnDestroy {
   color: boolean;
   valor: any;
   first: number = 0;
+  paginador: number = 1;
+  lastFirst: number = 0;
+  estadoPaginador: boolean = true;
 
   suscription: Subscription;
 
@@ -30,6 +33,27 @@ export class ViewCandidatesComponent implements OnInit, OnDestroy {
       {
         next: (valor: any) => {
           this.data = valor.content;
+          if (event.first > this.lastFirst && valor.numberOfElements == 9) {
+            console.log('Se hizo click en el botón de avanzar.');
+            this.paginador++;
+          } else if (
+            event.first < this.lastFirst &&
+            valor.numberOfElements == 9 &&
+            this.estadoPaginador
+            ) {
+            console.log('Se hizo click en el botón de retroceder.');
+            this.paginador--;
+          }
+          if(this.paginador == 1){
+            this.paginador++;
+          }
+          if (valor.numberOfElements < 9){
+            this.estadoPaginador = false;
+          }else{
+            this.estadoPaginador = true;
+          }
+
+          this.lastFirst = event.first;
         },
         error: (error: any) => {
           console.error(error);
@@ -45,6 +69,11 @@ export class ViewCandidatesComponent implements OnInit, OnDestroy {
       {
         next: (value: any) => {
           this.data = value.content
+          if (value.numberOfElements == 9){
+            this.paginador++;
+          }else{
+            this.paginador--
+          }
         },
         error: (error: any) => {
           console.error(error)

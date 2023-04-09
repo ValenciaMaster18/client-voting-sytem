@@ -16,6 +16,9 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
   data: IAprendiz[];
   suscribtion: Subscription;
   first: number = 0;
+  paginador: number = 1;
+  lastFirst: number = 0;
+  estadoPaginador: boolean = true;
 
   constructor(
     private _getAprendizService: GetAprendizService
@@ -34,11 +37,30 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
       {
         next: (valor: any) => {
           this.data = valor.content;
-          this.loaders = false;
+          if (event.first > this.lastFirst && valor.numberOfElements == 9) {
+            console.log('Se hizo click en el botón de avanzar.');
+            this.paginador++;
+          } else if (
+            event.first < this.lastFirst &&
+            valor.numberOfElements == 9 &&
+            this.estadoPaginador
+            ) {
+            console.log('Se hizo click en el botón de retroceder.');
+            this.paginador--;
+          }
+          if(this.paginador == 1){
+            this.paginador++;
+          }
+          if (valor.numberOfElements < 9){
+            this.estadoPaginador = false;
+          }else{
+            this.estadoPaginador = true;
+          }
+
+          this.lastFirst = event.first;
         },
         error: (error: any) => {
-          console.error(error);
-          this.loaders = false;
+          // console.error(error);
         },
         complete: () => {
           //
@@ -50,10 +72,15 @@ export class ViewApprenticesComponent implements OnInit, OnDestroy {
     ).subscribe({
       next: (valor: any) => {
         this.data = valor.content;
+        if (valor.numberOfElements == 9){
+          this.paginador++;
+        }else{
+          this.paginador--
+        }
         this.loaders = false;
       },
       error: (error: any) => {
-        console.error(error);
+        // console.error(error);
         this.loaders = false;
       },
       complete: () => {
