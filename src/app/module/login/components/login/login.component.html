@@ -1,62 +1,60 @@
-<div class="login__form">
-  <div class="container">
-    <section class="login">
-      <div class="section__form">
-        <div class="form__text">
-          <h2>Sistema de votación institucional</h2>
-          <span>Bienvenido. Por favor, ingrese sus credenciales</span>
-        </div>
-        <div class="mensaje__container" *ngIf="estado">
-          <span class="mensaje">
-            {{ mensaje }}
-          </span>
-        </div>
-        <div class="mensaje__container" *ngIf="_votosService.estado">
-          <span class="mensaje">
-            {{ _votosService.mensaje }}
-          </span>
-        </div>
-        <div class="mensaje__container" *ngIf="estadoVotacion">
-          <span class="mensaje">
-            {{ _votosService.mensaje }}
-          </span>
-        </div>
-        <form class="login" novalidate [formGroup]="miForm" (ngSubmit)="onSubmit()">
-          <div class="usuario">
-            <label for="usuario">
-              Usuario
-            </label>
-            <input type="text" id="usuario" name="username" placeholder="Numero documento" formControlName="username">
-            <ng-container *ngIf="
+<section class="login">
+  <div class="section__form">
+    <div class="form__text">
+      <picture>
+        <img src="../../../../../assets/img/logo-sena.png" alt="">
+      </picture>
+      <h2>Sistema de votación institucional</h2>
+      <span>Bienvenido. Por favor, ingrese sus credenciales</span>
+    </div>
+    <div class="mensaje__container" *ngIf="estado">
+      <span class="mensaje">
+        {{ mensaje }}
+      </span>
+    </div>
+    <div class="mensaje__container" *ngIf="_votosService.estado">
+      <span class="mensaje">
+        {{ _votosService.mensaje }}
+      </span>
+    </div>
+    <div class="mensaje__container" *ngIf="estadoVotacion">
+      <span class="mensaje">
+        {{ _votosService.mensaje }}
+      </span>
+    </div>
+    <form class="logins" [formGroup]="miForm" (ngSubmit)="onSubmit()">
+      <div class="usuario">
+        <label for="usuario">
+          Usuario
+        </label>
+        <input type="text" id="usuario" name="username" placeholder="Numero documento" formControlName="username">
+        <ng-container *ngIf="
             this.miForm.get('username')?.invalid &&
             this.miForm.get('username')?.touched &&
             this.miForm.get('username')?.errors?.['required']">
-              <span class="text-danger">
-                El Usuario no pueda estar vacia
-              </span>
-            </ng-container>
-          </div>
-          <div class="clave">
-            <label for="contraseña">
-              Contraseña
-            </label>
-            <input type="password" id="contraseña" name="password" placeholder="Contraseña" formControlName="password">
-            <ng-container *ngIf="
+          <span class="text-danger">
+            El Usuario no pueda estar vacia
+          </span>
+        </ng-container>
+      </div>
+      <div class="clave">
+        <label for="contraseña">
+          Contraseña
+        </label>
+        <input type="password" id="contraseña" name="password" placeholder="Contraseña" formControlName="password">
+        <ng-container *ngIf="
                     this.miForm.get('password')?.invalid &&
                     this.miForm.get('password')?.touched &&
                     this.miForm.get('password')?.errors?.['required']">
-              <span class="text-danger">
-                La contraseña no pueda estar vacia
-              </span>
-            </ng-container>
-          </div>
-          <button type="submit" [disabled]="miForm.invalid">Entrar al sistema</button>
-        </form>
+          <span class="text-danger">
+            La contraseña no pueda estar vacia
+          </span>
+        </ng-container>
       </div>
-      <picture class="login">
-        <img src="../../../assets/img/logo-sena-blanco.png" alt="logo sena">
-      </picture>
-    </section>
+      <button type="submit" [disabled]="miForm.invalid">Entrar al sistema</button>
+      <span>
+        I accept terms & conditions
+      </span>
+    </form>
   </div>
-
-</div>
+</section>

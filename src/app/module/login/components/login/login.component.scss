@@ -1,124 +1,142 @@
-section.login{
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-}
-.section__form{
-  height: 70%;
-  width: 100%;
-  order: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 25px;
-}
-.form__text h2{
-  color: black;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: 300;
-  text-align: center;
-  font-size: 2.1rem;
-}
-.form__text span{
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 1.4rem;
-}
-picture.login{
-  width: 100%;
-  height: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #198754;
-}
-picture.login img{
-  width: 100%;
+.login {
   height: 100%;
-  object-fit: contain;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('../../../.././../assets/img/fondo.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-form.login{
-  width: 80%;
+
+
+.section__form {
+  height: 100%;
+  width: 100%;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: center;
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.179);
+  -moz-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.179);
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.179);
 }
-.mensaje__container{
-  padding: 0 60px;
+.form__text {
   width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 
-  .mensaje{
+  picture {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 50%;
+      height: 150px;
+      object-fit: contain;
+    }
+  }
+
+  h2 {
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 300;
+    text-align: center;
+    font-size: 2.1rem;
+  }
+
+  span {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.4rem;
+  }
+}
+
+.mensaje__container {
+  padding: 0 20px;
+  width: 100%;
+  .mensaje {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 40px;
     background-color: #f8d7da;
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 1.6rem;
     padding: 1rem 0;
-    color: #842029;
-    border-radius: 10px;
   }
 }
 
-form.login .usuario{
+form.logins {
+  background-color: white;
+  width: 100%;
+  height: 60%;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  font-size: 1.5rem;
+  align-items: center;
+  gap: 20px;
 }
-form.login .clave{
+
+form.logins .usuario {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  font-size: 1.5rem;
+  gap: 15px;
+  font-size: 1.6rem;
 }
-form.login div label{
-  font-size: 1.5rem;
+
+form.logins .clave {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 1.6rem;
+}
+
+form.logins div label {
+  font-size: 1.6rem;
   font-weight: 600;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-form.login div input{
+
+form.logins div input {
   width: 100%;
   height: 40px;
-  border: 1px solid #80808046;
   border-radius: 5px;
   outline: none;
   padding: 0 10px;
 }
-form.login button{
+
+form.logins button {
+  width: 100%;
   height: 40px;
   border-radius: 5px;
   border: 0;
   background-color: #31572c;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: white;
   cursor: pointer;
-  &:disabled{
+
+  &:disabled {
     background-color: gray;
   }
 }
-@media screen and (min-width: 768px) {
-  section.login{
-      flex-direction: row;
-  }
-  .section__form{
-      height: 100%;
-  }
-  picture.login{
-      height: 70%;
-      order: 2;
-  }
-  picture.login img{
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+
+form.logins span {
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+@media screen and (min-width: 500px) {
+  .section__form {
+    height: 600px;
+    width: 400px;
   }
 }
