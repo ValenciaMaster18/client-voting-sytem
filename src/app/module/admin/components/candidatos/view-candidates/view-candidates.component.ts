@@ -6,7 +6,10 @@ import { CandidatoService } from '../../../../../services/candidato/candidato.se
 @Component({
   selector: 'app-view-candidates',
   templateUrl: './view-candidates.component.html',
-  styleUrls: ['./view-candidates.component.scss']
+  styleUrls: [
+    '../../../../../../assets/css/barra-busqueda.scss',
+    '../../../../../../assets/css/tablas.scss'
+  ]
 })
 export class ViewCandidatesComponent implements OnInit, OnDestroy {
   data: ICandidato[];

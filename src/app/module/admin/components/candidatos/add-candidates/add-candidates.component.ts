@@ -10,7 +10,7 @@ import { ICandidato } from 'src/app/models/Icandidato';
 @Component({
   selector: 'app-add-candidates',
   templateUrl: './add-candidates.component.html',
-  styleUrls: ['./add-candidates.component.scss']
+  styleUrls: ['../../../../../../assets/css/formularios.scss']
 })
 export class AddCandidatesComponent implements OnInit, OnDestroy {
   miForm: FormGroup;

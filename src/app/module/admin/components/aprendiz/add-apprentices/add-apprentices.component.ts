@@ -5,7 +5,7 @@ import { GetAprendizService } from '../../../../../services/aprendiz/get-aprendi
 @Component({
   selector: 'app-add-apprentices',
   templateUrl: './add-apprentices.component.html',
-  styleUrls: ['./add-apprentices.component.scss']
+  styleUrls: ['../../../../../../assets/css/formularios.scss']
 })
 export class AddApprenticesComponent implements OnDestroy {
   miForm: FormGroup;

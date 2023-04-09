@@ -5,7 +5,11 @@ import { GetAprendizService } from '../../../../../services/aprendiz/get-aprendi
 @Component({
   selector: 'app-view-apprentices',
   templateUrl: './view-apprentices.component.html',
-  styleUrls: ['./view-apprentices.component.scss']
+  styleUrls: [
+    '../../../../../../assets/css/barra-busqueda.scss',
+    '../../../../../../assets/css/tablas.scss',
+    '../../../../../../assets/css/loader.scss'
+  ]
 })
 export class ViewApprenticesComponent implements OnInit, OnDestroy {
 

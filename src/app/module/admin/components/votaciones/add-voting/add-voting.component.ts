@@ -6,7 +6,7 @@ import { IVotacion } from 'src/app/models/ivotacion';
 @Component({
   selector: 'app-add-voting',
   templateUrl: './add-voting.component.html',
-  styleUrls: ['./add-voting.component.scss']
+  styleUrls: ['../../../../../../assets/css/formularios.scss']
 })
 export class AddVotingComponent implements OnDestroy {
   miForm: FormGroup;

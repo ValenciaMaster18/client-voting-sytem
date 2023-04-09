@@ -1,0 +1,44 @@
+/* Structure */
+.mensaje{
+  font-size: 1.5rem;
+}
+table {
+  width: 100%;
+
+  thead {
+    tr {
+      th {
+        font-size: 1.4rem;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        text-align: center;
+        font-size: 1rem;
+      }
+    }
+  }
+}
+@media screen and (min-width: 998px) {
+  table {
+    thead {
+      tr {
+        th {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+}

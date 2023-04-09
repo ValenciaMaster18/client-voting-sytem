@@ -4,7 +4,10 @@ import { GetAprendizService } from 'src/app/services/aprendiz/get-aprendiz.servi
 @Component({
   selector: 'app-csv-apprentices',
   templateUrl: './csv-apprentices.component.html',
-  styleUrls: ['./csv-apprentices.component.scss']
+  styleUrls: [
+    './csv-apprentices.component.scss',
+    '../../../../../../assets/css/loader.scss'
+  ]
 })
 export class CsvApprenticesComponent {
   mensaje: string;

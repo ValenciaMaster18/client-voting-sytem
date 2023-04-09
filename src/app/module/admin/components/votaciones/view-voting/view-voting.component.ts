@@ -6,7 +6,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-view-voting',
   templateUrl: './view-voting.component.html',
-  styleUrls: ['./view-voting.component.scss']
+  styleUrls: [
+    '../../../../../../assets/css/tablas.scss'
+  ]
 })
 export class ViewVotingComponent implements OnInit {
   data: IVotacion[];
